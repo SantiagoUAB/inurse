@@ -19,7 +19,11 @@ const routes: Routes = [
   {
     path: 'ficha-paciente',
     loadChildren: () => import('./ficha-paciente/ficha-paciente.module').then( m => m.FichaPacientePageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
+
 ];
 
 @NgModule({
