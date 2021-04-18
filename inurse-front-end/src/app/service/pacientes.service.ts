@@ -12,9 +12,9 @@ export class PacientesService {
   private idPaciente: string;
 
   constructor(private httpClient: HttpClient) {
-    this.paciente = 'photos';
+    this.paciente = '?inc=name,nat,dob,picture&&nat=ES';
     this.limit = 20;
-    this.urlPacientes = 'https://jsonplaceholder.typicode.com/';
+    this.urlPacientes = 'https://randomuser.me/api/1.3/';
   }
 
   getPacientes(){
@@ -22,6 +22,14 @@ export class PacientesService {
   }
 
   getPaciente(idPaciente: number){
-    return this.httpClient.get('https://jsonplaceholder.typicode.com/' + this.paciente + '/' + idPaciente);
+    //https://randomuser.me/api/1.3/?inc=name,nat,dob,picture&&nat=ES
+    console.log('Datos paciente')
+    const data = this.httpClient.get(this.urlPacientes + this.paciente);
+    console.log(data);
+    return this.httpClient.get(this.urlPacientes + this.paciente);
+  }
+
+  private getName(){
+
   }
 }
