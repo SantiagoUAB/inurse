@@ -4,8 +4,15 @@
 }
 
 .button-add{
-  //font-size: 42px;
+  font-size: 200%;
 }
-ion-title{
 
+
+.list-status{
+  display: flex;
+  flex-direction: row;
 }
+.list-status , ion-icon {
+  font-size: 150%;
+}
+
