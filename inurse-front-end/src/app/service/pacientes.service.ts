@@ -23,9 +23,6 @@ export class PacientesService {
 
   getPaciente(idPaciente: number){
     //https://randomuser.me/api/1.3/?inc=name,nat,dob,picture&&nat=ES
-    console.log('Datos paciente')
-    const data = this.httpClient.get(this.urlPacientes + this.paciente);
-    console.log(data);
     return this.httpClient.get(this.urlPacientes + this.paciente);
   }
 
