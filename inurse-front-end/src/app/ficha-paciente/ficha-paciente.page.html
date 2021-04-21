@@ -14,13 +14,13 @@
       <ion-col offset="1"   >
         <ion-avatar id="img-patient">
 <!--          <ion-img   [src]=" this.patient.img ? this.urlImg : ''" alt="img paciente"  > </ion-img>-->
-          <ion-img [src]=" this.urlImg" ></ion-img>
+          <ion-img [src]=" this.patient?.img" ></ion-img>
         </ion-avatar>
       </ion-col>
     </ion-row>
     <ion-row >
       <ion-col>
-        <ion-col  offset="1"> Nombre </ion-col>
+        <ion-col  offset="1"  > {{ this.patient?.name}} </ion-col>
         <ion-col offset="1">Peso altura</ion-col>
       </ion-col>
     </ion-row>
@@ -30,36 +30,7 @@
         <ion-col offset="1"> nombre enfermera</ion-col>
       </ion-col>
     </ion-row>
-    <ion-row id="title-history">
-      <ion-col offset="1"  size="4">
-        <ion-title class="ion-no-padding">Historial</ion-title>
-      </ion-col>
 
-      <ion-col size="7"  class="ion-no-padding">
-
-<!--          <ion-button>-->
-<!--            <ion-icon name="add-circle-outline" class="button-add" color="primary"></ion-icon>-->
-<!--          </ion-button>-->
-        <ion-button href="#"   size="small"> <ion-icon name="add-circle-outline" class="button-add" ></ion-icon></ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-row>
-          <ion-col offset="1">
-            <ion-infinite-scroll >
-              <ion-item > visita 1 </ion-item>
-              <ion-item > visita 1 </ion-item>
-              <ion-item > visita 1 </ion-item>
-              <ion-item > visita 1 </ion-item>
-              <ion-item > visita 1 </ion-item>
-              <ion-item > visita 1 </ion-item>
-            </ion-infinite-scroll>
-
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
     <ion-row>
       <ion-col offset="1">
         <ion-title class="ion-no-padding">Estado actual</ion-title>
@@ -105,6 +76,36 @@
       <ion-col>
         <ion-col offset="1">Frecuencia cardiaca</ion-col>
         <ion-col>-....</ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row id="title-history">
+      <ion-col offset="1"  size="4">
+        <ion-title class="ion-no-padding">Historial</ion-title>
+      </ion-col>
+
+      <ion-col size="7"  class="ion-no-padding">
+
+        <!--          <ion-button>-->
+        <!--            <ion-icon name="add-circle-outline" class="button-add" color="primary"></ion-icon>-->
+        <!--          </ion-button>-->
+        <ion-button href="#"   size="small"> <ion-icon name="add-circle-outline" class="button-add" ></ion-icon></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-row>
+          <ion-col offset="1">
+            <ion-infinite-scroll >
+              <ion-item > visita 1 </ion-item>
+              <ion-item > visita 1 </ion-item>
+              <ion-item > visita 1 </ion-item>
+              <ion-item > visita 1 </ion-item>
+              <ion-item > visita 1 </ion-item>
+              <ion-item > visita 1 </ion-item>
+            </ion-infinite-scroll>
+
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
     <!--      end col container-->
