@@ -13,24 +13,22 @@ export class FichaPacientePage implements OnInit {
   private patient: Patient;
   private urlImg: string;
   private dataLoad: boolean
+  private idPaciente: string;
 
 
   constructor(private pacienteService: PacientesService) {
-    this.urlImg = 'https://thispersondoesnotexist.com/image';
-    this.urlImg = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
-    this.dataLoad = false;
+
+
 
   }
 
   ngOnInit() {
+    this.idPaciente = "0000000G";
 
-    this.pacienteService.getPaciente(1).subscribe(data => {
+    this.pacienteService.getPaciente("0000000G").subscribe(data => {
       console.log('En ficha paciente');
       console.log(data);
       this.patient = new Patient(data);
-      this.dataLoad = true;
-
-
     });
 
 

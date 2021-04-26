@@ -15,7 +15,7 @@ export  class Patient implements IPatient{
   constructor(data: any) {
     console.log('hola soy el constructor paciente');
     console.log(data);
-    this.name =data['results'][0]['name']['first'];
-    this.img =data['results'][0]['picture']['large'];
+
+    this.name = data['results'][0]['first_name'];
   }
 }
