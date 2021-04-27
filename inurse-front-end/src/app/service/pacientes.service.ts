@@ -17,9 +17,9 @@ export class PacientesService {
   }
 
   getPaciente(idPaciente: string) {
-    console.log("id paciente ", idPaciente);
-    //http://158.109.74.51:55001/patient/?format=json&dni=0000000G
-    return this.httpClient.get(this.urlPacientes + "?dni=" + idPaciente);
+    console.log('id paciente', idPaciente);
+    // http://158.109.74.51:55001/patient/?format=json&dni=0000000G
+    return this.httpClient.get(this.urlPacientes + '?dni=' + idPaciente);
   }
 
   private getName() {
