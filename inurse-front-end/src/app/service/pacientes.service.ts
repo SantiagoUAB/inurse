@@ -7,21 +7,22 @@ import {HttpClient} from '@angular/common/http';
 export class PacientesService {
 
   urlPacientes: string;
-  paciente: string;
-  private limit: number;
-  private idPaciente: string;
 
   constructor(private httpClient: HttpClient) {
-    this.paciente = 'photos';
-    this.limit = 20;
-    this.urlPacientes = 'https://jsonplaceholder.typicode.com/';
+    this.urlPacientes = 'http://158.109.74.51:55001/patient/';
   }
 
-  getPacientes(){
-    return this.httpClient.get(this.urlPacientes + this.paciente);
+  getPacientes() {
+    return this.httpClient.get(this.urlPacientes);
   }
 
-  getPaciente(idPaciente: number){
-    return this.httpClient.get('https://jsonplaceholder.typicode.com/' + this.paciente + '/' + idPaciente);
+  getPaciente(idPaciente: string) {
+    console.log("id paciente ", idPaciente);
+    //http://158.109.74.51:55001/patient/?format=json&dni=0000000G
+    return this.httpClient.get(this.urlPacientes + "?dni=" + idPaciente);
+  }
+
+  private getName() {
+
   }
 }
