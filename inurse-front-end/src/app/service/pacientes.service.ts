@@ -9,18 +9,18 @@ export class PacientesService {
   urlPacientes: string;
 
   constructor(private httpClient: HttpClient) {
-    this.urlPacientes = 'http://158.109.74.51:55001/patient/';
+    this.urlPacientes = 'http://158.109.74.51:55001/patient';
   }
 
   getPacientes(){
     return this.httpClient.get(this.urlPacientes);
   }
 
-  getPaciente(idPaciente: string){
+  getPaciente(idPaciente: number){
 
     console.log("id paciente " , idPaciente);
     //http://158.109.74.51:55001/patient/?format=json&dni=0000000G
-    return this.httpClient.get(this.urlPacientes + "?dni="+ idPaciente);
+    return this.httpClient.get(this.urlPacientes + "/"+ idPaciente+ "/");
   }
 
   private getName(){

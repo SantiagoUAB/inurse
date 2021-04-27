@@ -15,13 +15,14 @@ import {Historical} from '../class/class.historical';
 export class FichaPacientePage implements OnInit {
   patient: Patient;
   historical: Historical;
-  private idPaciente: string;
+  private idPaciente: number;
+
 
 
   constructor(private pacienteService: PacientesService, private  historicalService : HistoricalService) {  }
 
   ngOnInit() {
-    this.idPaciente = "0000000G";
+    this.idPaciente = 1;
 
     this.getDataPatientFile();
 
