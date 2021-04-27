@@ -2,7 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {PacientesService} from '../service/pacientes.service';
 import {IPatient} from '../models/interface.patient.model';
 import {Patient} from '../class/class.patient';
+
 import {fakeAsync} from '@angular/core/testing';
+import {HistoricalService} from '../service/historical.service';
+import {Historical} from '../class/class.historical';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -10,30 +13,41 @@ import {fakeAsync} from '@angular/core/testing';
   styleUrls: ['./ficha-paciente.page.scss'],
 })
 export class FichaPacientePage implements OnInit {
-  private patient: Patient;
-  private urlImg: string;
-  private dataLoad: boolean
+  patient: Patient;
+  historical: Historical;
   private idPaciente: string;
 
 
-  constructor(private pacienteService: PacientesService) {
-
-
-
-  }
+  constructor(private pacienteService: PacientesService, private  historicalService : HistoricalService) {  }
 
   ngOnInit() {
     this.idPaciente = "0000000G";
 
-    this.pacienteService.getPaciente("0000000G").subscribe(data => {
-      console.log('En ficha paciente');
-      console.log(data);
-      this.patient = new Patient(data);
-    });
-
+    this.getDataPatientFile();
 
   }
 
+
+  private getDataPatientFile() {
+    this.pacienteService.getPaciente(this.idPaciente).subscribe(data => {
+      console.log('En ficha paciente');
+      console.log(data);
+      this.patient = new Patient(data);
+
+      this.getDataPatientHistorical(this.patient.id);
+
+    });
+  }
+
+  private getDataPatientHistorical(idPatient: number) {
+    this.historicalService.getHistorical(idPatient).subscribe(data => {
+      console.log('Historial paciente ', idPatient);
+      console.log(data);
+
+      this.historical = new Historical( data);
+
+    });
+  }
 
   add() {
 
