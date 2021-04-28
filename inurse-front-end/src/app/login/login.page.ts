@@ -44,14 +44,16 @@ export class LoginPage implements OnInit {
 
   async sendPostRequest() {
     const postData = { username: this.username, password: this.password };
-    // return this.httpClient.post('http://158.109.74.51:55001/auth/login/', JSON.stringify(postData)).toPromise();
     this.httpClient.post('http://158.109.74.51:55001/auth/login/', postData).subscribe(data => {
       console.log(data);
+      console.log('login correcto');
+      // this.router.navigate(['/pantalla-principal']);
     }, error => {
-      console.log(error);
+      console.log('login incorrecto');
     });
   }
 
+  /*
   async getDataPatientFile() {
     this.userService.getUser(this.username).subscribe(data => {
       console.log(data['count']);
@@ -84,4 +86,5 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
+  */
 }
