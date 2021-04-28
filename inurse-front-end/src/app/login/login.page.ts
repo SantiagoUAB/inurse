@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {PacientesService} from '../service/pacientes.service';
+import { UsersService } from '../service/users.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import {Patient} from '../class/class.patient';
+import { User } from '../class/class.user';
+import {HttpClient} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login',
@@ -10,13 +12,14 @@ import {Patient} from '../class/class.patient';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  patient: Patient;
+  user: User;
   username = '';
   password = '';
   constructor(
     public toastController: ToastController,
     private router: Router,
-    private pacienteService: PacientesService,
+    private userService: UsersService,
+    private httpClient: HttpClient
   ) { }
 
   ngOnInit() {
@@ -35,25 +38,36 @@ export class LoginPage implements OnInit {
       });
       toast.present();
     }
-    this.getDataPatientFile();
+    this.sendPostRequest();
+    // this.getDataPatientFile();
+  }
+
+  async sendPostRequest() {
+    const postData = { username: this.username, password: this.password };
+    // return this.httpClient.post('http://158.109.74.51:55001/auth/login/', JSON.stringify(postData)).toPromise();
+    this.httpClient.post('http://158.109.74.51:55001/auth/login/', postData).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
   }
 
   async getDataPatientFile() {
-    this.pacienteService.getPaciente(this.username).subscribe(data => {
+    this.userService.getUser(this.username).subscribe(data => {
       console.log(data['count']);
       if (data['count'] === 0) {
         this.errorUserPassword();
         return;
       }
       else {
-        this.patient = new Patient(data);
-        console.log(this.patient.dni);
+        this.user = new User(data);
+        console.log(this.user.username);
         this.comprovationUser();
       }
     });
   }
   async comprovationUser(){
-    if (this.patient.dni === this.username){
+    if (this.user.username === this.username){
       console.log('Tot be, has iniciat sessio correctament');
       const toast = await this.toastController.create({
         message: 'Has iniciado sesión correctamente',
