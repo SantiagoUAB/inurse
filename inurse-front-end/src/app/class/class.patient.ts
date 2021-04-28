@@ -27,24 +27,19 @@ export  class Patient implements IPatient{
 
 
   constructor(data: any) {
+    if (this.dni === null) {
+      console.log('mfiero');
+    }
+    else {
+      this.dni = data['results'][0]['dni'];
+    }
     console.log('hola soy el constructor paciente');
     console.log(data);
 
-    this.firstName = data['results'][0]['first_name'];
-    this.actualState = data['results'][0]['actualState'];
-    this.age = data['results'][0]['age'];
-    this.allergies = data['results'][0]['allergies'];
-    this.assignedNurse = data['results'][0]['assignedNurse'];
-    this.dni = data['results'][0]['dni'];
-    this.height = data['results'][0]['height'];
-    this.id = data['results'][0]['id'];
-    this.lastName = data['results'][0]['last_name'];
+    //this.dni = data['results'][0]['dni'];
 
     //TODO poner ROOM
 
-    this.sex = data['results'][0]['sex'];
-    this.sex = data['results'][0]['sex'];
-    this.weight = data['results'][0]['weight'];
 
 
     if(this.sex=='m'){

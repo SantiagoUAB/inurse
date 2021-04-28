@@ -36,23 +36,38 @@ export class LoginPage implements OnInit {
       toast.present();
     }
     this.getDataPatientFile();
-    // Validar usuario con la info de la BD
-    // Rediregir a la página de Listado Plantas, una vez validado el usuario
   }
 
-  private getDataPatientFile() {
+  async getDataPatientFile() {
     this.pacienteService.getPaciente(this.username).subscribe(data => {
-      console.log('En ficha paciente');
-      console.log(data);
-      this.patient = new Patient(data);
-      console.log(this.patient.dni);
-      this.comprovationUser();
+      console.log(data['count']);
+      if (data['count'] === 0) {
+        this.errorUserPassword();
+        return;
+      }
+      else {
+        this.patient = new Patient(data);
+        console.log(this.patient.dni);
+        this.comprovationUser();
+      }
     });
   }
-  private comprovationUser() {
-    if(this.patient.dni === this.username){
-      console.log("Tot be, has iniciat sessio correctament");
-      //this.router.navigate(['/pantalla-principal']);
+  async comprovationUser(){
+    if (this.patient.dni === this.username){
+      console.log('Tot be, has iniciat sessio correctament');
+      const toast = await this.toastController.create({
+        message: 'Has iniciado sesión correctamente',
+        duration: 2000
+      });
+      toast.present();
+      // this.router.navigate(['/pantalla-principal']);
     }
+  }
+  async errorUserPassword() {
+    const toast = await this.toastController.create({
+      message: 'Usuario o contaseña incorrectos',
+      duration: 2000
+    });
+    toast.present();
   }
 }

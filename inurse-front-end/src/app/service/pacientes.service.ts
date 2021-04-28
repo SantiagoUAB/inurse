@@ -12,17 +12,9 @@ export class PacientesService {
     this.urlPacientes = 'http://158.109.74.51:55001/patient/';
   }
 
-  getPacientes() {
-    return this.httpClient.get(this.urlPacientes);
-  }
-
   getPaciente(idPaciente: string) {
-    console.log("id paciente ", idPaciente);
-    //http://158.109.74.51:55001/patient/?format=json&dni=0000000G
-    return this.httpClient.get(this.urlPacientes + "?dni=" + idPaciente);
-  }
-
-  private getName() {
-
+    console.log('id paciente ', idPaciente);
+    // http://158.109.74.51:55001/patient/?format=json&dni=0000000G
+    return this.httpClient.get(this.urlPacientes + '?dni=' + idPaciente);
   }
 }
