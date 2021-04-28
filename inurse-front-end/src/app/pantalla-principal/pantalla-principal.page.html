@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button slot="start">
+    <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-button>
-    <ion-title> INURSE </ion-title>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Pantalla Principal</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,7 +25,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+
 
 
 
@@ -36,7 +36,7 @@
   <ion-list>
     <ion-item class="paciente" ion-item *ngFor="let item of listaPaciente" (click)=verFichaPaciente(item[0],item[1]) >
        <ion-label>{{item[1]}} : {{item[0]}}</ion-label></ion-item>
-    
+
 
 
 
