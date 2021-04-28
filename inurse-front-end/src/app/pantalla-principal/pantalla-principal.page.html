@@ -7,113 +7,45 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-segment-button *ngfor= " let planta of plantas"
-    value="{{planta}}" >
-    <ion-label>{planta}</ion-label>
-</ion-segment-button> -->
 
 
 <ion-content>
 
-
-  <ion-grid fixed>
+  <ion-grid>
     <ion-row>
-      <ion-col size="11" >
-        <ion-segment scrollable (ionChange)="cambioPlanta($cambio)">
-          <div *ngfor="let planta of this.plantas"> </div>
-          <ion-segment-button  >
-          <ion-label>{{planta}}</ion-label>
+      <ion-col size="11">
+        <ion-segment scrollable   >
+          <ion-segment-button *ngFor="let planta of arrayPlanta" (click)="cambioPlanta(planta['floor_num'])">
+
+            PLANTA {{planta['floor_num']}}
+
           </ion-segment-button>
+
         </ion-segment>
       </ion-col>
     </ion-row>
   </ion-grid>
-
- 
-
-
-
-
-
-  <ion-grid>
-    <ion-row>
-      <div class="HabIzq">
-        <ion-row>
-            <button class="paciente" >Paciente A</button>
-        </ion-row>
-        <ion-row>
-          <button class="paciente" >Paciente B</button>
-        </ion-row>
-      </div>
-
-      <div class="HabDer">
-        <ion-row>
-            <button class="paciente" >Paciente A</button>
-        </ion-row>
-        <ion-row>
-          <button class="paciente" >Paciente B</button>
-        </ion-row>
-      </div>
-    </ion-row>
-    <ion-row>
-      <div class="HabIzq">
-        <ion-row>
-            <button class="paciente" >Paciente A</button>
-        </ion-row>
-        <ion-row>
-          <button class="paciente" >Paciente B</button>
-        </ion-row>
-      </div>
-
-      <div class="HabDer">
-        <ion-row>
-            <button class="paciente" >Paciente A</button>
-        </ion-row>
-        <ion-row>
-          <button class="paciente" >Paciente B</button>
-        </ion-row>
-      </div>
-  </ion-row>
-  <ion-row>
-    <div class="HabIzq">
-      <ion-row>
-          <button class="paciente" >Paciente A</button>
-      </ion-row>
-      <ion-row>
-        <button class="paciente" >Paciente B</button>
-      </ion-row>
-    </div>
-
-    <div class="HabDer">
-      <ion-row>
-          <button class="paciente" >Paciente A</button>
-      </ion-row>
-      <ion-row>
-        <button class="paciente" >Paciente B</button>
-      </ion-row>
-    </div>
-  </ion-row>
-  <ion-row>
-    <div class="HabIzq">
-      <ion-row>
-          <button class="paciente" >Paciente A</button>
-      </ion-row>
-      <ion-row>
-        <button class="paciente" >Paciente B</button>
-      </ion-row>
-    </div>
-
-    <div class="HabDer">
-      <ion-row>
-          <button class="paciente" >Paciente A</button>
-      </ion-row>
-      <ion-row>
-        <button class="paciente" >Paciente B</button>
-      </ion-row>
-    </div>
-  </ion-row>
-
-  </ion-grid>
   
+
+
+
+
+
+
+
+  <ion-list>
+    <ion-item class="paciente" ion-item *ngFor="let item of listaPaciente" (click)=verFichaPaciente(item[0],item[1]) >
+       <ion-label>{{item[1]}} : {{item[0]}}</ion-label></ion-item>
+    
+
+
+
+
+  </ion-list>
+
+
+
+
+
 
 </ion-content>
