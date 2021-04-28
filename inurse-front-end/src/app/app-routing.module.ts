@@ -19,7 +19,12 @@ const routes: Routes = [
   {
     path: 'ficha-paciente',
     loadChildren: () => import('./ficha-paciente/ficha-paciente.module').then( m => m.FichaPacientePageModule)
+  },
+  {
+    path: 'pantalla-principal',
+    loadChildren: () => import('./pantalla-principal/pantalla-principal.module').then( m => m.PantallaPrincipalPageModule)
   }
+
 ];
 
 @NgModule({

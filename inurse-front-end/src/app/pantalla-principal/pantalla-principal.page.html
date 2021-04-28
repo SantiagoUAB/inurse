@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-button>
+    <ion-title> INURSE </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-segment-button *ngfor= " let planta of plantas"
+    value="{{planta}}" >
+    <ion-label>{planta}</ion-label>
+</ion-segment-button> -->
+
+
+<ion-content>
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="11" >
+        <ion-segment scrollable (ionChange)="cambioPlanta($cambio)">
+          <div *ngfor="let planta of this.plantas"> </div>
+          <ion-segment-button  >
+          <ion-label>{{planta}}</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+ 
+
+
+
+
+
+  <ion-grid>
+    <ion-row>
+      <div class="HabIzq">
+        <ion-row>
+            <button class="paciente" >Paciente A</button>
+        </ion-row>
+        <ion-row>
+          <button class="paciente" >Paciente B</button>
+        </ion-row>
+      </div>
+
+      <div class="HabDer">
+        <ion-row>
+            <button class="paciente" >Paciente A</button>
+        </ion-row>
+        <ion-row>
+          <button class="paciente" >Paciente B</button>
+        </ion-row>
+      </div>
+    </ion-row>
+    <ion-row>
+      <div class="HabIzq">
+        <ion-row>
+            <button class="paciente" >Paciente A</button>
+        </ion-row>
+        <ion-row>
+          <button class="paciente" >Paciente B</button>
+        </ion-row>
+      </div>
+
+      <div class="HabDer">
+        <ion-row>
+            <button class="paciente" >Paciente A</button>
+        </ion-row>
+        <ion-row>
+          <button class="paciente" >Paciente B</button>
+        </ion-row>
+      </div>
+  </ion-row>
+  <ion-row>
+    <div class="HabIzq">
+      <ion-row>
+          <button class="paciente" >Paciente A</button>
+      </ion-row>
+      <ion-row>
+        <button class="paciente" >Paciente B</button>
+      </ion-row>
+    </div>
+
+    <div class="HabDer">
+      <ion-row>
+          <button class="paciente" >Paciente A</button>
+      </ion-row>
+      <ion-row>
+        <button class="paciente" >Paciente B</button>
+      </ion-row>
+    </div>
+  </ion-row>
+  <ion-row>
+    <div class="HabIzq">
+      <ion-row>
+          <button class="paciente" >Paciente A</button>
+      </ion-row>
+      <ion-row>
+        <button class="paciente" >Paciente B</button>
+      </ion-row>
+    </div>
+
+    <div class="HabDer">
+      <ion-row>
+          <button class="paciente" >Paciente A</button>
+      </ion-row>
+      <ion-row>
+        <button class="paciente" >Paciente B</button>
+      </ion-row>
+    </div>
+  </ion-row>
+
+  </ion-grid>
+  
+
+</ion-content>
