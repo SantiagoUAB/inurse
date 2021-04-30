@@ -9,7 +9,7 @@ const routes: Routes = [
   }, */
   {
     path: '',
-    redirectTo: 'ficha-paciente',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -23,7 +23,12 @@ const routes: Routes = [
   {
     path: 'pantalla-principal',
     loadChildren: () => import('./pantalla-principal/pantalla-principal.module').then( m => m.PantallaPrincipalPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
+
 
 ];
 

@@ -8,7 +8,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Pantalla pincipal', url: 'pantalla-principal', icon: 'archive' },
     { title: 'Ficha paciente', url: 'ficha-paciente', icon: 'person' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
+    { title: 'Cerrar Sesion', url: '/folder/Cerrar-Sesion', icon: 'arrow-forward' },
     { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
     { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
