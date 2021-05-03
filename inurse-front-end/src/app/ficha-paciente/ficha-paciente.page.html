@@ -19,14 +19,33 @@
       </ion-col>
     </ion-row>
     <ion-row >
-        <ion-col  offset="1"  >
-          <ion-label>{{ this.patient?.firstName}}
-          </ion-label></ion-col>
-        <ion-col offset="1">
-          <ion-label class="ion-align-items-start"> {{this.patient?.weight}}</ion-label>
+        <ion-col  offset="1" >
+          <ion-row  >
+<!--            <ion-label>Nombre</ion-label>-->
+          </ion-row>
+          <ion-row>
+            <ion-label  >{{ this.patient?.firstName}}</ion-label>
+          </ion-row>
+
         </ion-col>
         <ion-col offset="1">
-          <ion-label class="ion-align-items-end">{{this.patient?.height}}</ion-label>
+          <ion-row>
+<!--            <ion-label> Peso </ion-label>-->
+          </ion-row>
+          <ion-row>
+            <ion-label class="ion-align-items-start"> {{this.patient?.weight}}</ion-label>
+          </ion-row>
+
+        </ion-col>
+        <ion-col offset="1">
+          <ion-row>
+<!--            <ion-label>Altura</ion-label>-->
+          </ion-row>
+          <ion-row>
+
+            <ion-label class="ion-align-items-end">{{this.patient?.height}}</ion-label>
+          </ion-row>
+
         </ion-col>
     </ion-row>
     <ion-row>
@@ -111,7 +130,7 @@
 <!--                <ion-label> {{visit.createdTimestamp}} </ion-label>-->
 <!--                <ion-label> {{visit.nurse}} </ion-label>-->
                 <ion-label> {{visit.data.getDate() }}/{{visit.data.getMonth()}}/{{visit.data.getFullYear()}} </ion-label>
-                <ion-label> {{visit.description}} </ion-label>
+                <ion-label class="ion-text-wrap"> {{visit.treatment}} </ion-label>
 
 
 

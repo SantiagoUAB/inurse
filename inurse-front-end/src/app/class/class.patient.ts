@@ -32,7 +32,7 @@ export  class Patient implements IPatient{
 
     this.firstName = data['first_name'];
     this.actualState = data['actualState'];
-    this.age = data
+    this.age = data;
     this.allergies = data['allergies'];
     this.assignedNurse = data['assignedNurse'];
     this.dni = data['dni'];
@@ -48,7 +48,7 @@ export  class Patient implements IPatient{
     this.weight = data['weight'];
 
 
-    if(this.sex=='m'){
+    if (this.sex == 'm'){
       this.isMale = true;
     }else{
       this.isMale = false;
