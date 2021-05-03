@@ -19,13 +19,12 @@ export class FichaPacientePage implements OnInit {
 
 
 
-  constructor(private pacienteService: PacientesService, private  historicalService : HistoricalService) {  }
+  constructor(private pacienteService: PacientesService, private  historicalService: HistoricalService) {  }
 
   ngOnInit() {
-    this.idPaciente = 1;
+    this.idPaciente = this.pacienteService.getIdPacient();
 
     this.getDataPatientFile();
-
   }
 
 
