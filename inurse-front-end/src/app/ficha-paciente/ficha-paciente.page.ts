@@ -6,6 +6,9 @@ import {Patient} from '../class/class.patient';
 import {fakeAsync} from '@angular/core/testing';
 import {HistoricalService} from '../service/historical.service';
 import {Historical} from '../class/class.historical';
+import {AuthenticationService} from '../service/authentication.service';
+import {first} from 'rxjs/operators';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -19,7 +22,17 @@ export class FichaPacientePage implements OnInit {
 
 
 
-  constructor(private pacienteService: PacientesService, private  historicalService: HistoricalService) {  }
+  constructor(private pacienteService: PacientesService, private  historicalService: HistoricalService, private  auth: AuthenticationService) {
+    console.log('header');
+    this.auth.login('admin', 'admin')
+      .pipe(first())
+      .subscribe( (data: HttpResponse<any>) => {
+        console.log('header in in ');
+        console.log(data.headers);
+        console.log(data.headers.get('Set-Cookie'));
+        console.log(data.headers.get('Server'));
+      });
+  }
 
   ngOnInit() {
     this.idPaciente = this.pacienteService.getIdPacient();

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {first} from 'rxjs/operators';
 
 
 @Component({
@@ -40,7 +41,9 @@ export class LoginPage implements OnInit {
 
   async sendPostRequest() {
     const postData = { username: this.username, password: this.password };
-    this.httpClient.post('http://158.109.74.51:55001/auth/login/', postData).subscribe(data => {
+    this.httpClient.post('http://158.109.74.51:55001/auth/login/', postData, {observe: 'response' as 'body'})
+      .pipe(first())
+      .subscribe(data => {
       console.log(data);
       console.log('login correcto');
       this.comprovationUser();
@@ -49,6 +52,13 @@ export class LoginPage implements OnInit {
       this.errorUserPassword();
       console.log('login incorrecto');
     });
+
+    console.log('read headers');
+
+
+
+
+
   }
 
 
