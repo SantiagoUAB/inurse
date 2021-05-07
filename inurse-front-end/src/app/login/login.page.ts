@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  public errorMsg: any;
   username = '';
   password = '';
   constructor(
@@ -46,11 +47,13 @@ export class LoginPage implements OnInit {
       this.comprovationUser();
       this.router.navigate(['/pantalla-principal']);
     }, error => {
+      this.errorMsg = error.message;
       this.errorUserPassword();
+      console.log(error.message);
+      // console.log(error);
       console.log('login incorrecto');
     });
   }
-
 
   /*async getDataPatientFile() {
     this.userService.getUser(this.username).subscribe(data => {
@@ -66,6 +69,7 @@ export class LoginPage implements OnInit {
       }
     });
   }*/
+
   async comprovationUser(){
     const toast = await this.toastController.create({
       message: 'Has iniciado sesión correctamente',
