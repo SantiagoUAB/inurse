@@ -126,9 +126,9 @@
         <ion-row>
           <ion-col offset="1">
             <ion-infinite-scroll  >
-              <ion-item *ngFor="let visit of this.historical?.visits" >
+              <ion-item *ngFor="let visit of this.historical?.visits" (click)=verVisitaPaciente(visit.id) >
 <!--                <ion-label> {{visit.createdTimestamp}} </ion-label>-->
-<!--                <ion-label> {{visit.nurse}} </ion-label>-->
+                <ion-label> {{visit.id}} </ion-label>
                 <ion-label> {{visit.data.getDate() }}/{{visit.data.getMonth()}}/{{visit.data.getFullYear()}} </ion-label>
                 <ion-label class="ion-text-wrap"> {{visit.treatment}} </ion-label>
 

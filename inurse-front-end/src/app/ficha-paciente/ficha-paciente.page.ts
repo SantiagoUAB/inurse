@@ -6,6 +6,7 @@ import {Patient} from '../class/class.patient';
 import {fakeAsync} from '@angular/core/testing';
 import {HistoricalService} from '../service/historical.service';
 import {Historical} from '../class/class.historical';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -19,7 +20,7 @@ export class FichaPacientePage implements OnInit {
 
 
 
-  constructor(private pacienteService: PacientesService, private  historicalService: HistoricalService) {  }
+  constructor(private pacienteService: PacientesService, private  historicalService: HistoricalService,  private router: Router) {  }
 
   ngOnInit() {
     this.idPaciente = this.pacienteService.getIdPacient();
@@ -47,6 +48,12 @@ export class FichaPacientePage implements OnInit {
       this.historical = new Historical( data);
 
     });
+  }
+
+  verVisitaPaciente( id: any){
+    console.log('id visita wey', id);
+    this.pacienteService.setIdVisita(id);
+    this.router.navigate(['/visita']);
   }
 
   add() {
