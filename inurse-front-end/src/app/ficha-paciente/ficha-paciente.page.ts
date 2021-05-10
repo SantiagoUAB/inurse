@@ -19,16 +19,43 @@ export class FichaPacientePage implements OnInit {
   patient: Patient;
   historical: Historical;
   private idPaciente: number;
+  headers: string[];
 
 
 
-  constructor(private pacienteService: PacientesService, private  historicalService: HistoricalService, private  auth: AuthenticationService) {
+  constructor(
+    private pacienteService: PacientesService,
+    private  historicalService: HistoricalService,
+    private  auth: AuthenticationService) {
+
+
+/*    this.auth.getConfigResponsee()
+      .subscribe( resp => {
+        // mostrar headers
+        const keys = resp.headers.keys();
+        this.headers = keys.map( key =>
+        `${key} : ${resp.headers.get(key)}`);
+        // PRINT HEADERS
+
+        console.log('PRINT MAP HEADERS ----------------------------------------------');
+        console.log(this.headers);
+
+        console.log(' acceso al body');
+        console.log(resp.body);
+
+      });*/
+    this.login();
+  }
+
+  private login() {
     console.log('header');
     this.auth.login('admin', 'admin')
       .pipe(first())
-      .subscribe( (data: HttpResponse<any>) => {
+      .subscribe((data: HttpResponse<any>) => {
         console.log('header in in ');
         console.log(data.headers);
+        console.log('header keys');
+        console.log(data.headers.keys());
         console.log(data.headers.get('Set-Cookie'));
         console.log(data.headers.get('Server'));
       });
