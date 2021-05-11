@@ -9,13 +9,19 @@ import {Config} from '@ionic/angular';
 })
 export class AuthenticationService {
 
-  urlLogin: string;
-
   constructor(private http: HttpClient) {
     this.urlLogin = 'http://158.109.74.51:55001';
+    this.sessionID = AuthenticationService.NOT_LOG;
 
   }
 
+  public static NOT_LOG = 'no-login';
+  urlLogin: string;
+  sessionID: string;
+
+  getSessionID(){
+    return this.sessionID;
+  }
   login(user: string, pass: string ){
 
     const postData = { dni: user, password: pass };
@@ -37,6 +43,8 @@ export class AuthenticationService {
         return user;
       })) ;
   }
+
+
 
   getConfigResponsee(): Observable<HttpResponse<any>>{
     console.log('lanzo get login urlBase');
