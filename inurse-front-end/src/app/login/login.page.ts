@@ -53,10 +53,12 @@ export class LoginPage implements OnInit {
         console.log(data.body, ' set data');
         this.auth.setSessionID(data.body);
         this.comprovationUser();
-        this.router.navigate(['/pantalla-principal']);
+
 
         this.toast('he obtenido del servidor ' +  data.body);
         this.toast('he obtenido del servidor ' + this.auth.getSessionID());
+
+        this.router.navigate(['/pantalla-principal']);
       }
     );
   }

@@ -11,6 +11,18 @@
 
 <ion-content>
   {{this.auth?.getSessionID()}}
+  <br>
+  listado plantas
+{{this.listRooms}}
+
+  <ion-buttons >
+    <ion-button  color="primary" (click)="this.getRoomsAuth()">
+      Get Roms
+    </ion-button>
+    <ion-button  color="primary" (click)="this.loadPlantas()">
+      Get Plantas
+    </ion-button>
+  </ion-buttons>
   <ion-grid>
     <ion-row>
       <ion-col size="11">

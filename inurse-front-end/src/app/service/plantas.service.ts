@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {AuthenticationService} from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,18 +8,24 @@ import {HttpClient} from '@angular/common/http';
 export class PlantasService {
 
 
+  constructor(private httpClient: HttpClient) {
+  }
 
-  constructor(private httpClient: HttpClient) {}
-  getPlantas(){
-  return this.httpClient.get("http://158.109.74.51:55001/floor/");
+  private urlApi = 'http://158.109.74.51:55001/';
 
-}
-private urlPaciente="http://158.109.74.51:55001/patient/";
+  getPlantas() {
+    return this.httpClient.get('http://158.109.74.51:55001/floor/');
 
-getPaciente(){
-  return this.httpClient.get("http://158.109.74.51:55001/patient/")
+  }
 
-}
+  getPaciente() {
+    return this.httpClient.get('http://158.109.74.51:55001/patient/');
+
+  }
+
+  getRooms(){
+    return this.httpClient.get(this.urlApi + 'room');
+  }
 
 
 }

@@ -11,7 +11,8 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {
     this.urlLogin = 'http://158.109.74.51:55001';
-    this.sessionID = AuthenticationService.NOT_LOG;
+    // this.sessionID = AuthenticationService.NOT_LOG;
+    localStorage.setItem(AuthenticationService.SESSION_ID, AuthenticationService.NOT_LOG);
 
   }
 
@@ -30,9 +31,8 @@ export class AuthenticationService {
   }
 
   setSessionID(sessionID: string){
-    console.log('SETEO EL VALOR ====' + sessionID);
+    console.log('SETEO EL VALOR ==== ' + sessionID);
     localStorage.setItem(AuthenticationService.SESSION_ID, sessionID);
-    this.sessionID = sessionID;
   }
   login(user: string, pass: string ){
 
