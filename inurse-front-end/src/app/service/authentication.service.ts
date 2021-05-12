@@ -19,8 +19,15 @@ export class AuthenticationService {
   urlLogin: string;
   sessionID: string;
 
+  headers = new Headers({'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'});
+
   getSessionID(){
     return this.sessionID;
+  }
+
+  setSessionID(sessionID: string){
+    this.sessionID = sessionID;
   }
   login(user: string, pass: string ){
 
@@ -44,7 +51,43 @@ export class AuthenticationService {
       })) ;
   }
 
+  loginPromise(user: string, pass: string): Promise<string>{
 
+    const postData = { dni: user, password: pass };
+    const headers = new Headers({'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'});
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Access-Control-Allow-Origin': '*'
+
+      }),
+      withCredentials: true,
+      observe: 'response' as 'response'
+    };
+
+
+    return this.http.post('http://158.109.74.51:55001/auth/login/', postData, httpOptions)
+      .toPromise()
+      .then( this.handleLoginResponse);
+
+/*    return this.http.post(this.urlLogin, postData, httpOptions)
+      .toPromise().then( (res) => {
+        this.handleLoginResponse(res);
+      });
+    */
+
+
+  }
+
+
+  private handleLoginResponse(response: any): Promise<string>{
+
+    console.log('handleLoginResponse ---');
+    console.log(response);
+    return Promise.resolve(response);
+  }
 
   getConfigResponsee(): Observable<HttpResponse<any>>{
     console.log('lanzo get login urlBase');

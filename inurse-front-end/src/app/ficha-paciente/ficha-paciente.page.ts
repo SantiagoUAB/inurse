@@ -44,7 +44,20 @@ export class FichaPacientePage implements OnInit {
         console.log(resp.body);
 
       });*/
-    this.login();
+    // this.login();
+
+    this.loginPromise();
+  }
+
+  private loginPromise() {
+    console.log('LOGIN PROMISE .ts ficha paciente');
+    this.auth.loginPromise('admin', 'admin').then(
+      data => {
+
+        console.log('RESPUESTA EN FICHA PACINETE');
+        console.log(data);
+      }
+    );
   }
 
   private login() {
@@ -83,7 +96,6 @@ export class FichaPacientePage implements OnInit {
     this.historicalService.getHistorical(idPatient).subscribe(data => {
       console.log('Historial paciente ', idPatient);
       console.log(data);
-
       this.historical = new Historical( data);
 
     });
