@@ -16,6 +16,7 @@ export class AuthenticationService {
   }
 
   public static NOT_LOG = 'no-login';
+  public static SESSION_ID = 'sessionid';
   urlLogin: string;
   sessionID: string;
 
@@ -23,11 +24,14 @@ export class AuthenticationService {
     'Access-Control-Allow-Origin': '*'});
 
   getSessionID(): string{
-    return this.sessionID;
+    // return this.sessionID;
+    const sessionID = localStorage.getItem(AuthenticationService.SESSION_ID);
+    return sessionID;
   }
 
   setSessionID(sessionID: string){
     console.log('SETEO EL VALOR ====' + sessionID);
+    localStorage.setItem(AuthenticationService.SESSION_ID, sessionID);
     this.sessionID = sessionID;
   }
   login(user: string, pass: string ){
