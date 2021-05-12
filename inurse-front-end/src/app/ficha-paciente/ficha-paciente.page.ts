@@ -46,31 +46,43 @@ export class FichaPacientePage implements OnInit {
       });*/
     // this.login();
 
-    this.loginPromise();
+    // this.loginPromise();
   }
 
   private loginPromise() {
     console.log('LOGIN PROMISE .ts ficha paciente');
     this.auth.loginPromise('admin', 'admin').then(
-      data => {
+      (data: any) => {
 
         console.log('RESPUESTA EN FICHA PACINETE');
         console.log(data);
+
+        console.log(data.body);
+        this.auth.setSessionID(data.body.cookie);
+
+
       }
     );
   }
 
+  // saveSessionID(response: any)
+
   private login() {
     console.log('header');
-    this.auth.login('admin', 'admin')
+    // this.auth.login('admin', 'admin')
+    this.auth.login('0000', 'test')
       .pipe(first())
       .subscribe((data: HttpResponse<any>) => {
-        console.log('header in in ');
-        console.log(data.headers);
-        console.log('header keys');
-        console.log(data.headers.keys());
-        console.log(data.headers.get('Set-Cookie'));
-        console.log(data.headers.get('Server'));
+        // console.log('header in in ');
+        // console.log(data.headers);
+        // console.log('header keys');
+        // console.log(data.headers.keys());
+        // console.log(data.headers.get('Set-Cookie'));
+        // // console.log(data.headers.get('Server'));
+
+
+
+
       });
   }
 

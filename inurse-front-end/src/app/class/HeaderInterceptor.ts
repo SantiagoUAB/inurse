@@ -10,14 +10,16 @@ export class HaderInterceptor implements HttpInterceptor{
   constructor( public auth: AuthenticationService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Interceptor request', req);
 
 
 
     if (this.auth.getSessionID() === AuthenticationService.NOT_LOG){
       const authSesionID = this.auth.getSessionID();
       // clone the request and put sessionID
-      const authReq = req.clone({ setHeaders: { Authorization: authSesionID}});
+      // const authReq = req.clone({ setHeaders: { Authorization: authSesionID}});
+      console.log('Interceptor request', req);
+
+      const authReq = req.clone({ setHeaders: { Authorization : 'token-santi=486546, sessionid=' + authSesionID}});
       return next.handle(authReq);
     }else{
       return next.handle(req)
@@ -25,6 +27,7 @@ export class HaderInterceptor implements HttpInterceptor{
           tap(httpEvent => {
             // skip request
             if (httpEvent.type === 0){
+
               return;
             }
 
