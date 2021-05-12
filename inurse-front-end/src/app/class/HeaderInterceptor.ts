@@ -20,6 +20,7 @@ export class HaderInterceptor implements HttpInterceptor{
       console.log('Interceptor request', req);
 
       const authReq = req.clone({ setHeaders: { Authorization : 'token-santi=486546, sessionid=' + authSesionID}});
+      // console.log(next.handle(authReq));
       return next.handle(authReq);
     }else{
       return next.handle(req)

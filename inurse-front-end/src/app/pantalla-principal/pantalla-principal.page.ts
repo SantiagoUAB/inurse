@@ -3,6 +3,7 @@ import { PlantasService } from '../service/plantas.service';
 import{Floor} from '../class/class.floor';
 import {PacientesService} from '../service/pacientes.service';
 import {Router} from '@angular/router';
+import {AuthenticationService} from '../service/authentication.service';
 
 @Component({
   selector: 'app-pantalla-principal',
@@ -25,7 +26,8 @@ export class PantallaPrincipalPage implements OnInit {
 
   constructor(private plantasService: PlantasService,
               private patientSevice: PacientesService,
-              private router: Router,) {
+              private router: Router,
+              private auth: AuthenticationService) {
     this.idPatient = 1;
     this.plantasService.getPlantas().subscribe(data => {
       console.log('Plantas');

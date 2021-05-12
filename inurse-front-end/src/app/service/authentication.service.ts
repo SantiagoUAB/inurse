@@ -22,11 +22,12 @@ export class AuthenticationService {
   headers = new Headers({'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'});
 
-  getSessionID(){
+  getSessionID(): string{
     return this.sessionID;
   }
 
   setSessionID(sessionID: string){
+    console.log('SETEO EL VALOR ====' + sessionID);
     this.sessionID = sessionID;
   }
   login(user: string, pass: string ){
