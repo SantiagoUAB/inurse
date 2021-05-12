@@ -35,7 +35,7 @@
 
   <ion-list>
     <ion-item class="paciente" ion-item *ngFor="let item of listaPaciente" (click)=verFichaPaciente(item[2]) >
-       <ion-label>{{item[1]}} : {{item[0]}}</ion-label>
+       <ion-label>{{item[0]}} : {{item[1]}} {{item[2]}}</ion-label>
     </ion-item>
 
 

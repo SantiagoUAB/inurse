@@ -54,12 +54,12 @@ export class PantallaPrincipalPage implements OnInit {
     this.lista = [];
     for (let file of this.roomPacientes) {
       if (planta == (file['room']['floor']['floor_num'])){
-      this.aux2 = [file['first_name'],file['room']['room_num'], file.id];
+      this.aux2 = [file['room']['room_num'],file['first_name'],file['last_name'], file.id];
       this.lista.push(this.aux2);
       }
 
    }
-    this.listaPaciente = this.lista;
+    this.listaPaciente = this.lista.sort();
     console.log(this.listaPaciente);
 
 }
