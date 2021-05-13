@@ -32,12 +32,24 @@
 
 
 
+    <div *ngIf="comprobacionPacienteFijado == '0'">
+      <ion-text>&nbsp; &nbsp; <b>No hay ningún paciente fijado:</b></ion-text>
+    </div>
+    <div *ngIf="comprobacionPacienteFijado == '1'">
+      <ion-text>&nbsp; &nbsp; <b>Paciente fijado: {{nombrePacienteFijado}} {{apellidoPacienteFijado}}</b></ion-text>
+    </div>
 
-  <ion-list>
-    <ion-item class="paciente" ion-item *ngFor="let item of listaPaciente" (click)=verFichaPaciente(item[2]) >
-       <ion-label>{{item[0]}} : {{item[1]}} {{item[2]}}</ion-label>
+    <div *ngIf="comprobacionPacienteFijado == '1'">
+      <ion-button (click) = "desfijarPaciente()" expand="block" color="danger">Desfijar paciente</ion-button>
+    </div>
+
+      <ion-list>
+        <ion-item class="paciente" ion-item *ngFor="let item of listaPaciente" (click)=verFichaPaciente(item[3]) >
+          <ion-label>{{item[0]}} : {{item[1]}} {{item[2]}}</ion-label>
+        <div *ngIf="comprobacionPacienteFijado == '0'">
+          <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block">Fijar paciente</ion-button>
+        </div>
     </ion-item>
-
 
 
 

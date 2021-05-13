@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { PlantasService } from '../service/plantas.service';
-import{Floor} from '../class/class.floor';
+import {Floor} from '../class/class.floor';
 import {PacientesService} from '../service/pacientes.service';
 import {Router} from '@angular/router';
 
@@ -19,6 +19,9 @@ export class PantallaPrincipalPage implements OnInit {
   private habitacion: string;
   private lista: any[];
   private listaPaciente: any[];
+  private comprobacionPacienteFijado: string;
+  private nombrePacienteFijado: string;
+  private apellidoPacienteFijado: string;
 
   @Input()
   idPatient: any;
@@ -53,22 +56,47 @@ export class PantallaPrincipalPage implements OnInit {
   cambioPlanta(planta){
     this.lista = [];
     for (let file of this.roomPacientes) {
-      if (planta == (file['room']['floor']['floor_num'])){
+      if (planta === (file['room']['floor']['floor_num'])){
       this.aux2 = [file['room']['room_num'],file['first_name'],file['last_name'], file.id];
       this.lista.push(this.aux2);
       }
 
    }
     this.listaPaciente = this.lista.sort();
-    console.log(this.listaPaciente);
+    console.log('Lista paciente:', this.listaPaciente);
 
 }
   ngOnInit() {
+    this.nombrePacienteFijado = localStorage.getItem('nombrePacienteFijado');
+    this.apellidoPacienteFijado = localStorage.getItem('apellidoPacienteFijado');
+    this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
+    console.log('Valor inicial paciente fijado: ' + this.comprobacionPacienteFijado)
+    if (this.comprobacionPacienteFijado === null || undefined) {
+      this.comprobacionPacienteFijado = '0';
+    }
   }
-
-  verFichaPaciente( id: any){
+  verFichaPaciente( id: number) {
     console.log('id paciente wey', id);
     this.patientSevice.setIdPacient(id);
     this.router.navigate(['/ficha-paciente']);
  }
+  fijarPaciente(nombre: string, apellido: string) {
+    console.log('Nombre paciente fijado: ' + nombre);
+    console.log('Apellido paciente fijado: ' + apellido);
+    localStorage.setItem('comprobacionPacienteFijado', '1');
+    this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
+    console.log('Paciente fijado: ' + this.comprobacionPacienteFijado);
+    localStorage.setItem('nombrePacienteFijado', nombre);
+    localStorage.setItem('apellidoPacienteFijado', apellido);
+    this.nombrePacienteFijado = nombre;
+    this.apellidoPacienteFijado = apellido;
+ }
+  desfijarPaciente() {
+    localStorage.setItem('comprobacionPacienteFijado', '0');
+    this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
+    localStorage.clear();
+    this.nombrePacienteFijado = undefined;
+    this.apellidoPacienteFijado = undefined;
+  }
+
 }
