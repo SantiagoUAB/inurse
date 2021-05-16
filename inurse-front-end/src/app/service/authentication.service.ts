@@ -4,13 +4,28 @@ import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Config} from '@ionic/angular';
 
+const URL_AUTH = 'http://158.109.74.51:55001/auth/login/';
+/*const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Access-Control-Allow-Origin': '*',
+
+
+  }),
+  withCredentials: true,
+  observe: 'response' as 'response'
+};*/
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class AuthenticationService {
 
+
   constructor(private http: HttpClient) {
-    this.urlLogin = 'http://158.109.74.51:55001';
+
     // this.sessionID = AuthenticationService.NOT_LOG;
     localStorage.setItem(AuthenticationService.SESSION_ID, AuthenticationService.NOT_LOG);
 
@@ -18,8 +33,11 @@ export class AuthenticationService {
 
   public static NOT_LOG = 'no-login';
   public static SESSION_ID = 'sessionid';
-  urlLogin: string;
+  // const URL_AUTH = 'http://158.109.74.51:55001/auth/login/';
+  // const AUTH_API = 'http://localhost:8080/api/auth/';
+
   sessionID: string;
+
 
   headers = new Headers({'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'});
@@ -37,7 +55,7 @@ export class AuthenticationService {
   login(user: string, pass: string ){
 
     const postData = { dni: user, password: pass };
-    const httpOptions = {
+/*    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Access-Control-Allow-Origin': '*'
@@ -45,11 +63,13 @@ export class AuthenticationService {
       }),
       withCredentials: true,
       observe: 'response' as 'response'
-    };
+    };*/
 
-    return this.http.post<any>('http://158.109.74.51:55001/auth/login/', postData,
+    return this.http.post<any>('http://158.109.74.51:55001/auth/login/', postData
+      ,
       // {observe : 'response' as 'body'})
-      httpOptions)
+      // httpOptions
+    )
       .pipe(map( user => {
         console.log(user);
         return user;
@@ -59,22 +79,12 @@ export class AuthenticationService {
   loginPromise(user: string, pass: string): Promise<string>{
 
     const postData = { dni: user, password: pass };
-    const headers = new Headers({'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'});
+/*    const headers = new Headers({'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'});*/
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Access-Control-Allow-Origin': '*',
-
-
-      }),
-      withCredentials: true,
-      observe: 'response' as 'response'
-    };
-
-
-    return this.http.post('http://158.109.74.51:55001/auth/login/', postData, httpOptions)
+    return this.http.post( URL_AUTH, postData
+      // , httpOptions
+    )
       .toPromise()
       .then( this.handleLoginResponse);
 
@@ -98,7 +108,7 @@ export class AuthenticationService {
   getConfigResponsee(): Observable<HttpResponse<any>>{
     console.log('lanzo get login urlBase');
 
-    return this.http.get<any>(this.urlLogin, {observe: 'response'});
+    return this.http.get<any>(URL_AUTH, {observe: 'response'});
 
   }
 

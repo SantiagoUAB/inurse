@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from '../service/authentication.service';
+import {TokenStorageService} from '../service/token-storage.service';
 
 
 @Component({
@@ -14,14 +15,29 @@ import {AuthenticationService} from '../service/authentication.service';
 export class LoginPage implements OnInit {
   username = '';
   password = '';
+
+
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  public form = {
+    dni: null,
+    password: null,
+  };
+
   constructor(
     public toastController: ToastController,
     private router: Router,
     private httpClient: HttpClient,
-    private  auth: AuthenticationService
+    private  auth: AuthenticationService,
+    private tokenStorage: TokenStorageService
   ) { }
 
   ngOnInit() {
+    if ( this.tokenStorage.getToken()){
+      this.isLoggedIn = true;
+
+    }
   }
   async proceedLogin() {
     if (this.username === '') {
@@ -39,9 +55,31 @@ export class LoginPage implements OnInit {
     }
     // this.sendPostRequest();
     // this.getDataPatientFile();
-    this.loginPromise();
+    // this.loginPromise();
+    this.login();
+  }
+  login(): void {
+    const {dni, password} = this.form;
+    console.log( 'value form', this.form);
+    this.auth.login(this.form.dni, this.form.password).subscribe( data => {
+      console.log(data);
+
+      this.tokenStorage.saveToken(data.body);
+      this.tokenStorage.saveUser(data);
+      this.isLoginFailed = false;
+      this.isLoggedIn = true;
+
+      // this.reloadPage();
+    }, error => {
+      this.errorMessage = error.error.message;
+      console.error(this.errorMessage);
+      this.isLoginFailed = true;
+    });
   }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
   private loginPromise() {
     console.log('LOGIN PROMISE .ts ficha paciente');
     this.auth.loginPromise('admin', 'admin').then(
