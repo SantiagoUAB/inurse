@@ -8,11 +8,9 @@ export class AppComponent {
   public appPages = [
     { title: 'Pantalla pincipal', url: 'pantalla-principal', icon: 'archive' },
     { title: 'Ficha paciente', url: 'ficha-paciente', icon: 'person' },
-    { title: 'Cerrar Sesion', url: 'logout', icon: 'arrow-forward' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    { title: 'Cerrar Sesion', url: 'logout', icon: 'arrow-forward' }
+
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
   constructor() {}
 }

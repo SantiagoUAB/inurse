@@ -3,6 +3,8 @@ import { PlantasService } from '../service/plantas.service';
 import{Floor} from '../class/class.floor';
 import {PacientesService} from '../service/pacientes.service';
 import {Router} from '@angular/router';
+import {AuthenticationService} from '../service/authentication.service';
+import {TokenStorageService} from '../service/token-storage.service';
 
 @Component({
   selector: 'app-pantalla-principal',
@@ -22,11 +24,33 @@ export class PantallaPrincipalPage implements OnInit {
 
   @Input()
   idPatient: any;
+  private listRooms: any;
 
   constructor(private plantasService: PlantasService,
               private patientSevice: PacientesService,
-              private router: Router,) {
-    this.idPatient = 1;
+              private router: Router,
+              ) {
+    this.idPatient = 1; // paciente por defecto
+    this.loadPlantas();
+    this.loadPacientes();
+
+
+    console.log(this.resultado);
+   }
+
+  private loadPacientes() {
+    this.plantasService.getPaciente().subscribe(data => {
+      console.log('Pacientes');
+      console.log(data);
+      this.roomPacientes = data['results'];
+
+      console.log(this.roomPacientes);
+      console.log('poner planta 1 por defecto');
+      this.cambioPlanta(1);
+    });
+  }
+
+  private loadPlantas() {
     this.plantasService.getPlantas().subscribe(data => {
       console.log('Plantas');
       console.log(data);
@@ -34,23 +58,10 @@ export class PantallaPrincipalPage implements OnInit {
       this.arrayPlanta = this.planta.results;
 
     });
+  }
 
-    this.plantasService.getPaciente().subscribe(data => {
-      console.log('Pacientes');
-      console.log(data);
-      this.roomPacientes = data['results'];
-
-      console.log(this.roomPacientes);
-
-      this.cambioPlanta(1);
-    });
-
-
-    console.log(this.resultado);
-
-
-   }
   cambioPlanta(planta){
+    console.log('Poner la planta ', planta);
     this.lista = [];
     for (let file of this.roomPacientes) {
       if (planta == (file['room']['floor']['floor_num'])){
@@ -69,6 +80,14 @@ export class PantallaPrincipalPage implements OnInit {
   verFichaPaciente( id: any){
     console.log('id paciente wey', id);
     this.patientSevice.setIdPacient(id);
-    this.router.navigate(['/ficha-paciente']);
+    this.router.navigate(['/ficha-paciente/']);
+ }
+
+  getRoomsAuth(){
+
+    console.log('get rooms auth');
+    this.plantasService.getRooms().subscribe( data => {
+      this.listRooms = data;
+    });
  }
 }
