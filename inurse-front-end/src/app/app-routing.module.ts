@@ -9,7 +9,7 @@ const routes: Routes = [
   }, */
   {
     path: '',
-    redirectTo: 'ficha-paciente',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {

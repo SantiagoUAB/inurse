@@ -24,7 +24,7 @@ export class PlantasService {
   }
 
   getRooms(){
-    return this.httpClient.get(this.urlApi + 'room');
+    return this.httpClient.get(this.urlApi + 'room/');
   }
 
 

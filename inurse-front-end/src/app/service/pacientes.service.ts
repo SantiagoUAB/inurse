@@ -21,9 +21,9 @@ export class PacientesService {
 
   getPaciente(idPaciente: number){
 
-    console.log('id paciente ' , idPaciente);
+    console.log('id paciente en servicio ' , idPaciente);
     // http://158.109.74.51:55001/patient/?format=json&dni=0000000G
-    return this.httpClient.get(_URL_PACIENTES + '/' + idPaciente + '/');
+    return this.httpClient.get(ClassGlobalConstants.API_PATIENT + idPaciente + '/');
   }
 
   private getName(){

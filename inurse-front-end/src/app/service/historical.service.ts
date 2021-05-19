@@ -7,11 +7,11 @@ import {HttpClient} from '@angular/common/http';
 export class HistoricalService {
   urlHistorical: string;
   constructor(private httpClient: HttpClient) {
-    this.urlHistorical = 'http://158.109.74.51:55001/appointment';
+    this.urlHistorical = 'http://158.109.74.51:55001/appointment/';
   }
 
   getHistorical(idPaciente: number){
 
-    return this.httpClient.get(this.urlHistorical + '/?patient=' + idPaciente);
+    return this.httpClient.get(this.urlHistorical + '?patient=' + idPaciente);
   }
 }

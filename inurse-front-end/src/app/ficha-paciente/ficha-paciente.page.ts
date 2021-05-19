@@ -65,28 +65,8 @@ export class FichaPacientePage implements OnInit {
     );
   }
 
-  // saveSessionID(response: any)
-
-  private login() {
-    console.log('header');
-    // this.auth.login('admin', 'admin')
-    this.auth.login('0000', 'test')
-      .pipe(first())
-      .subscribe((data: HttpResponse<any>) => {
-        // console.log('header in in ');
-        // console.log(data.headers);
-        // console.log('header keys');
-        // console.log(data.headers.keys());
-        // console.log(data.headers.get('Set-Cookie'));
-        // // console.log(data.headers.get('Server'));
-
-
-
-
-      });
-  }
-
   ngOnInit() {
+    console.log('id paciente',  this.pacienteService.getIdPacient());
     this.idPaciente = this.pacienteService.getIdPacient();
 
     this.getDataPatientFile();
@@ -98,7 +78,6 @@ export class FichaPacientePage implements OnInit {
       console.log('En ficha paciente');
       console.log(data);
       this.patient = new Patient(data);
-
       this.getDataPatientHistorical(this.patient.id);
 
     });

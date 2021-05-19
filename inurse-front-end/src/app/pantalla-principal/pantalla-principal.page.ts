@@ -29,8 +29,8 @@ export class PantallaPrincipalPage implements OnInit {
   constructor(private plantasService: PlantasService,
               private patientSevice: PacientesService,
               private router: Router,
-              private tokenStorage: TokenStorageService) {
-    this.idPatient = 1;
+              ) {
+    this.idPatient = 1; // paciente por defecto
     this.loadPlantas();
     this.loadPacientes();
 
@@ -45,7 +45,7 @@ export class PantallaPrincipalPage implements OnInit {
       this.roomPacientes = data['results'];
 
       console.log(this.roomPacientes);
-
+      console.log('poner planta 1 por defecto');
       this.cambioPlanta(1);
     });
   }
@@ -61,6 +61,7 @@ export class PantallaPrincipalPage implements OnInit {
   }
 
   cambioPlanta(planta){
+    console.log('Poner la planta ', planta);
     this.lista = [];
     for (let file of this.roomPacientes) {
       if (planta == (file['room']['floor']['floor_num'])){
@@ -79,7 +80,7 @@ export class PantallaPrincipalPage implements OnInit {
   verFichaPaciente( id: any){
     console.log('id paciente wey', id);
     this.patientSevice.setIdPacient(id);
-    this.router.navigate(['/ficha-paciente']);
+    this.router.navigate(['/ficha-paciente/']);
  }
 
   getRoomsAuth(){
