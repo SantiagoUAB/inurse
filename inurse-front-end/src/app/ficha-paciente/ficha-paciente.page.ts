@@ -28,25 +28,9 @@ export class FichaPacientePage implements OnInit {
     private  historicalService: HistoricalService,
     private  auth: AuthenticationService) {
 
+    this.idPaciente = 1; // paciente por defecto
 
-/*    this.auth.getConfigResponsee()
-      .subscribe( resp => {
-        // mostrar headers
-        const keys = resp.headers.keys();
-        this.headers = keys.map( key =>
-        `${key} : ${resp.headers.get(key)}`);
-        // PRINT HEADERS
 
-        console.log('PRINT MAP HEADERS ----------------------------------------------');
-        console.log(this.headers);
-
-        console.log(' acceso al body');
-        console.log(resp.body);
-
-      });*/
-    // this.login();
-
-    // this.loginPromise();
   }
 
   private loginPromise() {
