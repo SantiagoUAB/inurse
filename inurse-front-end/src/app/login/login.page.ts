@@ -37,16 +37,17 @@ export class LoginPage implements OnInit {
     if ( this.tokenStorage.getToken()){
       this.isLoggedIn = true;
 
+      this.tokenStorage.sinOut();
     }
   }
   async proceedLogin() {
-    if (this.username === '') {
+    if (this.form.dni === '') {
       const toast = await this.toastController.create({
         message: 'Por favor, introduce el usuario',
         duration: 2000
       });
       toast.present();
-    } else if (this.password === '') {
+    } else if (this.form.password === '') {
       const toast = await this.toastController.create({
         message: 'Por favor, introduce la contraseña',
         duration: 2000
@@ -59,16 +60,18 @@ export class LoginPage implements OnInit {
     this.login();
   }
   login(): void {
-    const {dni, password} = this.form;
+    const {password, dni} = this.form;
     console.log( 'value form', this.form);
     this.auth.login(this.form.dni, this.form.password).subscribe( data => {
-      console.log(data);
 
-      this.tokenStorage.saveToken(data.body);
-      this.tokenStorage.saveUser(data);
+      console.log('login correcto', data);
+
+      this.tokenStorage.saveToken(data.token);
+      this.tokenStorage.saveUser(data.pk);
+
       this.isLoginFailed = false;
       this.isLoggedIn = true;
-
+      this.router.navigate(['/pantalla-principal']);
       // this.reloadPage();
     }, error => {
       this.errorMessage = error.error.message;

@@ -16,16 +16,24 @@ export class HaderInterceptor implements HttpInterceptor{
     let authReq = req;
     const token = this.token.getToken();
 
-    if (token !== 'no-token'){
-      console.log( 'value token', token);
-      authReq = req.clone({ setHeaders: {
+    console.log('INTECEPTOR ', req);
+    if (token ){
+      console.log( 'value token add to header', token);
+/*      authReq = req.clone({ setHeaders: {
           // Authorization : authSesionID,
-          Authorization :  'val',
+          Authorization :  token ,
           'Content-Type':  'application/json',
           'Access-Control-Allow-Origin': '*'
-        }, withCredentials: true}) ;
+        }, withCredentials: true}) ;*/
+
+
+      authReq = req.clone({ setHeaders: {
+          'Content-Type':  'application/json',
+          Authorization : 'JWT ' +  token ,
+
+        }}) ;
       // authReq = req.clone(
-      //   // {headers: req.headers.set( TOKEN_HEADER_KEY,  token)}
+      //   {headers: req.headers.set( TOKEN_HEADER_KEY,  token)}
       // );
     }
     return next.handle(authReq);

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {ClassGlobalConstants} from '../class/class.globalConstants';
 
 const _URL_PACIENTES  = 'http://158.109.74.51:55001/patient';
 @Injectable({
@@ -15,7 +16,7 @@ export class PacientesService {
   }
 
   getPacientes(){
-    return this.httpClient.get(_URL_PACIENTES);
+    return this.httpClient.get(ClassGlobalConstants.API_PATIENT);
   }
 
   getPaciente(idPaciente: number){

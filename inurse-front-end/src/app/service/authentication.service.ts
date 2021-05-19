@@ -3,18 +3,10 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Config} from '@ionic/angular';
+import {ClassGlobalConstants} from '../class/class.globalConstants';
 
-const URL_AUTH = 'http://158.109.74.51:55001/auth/login/';
-/*const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Access-Control-Allow-Origin': '*',
-
-
-  }),
-  withCredentials: true,
-  observe: 'response' as 'response'
-};*/
+// const URL_AUTH = 'http://158.109.74.51:55001/auth/login/';
+const URL_AUTH = 'http://127.0.0.1:8000/';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +25,8 @@ export class AuthenticationService {
 
   public static NOT_LOG = 'no-login';
   public static SESSION_ID = 'sessionid';
-  // const URL_AUTH = 'http://158.109.74.51:55001/auth/login/';
-  // const AUTH_API = 'http://localhost:8080/api/auth/';
+
+
 
   sessionID: string;
 
@@ -54,6 +46,7 @@ export class AuthenticationService {
   }
   login(user: string, pass: string ){
 
+
     const postData = { dni: user, password: pass };
 /*    const httpOptions = {
       headers: new HttpHeaders({
@@ -64,8 +57,8 @@ export class AuthenticationService {
       withCredentials: true,
       observe: 'response' as 'response'
     };*/
-
-    return this.http.post<any>('http://158.109.74.51:55001/auth/login/', postData
+    console.log('post login', postData);
+    return this.http.post<any>(ClassGlobalConstants.API_LOGIN , postData
       ,
       // {observe : 'response' as 'body'})
       // httpOptions
@@ -82,7 +75,7 @@ export class AuthenticationService {
 /*    const headers = new Headers({'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'});*/
 
-    return this.http.post( URL_AUTH, postData
+    return this.http.post( URL_AUTH + 'auth/login/', postData
       // , httpOptions
     )
       .toPromise()
