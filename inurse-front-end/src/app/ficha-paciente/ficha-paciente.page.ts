@@ -9,6 +9,7 @@ import {Historical} from '../class/class.historical';
 import {AuthenticationService} from '../service/authentication.service';
 import {first} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -26,7 +27,8 @@ export class FichaPacientePage implements OnInit {
   constructor(
     private pacienteService: PacientesService,
     private  historicalService: HistoricalService,
-    private  auth: AuthenticationService) {
+    private  auth: AuthenticationService,
+    private router: Router) {
 
     this.idPaciente = 1; // paciente por defecto
 
@@ -74,6 +76,12 @@ export class FichaPacientePage implements OnInit {
       this.historical = new Historical( data);
 
     });
+  }
+
+  verVisitaPaciente( id: any){
+    console.log('id visita wey', id);
+    this.pacienteService.setIdVisita(id);
+    this.router.navigate(['/visita']);
   }
 
   add() {

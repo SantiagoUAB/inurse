@@ -8,11 +8,13 @@ const _URL_PACIENTES  = 'http://158.109.74.51:55001/patient';
 })
 export class PacientesService {
 
-
+  idVisita: any;
   idPatient: any;
+  urlVisita: any;
 
   constructor(private httpClient: HttpClient) {
     this.idPatient = 1;
+    this.urlVisita = 'http://158.109.74.51:55001/appointment';
   }
 
   getPacientes(){
@@ -37,5 +39,20 @@ export class PacientesService {
   getIdPacient(){
     // TODO error if null
     return  this.idPatient;
+  }
+  setIdVisita(id: any){
+    // TODO determinar si es un id valido o controlar id correcto
+    this.idVisita = id;
+  }
+  getIdVisita(){
+    // TODO error if null
+    console.log('get id visita ' , this.idVisita);
+    return  this.idVisita;
+  }
+  getVisita(idVisita: number){
+
+    console.log('id visita ' , idVisita);
+    // http://158.109.74.51:55001/patient/?format=json&dni=0000000G
+    return this.httpClient.get(this.urlVisita + '/' + idVisita + '/');
   }
 }

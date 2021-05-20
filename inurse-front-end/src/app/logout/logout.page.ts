@@ -3,8 +3,10 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {TokenStorageService} from '../service/token-storage.service';
+import {PantallaPrincipalPage} from '../pantalla-principal/pantalla-principal.page';
 
 @Component({
+  providers: [PantallaPrincipalPage],
   selector: 'app-logout',
   templateUrl: './logout.page.html',
   styleUrls: ['./logout.page.scss'],
@@ -14,11 +16,13 @@ export class LogoutPage implements OnInit {
     public toastController: ToastController,
     private router: Router,
     private httpClient: HttpClient,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
+    private pantallaPrincipal: PantallaPrincipalPage
   ) { }
 
   ngOnInit() {
     this.logout();
+    this.pantallaPrincipal.desfijarPaciente();
   }
 
   logout() {
