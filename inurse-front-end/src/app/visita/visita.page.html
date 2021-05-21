@@ -1,13 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+<!--      <ion-menu-button></ion-menu-button>-->
+      <ion-back-button
+        text='back'
+        icon="chevron-back-outline">
+      </ion-back-button>
     </ion-buttons>
     <ion-title>Visita</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-progress-bar [value]="this.progress"  color="secondary"  *ngIf="this.progress > 0"></ion-progress-bar>
+
   <ion-list>
     <ion-item>
       <ion-text>Nombre del paciente:</ion-text>
