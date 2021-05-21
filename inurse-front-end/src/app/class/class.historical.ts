@@ -6,8 +6,8 @@ export class Historical implements IHistorical{
 
   constructor(data: any) {
     this.visits = [];
-    console.log('hola soy el constructor historial');
-    console.log(data);
+    // console.log('hola soy el constructor historial');
+    // console.log(data);
 
 
 /*    for (let i = 0; i < data.results.length; i++){

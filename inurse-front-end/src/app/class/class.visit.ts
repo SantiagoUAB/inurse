@@ -11,8 +11,8 @@ export class Visit{
 
   constructor(data: any) {
 
-    console.log('soy el constructor Visita');
-    console.log(data);
+    // console.log('soy el constructor Visita');
+    // console.log(data);
 
 
     // this.createdTimestamp =  data['created_at'];

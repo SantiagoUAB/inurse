@@ -53,6 +53,6 @@ export class PacientesService {
 
     console.log('id visita ' , idVisita);
     // http://158.109.74.51:55001/patient/?format=json&dni=0000000G
-    return this.httpClient.get(this.urlVisita + '/' + idVisita + '/');
+    return this.httpClient.get(ClassGlobalConstants.API_VISITA  + idVisita + '/');
   }
 }

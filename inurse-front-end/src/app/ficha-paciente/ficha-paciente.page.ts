@@ -59,7 +59,7 @@ export class FichaPacientePage implements OnInit {
   }
 
 
-  private getDataPatientFile() {
+  public getDataPatientFile() {
     this.pacienteService.getPaciente(this.idPaciente).subscribe(data => {
       console.log('En ficha paciente');
       console.log(data);
@@ -79,7 +79,7 @@ export class FichaPacientePage implements OnInit {
   }
 
   verVisitaPaciente( id: any){
-    console.log('id visita wey', id);
+    console.log('ir a la visita con ID', id);
     this.pacienteService.setIdVisita(id);
     this.router.navigate(['/visita']);
   }

@@ -5,5 +5,6 @@ export class ClassGlobalConstants{
 
   public static API_PATIENT = ClassGlobalConstants.API_BASE + 'patient/';
   public static API_FLOOR = ClassGlobalConstants.API_BASE + 'floor/';
+  public static API_VISITA = ClassGlobalConstants.API_BASE + 'appointment/';
 
 }

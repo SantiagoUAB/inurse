@@ -87,8 +87,8 @@ export class PantallaPrincipalPage implements OnInit {
     }
   }
 
-  verFichaPaciente( id: any){
-    console.log('id paciente wey', id);
+  public verFichaPaciente( id: any){
+    console.log('voy a ver la ficha paciente con ID', id);
     this.patientSevice.setIdPacient(id);
     this.router.navigate(['/ficha-paciente/']);
  }

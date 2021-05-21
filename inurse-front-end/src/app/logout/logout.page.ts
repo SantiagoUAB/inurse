@@ -26,17 +26,18 @@ export class LogoutPage implements OnInit {
   }
 
   logout() {
+
     const postData = {content: ''};
     this.httpClient.post('http://158.109.74.51:55001/auth/logout/', postData).subscribe(data => {
       console.log(data);
       console.log('logout correcto');
-
       this.comprovationUser();
       this.router.navigate(['/login']);
       this.tokenStorage.sinOut();
     }, error => {
       this.errorUserPassword();
       console.log('logout incorrecto');
+      this.router.navigate(['/login']);
     });
   }
 

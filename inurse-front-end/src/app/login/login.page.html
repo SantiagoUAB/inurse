@@ -8,7 +8,7 @@
   <ion-list>
 
     <ion-item>
-      <ion-label position="floating">Usuario</ion-label>
+      <ion-label position="floating">DNI</ion-label>
       <ion-input [(ngModel)]="this.form.dni"></ion-input>
     </ion-item>
 
@@ -22,5 +22,5 @@
   <div>
     <ion-button expand="block" shape="round" (click)="proceedLogin()" >Iniciar Sesión</ion-button>
   </div>
-    {{this.tokenStorage.getToken() | json}}
+
 </ion-content>

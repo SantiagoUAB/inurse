@@ -5,8 +5,11 @@ import {Visit} from '../class/class.visit';
 import {Patient} from '../class/class.patient';
 import {HttpClient} from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
+import {FichaPacientePage} from '../ficha-paciente/ficha-paciente.page';
+import {PantallaPrincipalPage} from '../pantalla-principal/pantalla-principal.page';
 
 @Component({
+  providers: [PantallaPrincipalPage],
   selector: 'app-visita',
   templateUrl: './visita.page.html',
   styleUrls: ['./visita.page.scss'],
@@ -24,7 +27,9 @@ export class VisitaPage implements OnInit {
   constructor(private patientSevice: PacientesService,
               private router: Router,
               private httpClient: HttpClient,
-              public toastController: ToastController) { }
+              public toastController: ToastController,
+              public pantallaPrincipal: PantallaPrincipalPage
+  ) { }
 
   ngOnInit() {
     this.idVisita = this.patientSevice.getIdVisita();
@@ -60,20 +65,34 @@ export class VisitaPage implements OnInit {
       // const postData = { treatment: this.treatment };
       const postData = { date: this.visit['data'], treatment: this.treatment, patient: '1' };
       console.log(postData);
-      this.httpClient.post('http://158.109.74.51:55001/appointment/', postData).subscribe(data => {
+      this.httpClient.post('http://158.109.74.51:55001/appointment/', postData).subscribe(async data => {
         console.log(data);
         console.log('Visita modificada correctamente');
         this.correctModification();
-        this.router.navigate(['/ficha-paciente']);
+        // this.fichaPaciente.getDataPatientFile();
+        // this.fichaPaciente.ngOnInit();
+        
+        await this.goToFichaPaciente();
+
+
       }, error => {
         console.log('No se ha podido modificar la visita');
       });
     }
     else {
       this.errorModification();
-      this.router.navigate(['/ficha-paciente']);
+      this.goToFichaPaciente();
     }
   }
+
+
+  private goToFichaPaciente() {
+    this.router.navigate(['/ficha-paciente'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
+
   async correctModification() {
     const toast = await this.toastController.create({
       message: 'Cambios aplicados correctamente',
@@ -89,4 +108,8 @@ export class VisitaPage implements OnInit {
     toast.present();
   }
 
+}
+
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
 }
