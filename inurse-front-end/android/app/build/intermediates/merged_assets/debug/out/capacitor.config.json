@@ -1,0 +1,6 @@
+{
+	"appId": "com.example.app",
+	"appName": "front-inurse",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

@@ -1,0 +1,4 @@
+#Sat May 22 09:27:51 CEST 2021
+base.0=C\:\\SRP\\Git\\gitUAB\\LISgit\\inurse-front-end\\inurse-front-end\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
