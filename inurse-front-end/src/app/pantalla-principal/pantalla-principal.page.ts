@@ -5,6 +5,7 @@ import {PacientesService} from '../service/pacientes.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../service/authentication.service';
 import {TokenStorageService} from '../service/token-storage.service';
+import { Patient } from '../class/class.patient';
 
 @Component({
   selector: 'app-pantalla-principal',
@@ -24,6 +25,10 @@ export class PantallaPrincipalPage implements OnInit {
   private comprobacionPacienteFijado: string;
   private nombrePacienteFijado: string;
   private apellidoPacienteFijado: string;
+  private buscador:boolean
+  private pacienteBuscador: Patient;
+  private pacienteList:any = []
+
 
   @Input()
   idPatient: any;
@@ -78,6 +83,7 @@ export class PantallaPrincipalPage implements OnInit {
 
 }
   ngOnInit() {
+    this.buscador = false;
     this.nombrePacienteFijado = localStorage.getItem('nombrePacienteFijado');
     this.apellidoPacienteFijado = localStorage.getItem('apellidoPacienteFijado');
     this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
@@ -119,4 +125,64 @@ export class PantallaPrincipalPage implements OnInit {
       this.listRooms = data;
     });
  }
+
+ 
+ pantallaBuscador(value: any){
+   
+  this.pacienteList = []
+   if (value != ''){ 
+  
+  var primeraPosicio:Number = parseInt(value.substring(0,1));
+  if(Number.isFinite(primeraPosicio)){    
+   
+    this.patientSevice.getPacienteDni(value).subscribe((response: any) => {
+      response.results.forEach(element => {
+        this.pacienteList.push(element);
+      });
+      console.log("RESULTS ", response.results);
+      console.log("PACIENTE ", this.pacienteList);
+      if(response['count'] !== 0){
+        this.buscador = true;
+      } else {
+        this.buscador = false;
+     }
+    })
+    
+  } else if(!Number.isFinite(primeraPosicio)){
+    
+    
+    this.patientSevice.getPacienteName(value).subscribe((response: any = []) => {
+      
+      if(response.results[1] == null) { 
+        console.log("nomes una persona")
+        response.results.forEach(element => {
+          this.pacienteList.push(element);
+        });
+
+      console.log("PACIENTE ", this.pacienteList);
+       
+
+      } else{
+        console.log("varies persona")
+        response.results.forEach(element => {
+          this.pacienteList.push(element);
+        });
+     // this.pacienteList.push(response.results);
+      console.log("RESULTS ", response.results);
+      console.log("PACIENTE ", this.pacienteList);
+    }
+      if(response['count'] !== 0){
+        this.buscador = true;
+      } else {
+        this.buscador = false;
+     }
+    })
+    
+  }
+
+ } else {
+   this.buscador = false;
+ }
+  
+}
 }

@@ -1,16 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center">Pantalla Principal</ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+          <ion-menu-button></ion-menu-button>
+        </ion-col>
+        <ion-col offSet="2" size="6">
+          <ion-title class="ion-text-center">Pantalla Principal</ion-title>
+        </ion-col>
+        <ion-col size="3">
+          <ion-searchbar placeholder="Buscador" (ionChange)="pantallaBuscador($event.detail.value)"></ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
 
-
 <ion-content>
-
+  <div *ngIf="!buscador">
   <ion-grid>
     <ion-row>
       <ion-col size="11">
@@ -50,15 +58,13 @@
         <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block">Fijar paciente</ion-button>
       </div>
     </ion-item>
-
-
-
-
   </ion-list>
+</div>
+<div *ngIf="buscador">
+    
+        
+  <app-buscador [pacienteList]="pacienteList"></app-buscador>
 
-
-
-
-
+</div>
 
 </ion-content>

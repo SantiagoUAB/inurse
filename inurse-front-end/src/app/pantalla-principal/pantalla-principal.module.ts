@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PantallaPrincipalPageRoutingModule } from './pantalla-principal-routing.module';
 
 import { PantallaPrincipalPage } from './pantalla-principal.page';
+import { BuscadorPage } from '../buscador/buscador.page';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { PantallaPrincipalPage } from './pantalla-principal.page';
     IonicModule,
     PantallaPrincipalPageRoutingModule
   ],
-  declarations: [PantallaPrincipalPage]
+  declarations: [PantallaPrincipalPage, BuscadorPage]
 })
 export class PantallaPrincipalPageModule {}

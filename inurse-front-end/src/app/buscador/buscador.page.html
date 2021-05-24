@@ -1,0 +1,12 @@
+
+
+
+
+<ion-list>
+  <ion-item *ngFor="let paciente of pacienteList" (click)=verFichaPaciente(paciente.id)> 
+    <ion-label>&nbsp; &nbsp; <b>Nombre:</b> {{paciente.first_name}} </ion-label>
+    <ion-label>&nbsp; &nbsp; <b>Apellido: </b>{{paciente.last_name}} </ion-label>
+    <ion-label>&nbsp; &nbsp; <b>Planta:</b> {{paciente.room.floor.floor_num}}</ion-label>
+  </ion-item>
+
+</ion-list>

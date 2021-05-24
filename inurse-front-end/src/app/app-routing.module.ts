@@ -35,7 +35,11 @@ const routes: Routes = [
   {
     path: 'visita',
     loadChildren: () => import('./visita/visita.module').then( m => m.VisitaPageModule)
+  },  {
+    path: 'buscador',
+    loadChildren: () => import('./buscador/buscador.module').then( m => m.BuscadorPageModule)
   }
+
 
 
 

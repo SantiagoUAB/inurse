@@ -55,4 +55,14 @@ export class PacientesService {
     // http://158.109.74.51:55001/patient/?format=json&dni=0000000G
     return this.httpClient.get(ClassGlobalConstants.API_VISITA  + idVisita + '/');
   }
+
+  getPacienteName(nombrePaciente: String){
+    return this.httpClient.get(ClassGlobalConstants.API_PATIENT + '?Name=' + nombrePaciente);
+  }
+  getPacienteDni(dniPaciente: String){
+     return this.httpClient.get(ClassGlobalConstants.API_PATIENT + '?dni=' + dniPaciente);
+    
+    //return this.httpClient.get(ClassGlobalConstants.API_PATIENT  + dniPaciente + '/');
+   }
+
 }
