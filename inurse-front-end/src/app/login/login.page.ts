@@ -41,13 +41,13 @@ export class LoginPage implements OnInit {
     }
   }
   async proceedLogin() {
-    if (this.form.dni === '') {
+    if (this.form.dni === null || undefined) {
       const toast = await this.toastController.create({
         message: 'Por favor, introduce el usuario',
         duration: 2000
       });
       toast.present();
-    } else if (this.form.password === '') {
+    } else if (this.form.password === null || undefined) {
       const toast = await this.toastController.create({
         message: 'Por favor, introduce la contraseña',
         duration: 2000
@@ -71,9 +71,13 @@ export class LoginPage implements OnInit {
 
       this.isLoginFailed = false;
       this.isLoggedIn = true;
+      this.comprovationUser();
       this.router.navigate(['/pantalla-principal']);
       // this.reloadPage();
     }, error => {
+      if (this.isLoginFailed === true) {
+        this.errorUserPassword();
+      }
       this.errorMessage = error.error.message;
       console.error(this.errorMessage);
       this.isLoginFailed = true;
@@ -109,14 +113,14 @@ export class LoginPage implements OnInit {
     this.httpClient.post('http://158.109.74.51:55001/auth/login/', postData, {observe: 'response' as 'body'})
       .pipe(first())
       .subscribe(data => {
-      console.log(data);
-      console.log('login correcto');
-      this.comprovationUser();
-      this.router.navigate(['/pantalla-principal']);
-    }, error => {
-      this.errorUserPassword();
-      console.log('login incorrecto');
-    });
+        console.log(data);
+        console.log('login correcto');
+        this.comprovationUser();
+        this.router.navigate(['/pantalla-principal']);
+      }, error => {
+        this.errorUserPassword();
+        console.log('login incorrecto');
+      });
 
     console.log('read headers');
 
