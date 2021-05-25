@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {AuthGuard} from "./guard/auth.guard";
 
 const routes: Routes = [
   /*{
@@ -11,6 +12,7 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+
   },
   {
     path: 'folder/:id',
@@ -18,26 +20,35 @@ const routes: Routes = [
   },
   {
     path: 'ficha-paciente',
-    loadChildren: () => import('./ficha-paciente/ficha-paciente.module').then( m => m.FichaPacientePageModule)
+    loadChildren: () => import('./ficha-paciente/ficha-paciente.module').then( m => m.FichaPacientePageModule),
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'pantalla-principal',
-    loadChildren: () => import('./pantalla-principal/pantalla-principal.module').then( m => m.PantallaPrincipalPageModule)
+    loadChildren: () => import('./pantalla-principal/pantalla-principal.module').then( m => m.PantallaPrincipalPageModule),
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+
   },
   {
     path: 'logout',
-    loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
+    loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule),
+    canActivate: [AuthGuard] // TODO solucion temporal
   },
   {
     path: 'visita',
-    loadChildren: () => import('./visita/visita.module').then( m => m.VisitaPageModule)
-  },  {
+    loadChildren: () => import('./visita/visita.module').then( m => m.VisitaPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'buscador',
-    loadChildren: () => import('./buscador/buscador.module').then( m => m.BuscadorPageModule)
+    loadChildren: () => import('./buscador/buscador.module').then( m => m.BuscadorPageModule),
+    canActivate: [AuthGuard]
   }
 
 

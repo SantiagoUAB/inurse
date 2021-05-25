@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Config} from '@ionic/angular';
 import {ClassGlobalConstants} from '../class/class.globalConstants';
+import {TokenStorageService} from "./token-storage.service";
 
 // const URL_AUTH = 'http://158.109.74.51:55001/auth/login/';
 const URL_AUTH = 'http://127.0.0.1:8000/';
@@ -16,7 +17,8 @@ const URL_AUTH = 'http://127.0.0.1:8000/';
 export class AuthenticationService {
 
 
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient, private tokenService: TokenStorageService) {
 
     // this.sessionID = AuthenticationService.NOT_LOG;
     localStorage.setItem(AuthenticationService.SESSION_ID, AuthenticationService.NOT_LOG);
@@ -25,14 +27,15 @@ export class AuthenticationService {
 
   public static NOT_LOG = 'no-login';
   public static SESSION_ID = 'sessionid';
-
-
-
-  sessionID: string;
-
+  isLoggedIn = false;
+  redirectURL: string;
 
   headers = new Headers({'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'});
+
+  isLogIn(){
+    return this.tokenService.isLogIn();
+  }
 
   getSessionID(): string{
     // return this.sessionID;
@@ -48,25 +51,17 @@ export class AuthenticationService {
 
 
     const postData = { dni: user, password: pass };
-/*    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Access-Control-Allow-Origin': '*'
 
-      }),
-      withCredentials: true,
-      observe: 'response' as 'response'
-    };*/
-    console.log('post login', postData);
+    // console.log('post login', postData);
     return this.http.post<any>(ClassGlobalConstants.API_LOGIN , postData
       ,
       // {observe : 'response' as 'body'})
       // httpOptions
     )
-      .pipe(map( user => {
-        console.log(user);
-        return user;
-      })) ;
+      .pipe(
+        // si es correcto el login, guardo que estoy logeado
+        tap(() => this.isLoggedIn = true)
+      );
   }
 
   loginPromise(user: string, pass: string): Promise<string>{

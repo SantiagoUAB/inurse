@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {TokenStorageService} from '../service/token-storage.service';
 import {PantallaPrincipalPage} from '../pantalla-principal/pantalla-principal.page';
+import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
   providers: [PantallaPrincipalPage],
@@ -17,7 +18,8 @@ export class LogoutPage implements OnInit {
     private router: Router,
     private httpClient: HttpClient,
     private tokenStorage: TokenStorageService,
-    private pantallaPrincipal: PantallaPrincipalPage
+    private pantallaPrincipal: PantallaPrincipalPage,
+    private auth: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -31,13 +33,17 @@ export class LogoutPage implements OnInit {
     this.httpClient.post('http://158.109.74.51:55001/auth/logout/', postData).subscribe(data => {
       console.log(data);
       console.log('logout correcto');
+
+      this.auth.isLoggedIn = false;
       this.comprovationUser();
       this.router.navigate(['/login']);
       this.tokenStorage.sinOut();
     }, error => {
       this.errorUserPassword();
+
       console.log('logout incorrecto');
       this.router.navigate(['/login']);
+      error(error);
     });
   }
 

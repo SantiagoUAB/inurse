@@ -17,8 +17,7 @@ export class LoginPage implements OnInit {
   password = '';
 
 
-  isLoggedIn = false;
-  isLoginFailed = false;
+
   errorMessage = '';
   public form = {
     dni: null,
@@ -35,7 +34,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     if ( this.tokenStorage.getToken()){
-      this.isLoggedIn = true;
+      // this.isLoggedIn = true;
 
       this.tokenStorage.sinOut();
     }
@@ -66,17 +65,18 @@ export class LoginPage implements OnInit {
 
       console.log('login correcto', data);
 
-      this.tokenStorage.saveToken(data.token);
-      this.tokenStorage.saveUser(data.pk);
 
-      this.isLoginFailed = false;
-      this.isLoggedIn = true;
+      this.tokenStorage.saveToken(data.token);
+
+
+      // this.isLoginFailed = false;
+
       this.router.navigate(['/pantalla-principal']);
       // this.reloadPage();
     }, error => {
       this.errorMessage = error.error.message;
       console.error(this.errorMessage);
-      this.isLoginFailed = true;
+      // this.isLoginFailed = true;
     });
   }
 
