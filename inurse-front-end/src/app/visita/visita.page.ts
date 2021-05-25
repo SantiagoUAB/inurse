@@ -8,6 +8,7 @@ import {ToastController} from '@ionic/angular';
 import {PantallaPrincipalPage} from '../pantalla-principal/pantalla-principal.page';
 import {catchError} from "rxjs/operators";
 import {ClassManageErrors} from '../class/class.manageErrors';
+import {HistoricalService} from "../service/historical.service";
 
 @Component({
   providers: [PantallaPrincipalPage],
@@ -31,7 +32,8 @@ export class VisitaPage implements OnInit {
   constructor(private patientSevice: PacientesService,
               private router: Router,
               private httpClient: HttpClient,
-              public toastController: ToastController
+              public toastController: ToastController,
+              private historicalService: HistoricalService
 
   ) {
     this.manageErrors = new ClassManageErrors();
@@ -93,6 +95,7 @@ export class VisitaPage implements OnInit {
               break;
             case HttpEventType.Response:
               console.log('New Appointment created! ', event.body);
+              this.historicalService.addVisit(event.body);
               setTimeout(() => {
               this.progress = 0;
             }, 1500);

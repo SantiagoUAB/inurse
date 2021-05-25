@@ -18,7 +18,7 @@ import {Router} from '@angular/router';
 })
 export class FichaPacientePage implements OnInit {
   patient: Patient;
-  historical: Historical;
+  historical: Historical; // TODO es necesario add un observer
   private idPaciente: number;
   headers: string[];
 
@@ -30,7 +30,7 @@ export class FichaPacientePage implements OnInit {
     private  auth: AuthenticationService,
     private router: Router) {
 
-    this.idPaciente = 1; // paciente por defecto
+    // this.idPaciente = 1; // paciente por defecto
 
 
   }
@@ -70,12 +70,16 @@ export class FichaPacientePage implements OnInit {
   }
 
   private getDataPatientHistorical(idPatient: number) {
-    this.historicalService.getHistorical(idPatient).subscribe(data => {
+    this.historicalService.getHistoricalAPI(idPatient).subscribe(dataHistorical => {
       console.log('Historial paciente ', idPatient);
-      console.log(data);
-      this.historical = new Historical( data);
+      console.log(dataHistorical);
+      // this.historical = new Historical(data);
+      this.historicalService.setHistorical(dataHistorical);
+      this.historical = this.historicalService.getHistocial();
+
 
     });
+
   }
 
   verVisitaPaciente( id: any){

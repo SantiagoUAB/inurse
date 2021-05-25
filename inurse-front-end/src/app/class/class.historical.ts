@@ -28,6 +28,9 @@ export class Historical implements IHistorical{
 
   }
 
+  add(visit: Visit) {
+    this.visits.push(visit);
+  }
 
 
 }
