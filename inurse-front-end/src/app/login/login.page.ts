@@ -41,7 +41,12 @@ export class LoginPage implements OnInit {
       this.tokenStorage.sinOut();
     }
   }
+
+  test(message: string){
+    this.toast(message);
+  }
   async proceedLogin() {
+    /*this.toast('Se procede a hacer login ');*/
     if (this.form.dni === '') {
       const toast = await this.toastController.create({
         message: 'Por favor, introduce el usuario',
@@ -61,6 +66,7 @@ export class LoginPage implements OnInit {
     this.login();
   }
   login(): void {
+    this.toast('Se procede a hacer login ');
     const {password, dni} = this.form;
     console.log( 'value form', this.form);
     this.auth.login(this.form.dni, this.form.password).subscribe( data => {
@@ -73,10 +79,10 @@ export class LoginPage implements OnInit {
       this.isLoginFailed = false;
       this.isLoggedIn = true;
       this.router.navigate(['/pantalla-principal']);
-      this.dataResponseOk = data;
+      this.dataResponseOk = this.form;
       // this.reloadPage();
     }, error => {
-      this.errorMessage = error.error.message;
+      this.errorMessage = error;
       console.error(this.errorMessage);
       this.isLoginFailed = true;
     });
