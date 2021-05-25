@@ -24,6 +24,7 @@ export class LoginPage implements OnInit {
     dni: null,
     password: null,
   };
+  private dataResponseOk: any;
 
   constructor(
     public toastController: ToastController,
@@ -72,6 +73,7 @@ export class LoginPage implements OnInit {
       this.isLoginFailed = false;
       this.isLoggedIn = true;
       this.router.navigate(['/pantalla-principal']);
+      this.dataResponseOk = data;
       // this.reloadPage();
     }, error => {
       this.errorMessage = error.error.message;
