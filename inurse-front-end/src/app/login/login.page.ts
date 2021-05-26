@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from '../service/authentication.service';
 import {TokenStorageService} from '../service/token-storage.service';
-
+import {PacientesService} from '../service/pacientes.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private httpClient: HttpClient,
     private  auth: AuthenticationService,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
+    private  pacientesService: PacientesService
   ) { }
 
   ngOnInit() {
@@ -41,6 +42,8 @@ export class LoginPage implements OnInit {
     }
   }
   async proceedLogin() {
+    console.log('this.form.dni: ' + this.form.dni);
+    this.setUserDni(this.form.dni);
     if (this.form.dni === null || undefined) {
       const toast = await this.toastController.create({
         message: 'Por favor, introduce el usuario',
@@ -126,6 +129,9 @@ export class LoginPage implements OnInit {
 
   }
 
+  setUserDni(userDNI) {
+    this.pacientesService.setUserDni(userDNI);
+  }
 
   /*async getDataPatientFile() {
     this.userService.getUser(this.username).subscribe(data => {

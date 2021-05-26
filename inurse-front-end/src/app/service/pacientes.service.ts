@@ -11,6 +11,7 @@ export class PacientesService {
   idVisita: any;
   idPatient: any;
   urlVisita: any;
+  usernameSave: string;
 
   constructor(private httpClient: HttpClient) {
     this.idPatient = 1;
@@ -61,8 +62,17 @@ export class PacientesService {
   }
   getPacienteDni(dniPaciente: String){
      return this.httpClient.get(ClassGlobalConstants.API_PATIENT + '?dni=' + dniPaciente);
-    
+
     //return this.httpClient.get(ClassGlobalConstants.API_PATIENT  + dniPaciente + '/');
+   }
+   setUserDni(dni: string){
+     localStorage.setItem('userDNI', dni);
+     this.usernameSave = localStorage.getItem('userDNI');
+     this.usernameSave = dni;
+   }
+   getUserDni() {
+     this.usernameSave = localStorage.getItem('userDNI');
+     return this.usernameSave;
    }
 
 }
