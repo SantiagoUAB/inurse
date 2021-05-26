@@ -41,7 +41,7 @@ export class AddVisitaPage implements OnInit {
   ngOnInit() {
     this.idVisita = this.patientSevice.getIdVisita();
     this.idPaciente = this.patientSevice.getIdPacient();
-    this.getVisitaPatientFile();
+    // this.getVisitaPatientFile();
     this.getDataPatientFile();
     this.currentDate = new Date();
     console.log('Data actual: ' + this.currentDate);
