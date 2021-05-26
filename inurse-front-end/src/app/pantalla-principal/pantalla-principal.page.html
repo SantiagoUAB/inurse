@@ -18,6 +18,8 @@
 
 
 <ion-content>
+ <!-- <ion-button> Refresh</ion-button>-->
+
   <div *ngIf="!buscador">
   <ion-grid>
     <ion-row>
@@ -44,25 +46,29 @@
     <ion-text>&nbsp; &nbsp; <b>No hay ningún paciente fijado:</b></ion-text>
   </div>
   <div *ngIf="comprobacionPacienteFijado == '1'">
-    <ion-text>&nbsp; &nbsp; <b>Paciente fijado: {{nombrePacienteFijado}} {{apellidoPacienteFijado}}</b></ion-text>
+
+    <ion-row class="ion-align-items-center">
+      <ion-text class="ion-padding-end">&nbsp; &nbsp; <b>Paciente fijado: {{nombrePacienteFijado}} {{apellidoPacienteFijado}}</b></ion-text>
+      <ion-button (click) = "desfijarPaciente()" expand="block" color="danger" size="small"   fill="outline"><ion-icon name="close-circle-sharp"></ion-icon></ion-button>
+    </ion-row>
   </div>
 
   <div *ngIf="comprobacionPacienteFijado == '1'">
-    <ion-button (click) = "desfijarPaciente()" expand="block" color="danger">Desfijar paciente</ion-button>
+
   </div>
 
   <ion-list>
     <ion-item class="paciente" ion-item *ngFor="let item of listaPaciente" (click)=verFichaPaciente(item[3]) >
-      <ion-label>{{item[0]}} : {{item[1]}} {{item[2]}}</ion-label>
+      <ion-label class="ion-text-wrap"  >{{item[0]}} : {{item[1]}} {{item[2]}}</ion-label>
       <div *ngIf="comprobacionPacienteFijado == '0'">
-        <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block">Fijar paciente</ion-button>
+        <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block" size="small" color="primary"  fill="outline"><ion-icon name="pin-sharp"></ion-icon></ion-button>
       </div>
     </ion-item>
   </ion-list>
 </div>
 <div *ngIf="buscador">
-    
-        
+
+
   <app-buscador [pacienteList]="pacienteList"></app-buscador>
 
 </div>
