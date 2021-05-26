@@ -70,10 +70,10 @@ export class AddVisitaPage implements OnInit {
   async confirmVisit() {
     console.log('Treatment: ' + this.treatment);
     console.log('TreatmentAux: ' + this.treatmentAux);
-    if (this.treatment !== this.treatmentAux) {
+    if (true)     {
       // const postData = { treatment: this.treatment };
-      const postData = { date: this.currentDate, treatment: this.treatment, patient: this.idPaciente };
-      console.log('enio la visita', postData);
+      const postData = { date: this.currentDate, nurse: 2 ,  treatment: this.treatment, patient: this.idPaciente };
+
       this.httpClient.post('http://158.109.74.51:55001/appointment/', postData, {
         reportProgress: true,
         observe: 'events'})
@@ -82,6 +82,7 @@ export class AddVisitaPage implements OnInit {
         )
         .subscribe(async (event: HttpEvent<any>) => {
           // console.log(data);
+          console.log('enio la visita', postData);
           switch (event.type){
             case HttpEventType.Sent:
               console.log('Request send');
@@ -95,14 +96,16 @@ export class AddVisitaPage implements OnInit {
               break;
             case HttpEventType.Response:
               console.log('New Appointment created! ', event.body);
+              await this.goToFichaPaciente();
+
               setTimeout(() => {
                 this.progress = 0;
               }, 1500);
           }
           // console.log('Visita modificada correctamente');
-          this.correctModification();
 
-          await this.goToFichaPaciente();
+
+
         }, error => {
           console.log('No se ha podido modificar la visita');
         });
@@ -118,6 +121,7 @@ export class AddVisitaPage implements OnInit {
     this.router.navigate(['/pantalla-principal'])
       .then(() => {
         window.location.reload();
+        this.correctModification();
       });
   }
 
