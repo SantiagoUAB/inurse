@@ -56,13 +56,12 @@ export class PacientesService {
     return this.httpClient.get(ClassGlobalConstants.API_VISITA  + idVisita + '/');
   }
 
-  getPacienteName(nombrePaciente: String){
+  getPacienteName(nombrePaciente: string){
     return this.httpClient.get(ClassGlobalConstants.API_PATIENT + '?Name=' + nombrePaciente);
   }
-  getPacienteDni(dniPaciente: String){
+  getPacienteDni(dniPaciente: string){
      return this.httpClient.get(ClassGlobalConstants.API_PATIENT + '?dni=' + dniPaciente);
-    
-    //return this.httpClient.get(ClassGlobalConstants.API_PATIENT  + dniPaciente + '/');
+    // return this.httpClient.get(ClassGlobalConstants.API_PATIENT  + dniPaciente + '/');
    }
 
 }

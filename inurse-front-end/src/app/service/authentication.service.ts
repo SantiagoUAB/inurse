@@ -4,7 +4,7 @@ import {map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Config} from '@ionic/angular';
 import {ClassGlobalConstants} from '../class/class.globalConstants';
-import {TokenStorageService} from "./token-storage.service";
+import {TokenStorageService} from './token-storage.service';
 
 // const URL_AUTH = 'http://158.109.74.51:55001/auth/login/';
 const URL_AUTH = 'http://127.0.0.1:8000/';
@@ -48,8 +48,6 @@ export class AuthenticationService {
     localStorage.setItem(AuthenticationService.SESSION_ID, sessionID);
   }
   login(user: string, pass: string ){
-
-
     const postData = { dni: user, password: pass };
 
     // console.log('post login', postData);
@@ -64,6 +62,19 @@ export class AuthenticationService {
       );
   }
 
+  refreshToken(){
+
+    return this.http.post<any>(ClassGlobalConstants.API_REFRESH,
+      {refreshToken: this.tokenService.getToken()})
+      .pipe(tap((token: any) => {
+        this.tokenService.saveToken(token.token);
+      }));
+
+  }
+
+  private getRefreshToken() {
+    return localStorage.getItem(this.tokenService.getRefreshToken());
+  }
   loginPromise(user: string, pass: string): Promise<string>{
 
     const postData = { dni: user, password: pass };
@@ -81,10 +92,7 @@ export class AuthenticationService {
         this.handleLoginResponse(res);
       });
     */
-
-
   }
-
 
   private handleLoginResponse(response: any): Promise<string>{
 
@@ -97,7 +105,6 @@ export class AuthenticationService {
     console.log('lanzo get login urlBase');
 
     return this.http.get<any>(URL_AUTH, {observe: 'response'});
-
   }
 
  /* loginReadHeader(user: string, pass: string ){
