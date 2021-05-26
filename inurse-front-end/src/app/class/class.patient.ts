@@ -22,7 +22,7 @@ export  class Patient implements IPatient{
   sex: string;
   id: number;
 
-  isMale:boolean;
+  isMale: boolean;
 
 
 
@@ -30,10 +30,10 @@ export  class Patient implements IPatient{
     console.log('hola soy el constructor paciente');
     console.log(data);
 
-    this.firstName = data['first_name'];
-    this.actualState = data['actualState'];
-    this.age = data;
-    this.allergies = data['allergies'];
+    this.firstName = data.first_name;
+    this.actualState = data.actualState;
+    this.age = data.age;
+    this.allergies = data.allergies;
     this.assignedNurse = data['assignedNurse'];
     this.dni = data['dni'];
     this.height = data['height'];

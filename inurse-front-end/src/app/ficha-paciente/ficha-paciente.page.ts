@@ -30,7 +30,7 @@ export class FichaPacientePage implements OnInit {
     private  auth: AuthenticationService,
     private router: Router) {
 
-    this.idPaciente = 1; // paciente por defecto
+    // this.idPaciente = 1; // paciente por defecto
 
 
   }

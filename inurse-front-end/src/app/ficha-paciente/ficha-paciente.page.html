@@ -12,6 +12,7 @@
 </ion-header>
 
 <ion-content >
+
   <ion-grid class="ion-align-items-center"  >
     <!--    TODO mirar como poner offset como en img paciente-->
     <ion-row >
@@ -24,7 +25,7 @@
     </ion-row>
     <ion-row>
       <ion-col offset="1" class="ion-padding-vertical" >
-        <ion-title class="ion-no-padding ion-text-left" >Datos paciente</ion-title>
+        <ion-label class="ion-no-padding ion-text-left" >Datos paciente</ion-label>
       </ion-col>
     </ion-row>
     <ion-row >
@@ -32,8 +33,11 @@
           <ion-row  >
 <!--            <ion-label>Nombre</ion-label>-->
           </ion-row>
-          <ion-row>
-            <ion-label  >{{ this.patient?.firstName}}</ion-label>
+          <ion-row >
+            <ion-title class="ion-no-padding " >{{ this.patient?.lastName  }}  {{ this.patient?.firstName}} </ion-title>
+
+
+
           </ion-row>
 
         </ion-col>
@@ -57,19 +61,8 @@
 
         </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col offset="1"  class="ion-padding-vertical" >
-        <ion-title class="ion-no-padding ion-text-left" >Medico a cargo</ion-title>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-        <ion-col offset="1">
-        <ion-label >nombre medico </ion-label>
-        </ion-col>
-        <ion-col offset="1">
-        <ion-label> nombre enfermera </ion-label>
-        </ion-col>
-    </ion-row>
+
+
     <ion-row>
       <ion-col offset="1" class="ion-padding-vertical">
         <ion-title class="ion-no-padding ion-text-left">Estado actual</ion-title>
