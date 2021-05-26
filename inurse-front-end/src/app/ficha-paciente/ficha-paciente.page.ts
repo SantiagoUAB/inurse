@@ -8,7 +8,7 @@ import {HistoricalService} from '../service/historical.service';
 import {Historical} from '../class/class.historical';
 import {AuthenticationService} from '../service/authentication.service';
 import {first} from 'rxjs/operators';
-import {HttpResponse} from '@angular/common/http';
+import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 @Component({
@@ -21,6 +21,7 @@ export class FichaPacientePage implements OnInit {
   historical: Historical;
   private idPaciente: number;
   headers: string[];
+  progress: number;
 
 
 
@@ -30,7 +31,7 @@ export class FichaPacientePage implements OnInit {
     private  auth: AuthenticationService,
     private router: Router) {
 
-    // this.idPaciente = 1; // paciente por defecto
+    this.progress = 0;
 
 
   }
@@ -85,6 +86,58 @@ export class FichaPacientePage implements OnInit {
   }
 
   add() {
+
+  }
+
+  onChangeStatus($event: any) {
+    console.log('valor evento', $event.target.value);
+
+    this.patient.setCurrentStatus( $event.target.value);
+    this.postFilePatient();
+
+  }
+
+  onChangeConstants(idElement: string, newValue: string) {
+
+    // console.log('valor de id' , idElement);
+    // console.log('valor de constante cambiada', newValue);
+
+    switch (idElement) {
+      case 'tension':
+        this.patient.setTension(newValue);
+        break;
+      case 'temperature':
+        this.patient.setTemperature(newValue);
+        break;
+      case 'heardRate':
+        this.patient.setHeardRate(newValue);
+        break;
+    }
+    console.log(this.patient);
+  }
+
+  postFilePatient() {
+    this.pacienteService.saveFilePatient(this.patient).subscribe((event: HttpEvent<any>) => {
+
+      switch (event.type){
+        case HttpEventType.Sent:
+          console.log('Request send');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Response header has ben received!', event.headers);
+          break;
+        case HttpEventType.UploadProgress:
+          this.progress = Math.round(event.loaded / event.total * 100);
+          console.log(`Progress ... ${this.progress} %`);
+          break;
+        case HttpEventType.Response:
+          console.log('New Appointment created! ', event.body);
+          setTimeout(() => {
+            this.progress = 0;
+          }, 1500);
+      }
+    });
+
 
   }
 }
