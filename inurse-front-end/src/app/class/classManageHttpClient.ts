@@ -1,7 +1,7 @@
-import {HttpErrorResponse} from "@angular/common/http";
-import {throwError} from "rxjs";
+import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http';
+import {throwError} from 'rxjs';
 
-export class ClassManageErrors{
+export class ClassManageHttpClient{
 
 
   errorMgmt(error: HttpErrorResponse) {
@@ -16,4 +16,6 @@ export class ClassManageErrors{
     console.log(errorMessage);
     return throwError(errorMessage);
   }
+
+
 }

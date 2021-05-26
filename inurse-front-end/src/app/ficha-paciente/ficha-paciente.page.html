@@ -12,103 +12,87 @@
 </ion-header>
 
 <ion-content >
-  <ion-grid class="ion-align-items-center"  >
-    <!--    TODO mirar como poner offset como en img paciente-->
-    <ion-row >
+  <ion-progress-bar [value]="this.progress"  color="secondary"  *ngIf="this.progress > 0"></ion-progress-bar>
+  <ion-grid  class="ion-padding ion-margin" >
 
-      <ion-col offset="1"   >
-        <ion-avatar id="img-patient">
-          <ion-icon [name]="this.patient?.isMale ? 'male-outline' : 'female-outline' "></ion-icon>
-        </ion-avatar>
-      </ion-col>
-    </ion-row>
+
     <ion-row>
-      <ion-col offset="1" class="ion-padding-vertical" >
-        <ion-title class="ion-no-padding ion-text-left" >Datos paciente</ion-title>
+      <ion-col  class="ion-padding-vertical" >
+        <ion-title class="ion-no-padding ion-text-left">Datos Paciente</ion-title>
       </ion-col>
     </ion-row>
     <ion-row >
-        <ion-col  offset="1" >
-          <ion-row  >
-<!--            <ion-label>Nombre</ion-label>-->
-          </ion-row>
-          <ion-row>
-            <ion-label  >{{ this.patient?.firstName}}</ion-label>
-          </ion-row>
-
-        </ion-col>
-        <ion-col offset="1">
-          <ion-row>
-<!--            <ion-label> Peso </ion-label>-->
-          </ion-row>
-          <ion-row>
-            <ion-label class="ion-align-items-start"> {{this.patient?.weight}}</ion-label>
-          </ion-row>
-
-        </ion-col>
-        <ion-col offset="1">
-          <ion-row>
-<!--            <ion-label>Altura</ion-label>-->
-          </ion-row>
-          <ion-row>
-
-            <ion-label class="ion-align-items-end">{{this.patient?.height}}</ion-label>
-          </ion-row>
-
-        </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col offset="1"  class="ion-padding-vertical" >
-        <ion-title class="ion-no-padding ion-text-left" >Medico a cargo</ion-title>
+      <ion-col  >
+        <ion-label  class="ion-no-padding " >{{ this.patient?.lastName  }}, {{ this.patient?.firstName}} </ion-label>
       </ion-col>
-    </ion-row>
-    <ion-row>
-        <ion-col offset="1">
-        <ion-label >nombre medico </ion-label>
-        </ion-col>
-        <ion-col offset="1">
-        <ion-label> nombre enfermera </ion-label>
-        </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col offset="1" class="ion-padding-vertical">
-        <ion-title class="ion-no-padding ion-text-left">Estado actual</ion-title>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col offset="1"  class="ion-padding-vertical">
-
-<!--          <ion-icon *ngFor="let state of this.patient.status" name="person-circle-outline" ></ion-icon>-->
-        <div class="list-status">
-          <ion-icon name="person-circle-outline"  ></ion-icon>
-          <ion-icon name="person-circle-outline" ></ion-icon>
-          <ion-icon name="person-circle-outline" ></ion-icon>
-          <ion-icon name="person-circle-outline" ></ion-icon>
-          <ion-button href="#"   size="small"  > <ion-icon name="add-circle-outline" class="button-add" ></ion-icon></ion-button>
-        </div>
-
-      </ion-col>
-
-    </ion-row>
-    <ion-row>
-      <ion-col offset="1"  >
-        <ion-title class="ion-no-padding ion-text-left" >Constantes</ion-title>
+      <ion-col>
+        <ion-icon [name]="this.patient?.isMale ? 'male-outline' : 'female-outline' "></ion-icon>
       </ion-col>
     </ion-row>
     <ion-row >
-        <ion-col offset="1" size="6">
+        <ion-col  >
+          <ion-row>
+            <ion-label>Peso: {{this.patient?.weight}}</ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-label class="ion-align-items-start"> </ion-label>
+          </ion-row>
+
+        </ion-col>
+        <ion-col >
+          <ion-row>
+            <ion-label>Altura: {{this.patient?.height}}</ion-label>
+          </ion-row>
+          <ion-row>
+
+            <ion-label class="ion-align-items-end"></ion-label>
+          </ion-row>
+
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-padding-top">
+      <ion-col  >
+        <ion-title class="ion-no-padding ion-text-left " >Estado actual</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >
+
+        <ion-item class=" ">
+
+          <ion-select value="3" (ionChange)="this.onChangeStatus($event)"  >
+            <ion-select-option value="0">Sin estado</ion-select-option>
+            <ion-select-option class="" value="1">En tratamiento</ion-select-option>
+            <ion-select-option value="2">En cirugía</ion-select-option>
+            <ion-select-option value="3" >Esperando resultados</ion-select-option>
+          </ion-select >
+        </ion-item>
+
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="ion-padding-top">
+      <ion-col   >
+        <ion-title class="ion-no-padding ion-text-left " >Constantes</ion-title>
+      </ion-col>
+      <ion-col> <ion-button size="small" color="primary"  fill="outline" (click)="postFilePatient()" > <ion-icon name="save-outline"></ion-icon></ion-button></ion-col>
+    </ion-row>
+    <ion-row >
+        <ion-col  >
           <ion-item>
-            <ion-label position="stacked" >Tensión</ion-label>
-            <ion-input type="number" [placeholder]="this.patient?.tension ? this.patient?.tension : 'no data'"></ion-input>
+            <ion-label position="stacked" >Tensión (mmHg)</ion-label>
+            <ion-input type="number" [placeholder]="this.patient?.tension " (ionChange)="onChangeConstants($event.target.id, $event.target.value)" id="tension"></ion-input>
           </ion-item>
         </ion-col>
     </ion-row>
     <ion-row>
 
-      <ion-col offset="1" size="6">
+      <ion-col  >
         <ion-item>
-          <ion-label position="stacked">Temperatura</ion-label>
-          <ion-input type="number" [placeholder]="this.patient?.temperature ? this.patient?.tension : 'no data'"></ion-input>
+          <ion-label position="stacked">Temperatura (°C)</ion-label>
+          <ion-input type="number" [placeholder]="this.patient?.temperature " (ionChange)="onChangeConstants($event.target.id, $event.target.value)" id="temperature"></ion-input>
         </ion-item>
       </ion-col>
 
@@ -116,24 +100,24 @@
     </ion-row>
     <ion-row>
 
-        <ion-col offset="1" size="6">
+        <ion-col >
           <ion-item>
-            <ion-label position="stacked">Frecuencia Cardiaca</ion-label>
-            <ion-input type="number" [placeholder]="this.patient?.heardRate ? this.patient?.tension : 'no data'"></ion-input>
+            <ion-label position="stacked">Frecuencia Cardiaca (lat/min)</ion-label>
+            <ion-input type="number" [placeholder]="this.patient?.heardRate" (ionChange)="onChangeConstants($event.target.id, $event.target.value)" id="heardRate"></ion-input>
           </ion-item>
         </ion-col>
 
     </ion-row>
     <ion-row id="title-history">
-      <ion-col offset="1"  size="4" >
+      <ion-col   >
         <ion-title class="ion-no-padding ion-text-left">Historial</ion-title>
       </ion-col>
-
-      <ion-col size="7"  class="ion-no-padding ">
-        <ion-button class="" size="small" (click)=addVisitaPaciente()>
-          <ion-icon  name="add-circle-outline" class="button-add" > </ion-icon>
+      <ion-col>
+        <ion-button size="small" color="primary"  fill="outline">
+          <ion-icon  name="add-circle-outline" class="button-add" ></ion-icon>
         </ion-button>
       </ion-col>
+
     </ion-row>
     <ion-row>
       <ion-col>

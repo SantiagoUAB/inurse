@@ -7,7 +7,7 @@ import {HttpClient, HttpEvent, HttpEventType} from '@angular/common/http';
 import {ToastController} from '@ionic/angular';
 import {PantallaPrincipalPage} from '../pantalla-principal/pantalla-principal.page';
 import {catchError} from 'rxjs/operators';
-import {ClassManageErrors} from '../class/class.manageErrors';
+import {ClassManageHttpClient} from '../class/classManageHttpClient';
 
 @Component({
   selector: 'app-add-visita',
@@ -25,7 +25,7 @@ export class AddVisitaPage implements OnInit {
   treatmentAux: string;
   currentDate: Date;
 
-  manageErrors: ClassManageErrors;
+  manageErrors: ClassManageHttpClient;
   progress: number;
 
   constructor(private patientSevice: PacientesService,
@@ -34,7 +34,7 @@ export class AddVisitaPage implements OnInit {
               public toastController: ToastController
 
   ) {
-    this.manageErrors = new ClassManageErrors();
+    this.manageErrors = new ClassManageHttpClient();
     this.progress = 0;
   }
 

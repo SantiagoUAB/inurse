@@ -1,6 +1,6 @@
 #img-patient , #img-patient ion-icon{
-  width: 7rem;
-  height: 7rem;
+  //width: 7rem;
+  //height: 7rem;
 }
 
 .button-add{
@@ -16,3 +16,7 @@
   font-size: 150%;
 }
 
+ion-label {
+  white-space: normal !important;
+  transform: none !important;
+}

@@ -16,7 +16,7 @@ export class HaderInterceptor implements HttpInterceptor{
     let authReq = req;
     const token = this.token.getToken();
 
-    // console.log('INTECEPTOR ', req);
+    console.log('INTECEPTOR ', req);
     if (token ){
       // console.log( 'value token add to header', token);
 

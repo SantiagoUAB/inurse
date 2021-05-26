@@ -6,8 +6,8 @@ import {Patient} from '../class/class.patient';
 import {HttpClient, HttpEvent, HttpEventType} from '@angular/common/http';
 import {ToastController} from '@ionic/angular';
 import {PantallaPrincipalPage} from '../pantalla-principal/pantalla-principal.page';
-import {catchError} from 'rxjs/operators';
-import {ClassManageErrors} from '../class/class.manageErrors';
+import {catchError} from "rxjs/operators";
+import {ClassManageHttpClient} from '../class/classManageHttpClient';
 
 @Component({
   providers: [PantallaPrincipalPage],
@@ -25,7 +25,7 @@ export class VisitaPage implements OnInit {
   treatment: string;
   treatmentAux: string;
 
-  manageErrors: ClassManageErrors;
+  manageErrors: ClassManageHttpClient;
   progress: number;
 
   constructor(private patientSevice: PacientesService,
@@ -34,7 +34,7 @@ export class VisitaPage implements OnInit {
               public toastController: ToastController
 
   ) {
-    this.manageErrors = new ClassManageErrors();
+    this.manageErrors = new ClassManageHttpClient();
     this.progress = 0;
   }
 

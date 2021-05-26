@@ -7,12 +7,12 @@ export  class Patient implements IPatient{
   history: string[];
   img: string;
   firstName: string;
-  status: string;
+
   temperature: string;
   tension: string;
   weight: number;
 
-  actualState: string;
+  currentStatus: string;
   age: number;
   allergies: string;
   assignedNurse: number;
@@ -22,33 +22,61 @@ export  class Patient implements IPatient{
   sex: string;
   id: number;
 
-  isMale:boolean;
+  isMale: boolean;
 
 
+  setTension(value: string){
+    this.tension = value;
+  }
 
+  setTemperature(value: string){
+    this.temperature = value;
+  }
+
+  setHeardRate(value: string){
+    this.heardRate = value;
+  }
+
+  getTension(){
+    return this.tension;
+  }
+
+  getTemperature(){
+    return this.temperature;
+  }
+
+  getHeardRate(){
+    return this.heardRate;
+  }
+
+  getFirstName(): any{
+    return this.firstName;
+  }
   constructor(data: any) {
     console.log('hola soy el constructor paciente');
     console.log(data);
 
-    this.firstName = data['first_name'];
-    this.actualState = data['actualState'];
-    this.age = data;
-    this.allergies = data['allergies'];
-    this.assignedNurse = data['assignedNurse'];
-    this.dni = data['dni'];
-    this.height = data['height'];
-    this.id = data['id'];
-    this.lastName = data['last_name'];
+    console.log(data.heart_rate);
+    console.log(data.temperature);
+    console.log(data.tension);
 
-    //TODO poner ROOM
+    this.firstName = data.first_name;
+    this.age = data.age;
+    this.allergies = data.allergies;
+    this.currentStatus = data.current_status;
+    this.heardRate = data.heart_rate;
+    this.dni = data.dni;
+    this.height = data.height;
+    this.id = data.id;
+    this.lastName = data.last_name;
+    this.sex = data.sex;
+    this.temperature = data.temperature;
+    this.tension = data.tension;
+    this.weight = data.weight;
+    this.roomId = data.room.id;
 
-    this.sex = data['sex'];
 
-
-    this.weight = data['weight'];
-
-
-    if (this.sex == 'm'){
+    if (this.sex == 'Man'){
       this.isMale = true;
     }else{
       this.isMale = false;
@@ -57,6 +85,40 @@ export  class Patient implements IPatient{
   }
 
 
+  getLastName() {
+    return this.lastName;
+  }
 
+  getAge() {
+    return this.age;
+  }
 
+  getDni() {
+    return this.dni;
+  }
+
+  getRoom() {
+    // TODO mirar donde se carga el valor
+    return this.roomId;
+  }
+
+  getSex() {
+    return this.sex;
+  }
+
+  getHeight() {
+    return this.height;
+  }
+
+  getAllergies() {
+    return this.allergies;
+  }
+
+  getCurrentStatus() {
+    return this.currentStatus;
+  }
+
+  setCurrentStatus(value: any) {
+    this.currentStatus = value;
+  }
 }
