@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from '../service/authentication.service';
 import {TokenStorageService} from '../service/token-storage.service';
-
+import {PacientesService} from '../service/pacientes.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   password = '';
 
 
-
+  isLoginFailed = false;
   errorMessage = '';
   public form = {
     dni: null,
@@ -29,7 +29,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private httpClient: HttpClient,
     private  auth: AuthenticationService,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
+    private  pacientesService: PacientesService
   ) { }
 
   ngOnInit() {
@@ -40,23 +41,26 @@ export class LoginPage implements OnInit {
     }
   }
   async proceedLogin() {
-    if (this.form.dni === '') {
+    this.setUserDni(this.form.dni);
+    if (this.form.dni === null || undefined) {
       const toast = await this.toastController.create({
         message: 'Por favor, introduce el usuario',
         duration: 2000
       });
       toast.present();
-    } else if (this.form.password === '') {
+    } else if (this.form.password === null || undefined) {
       const toast = await this.toastController.create({
         message: 'Por favor, introduce la contraseña',
         duration: 2000
       });
       toast.present();
+    } else {
+      // this.sendPostRequest();
+      // this.getDataPatientFile();
+      // this.loginPromise();
+      this.login();
     }
-    // this.sendPostRequest();
-    // this.getDataPatientFile();
-    // this.loginPromise();
-    this.login();
+
   }
   login(): void {
     const {password, dni} = this.form;
@@ -65,18 +69,18 @@ export class LoginPage implements OnInit {
 
       console.log('login correcto', data);
 
-
       this.tokenStorage.saveToken(data.token);
-
-
-      // this.isLoginFailed = false;
-
+      this.isLoginFailed = false;
+      this.correctLogin();
       this.router.navigate(['/pantalla-principal']);
       // this.reloadPage();
     }, error => {
+      if (this.isLoginFailed === true) {
+        this.errorUserPassword();
+      }
       this.errorMessage = error.error.message;
       console.error(this.errorMessage);
-      // this.isLoginFailed = true;
+      this.isLoginFailed = true;
     });
   }
 
@@ -93,7 +97,7 @@ export class LoginPage implements OnInit {
 
         console.log(data.body, ' set data');
         this.auth.setSessionID(data.body);
-        this.comprovationUser();
+        this.correctLogin();
 
 
         this.toast('he obtenido del servidor ' +  data.body);
@@ -111,7 +115,7 @@ export class LoginPage implements OnInit {
       .subscribe(data => {
       console.log(data);
       console.log('login correcto');
-      this.comprovationUser();
+      this.correctLogin();
       this.router.navigate(['/pantalla-principal']);
     }, error => {
       this.errorUserPassword();
@@ -137,7 +141,10 @@ export class LoginPage implements OnInit {
       }
     });
   }*/
-  async comprovationUser(){
+  setUserDni(userDNI) {
+    this.pacientesService.setUserDni(userDNI);
+  }
+  async correctLogin(){
     const toast = await this.toastController.create({
       message: 'Has iniciado sesión correctamente',
       duration: 2000

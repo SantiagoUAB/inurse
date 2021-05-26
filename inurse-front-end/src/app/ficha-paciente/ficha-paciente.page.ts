@@ -83,6 +83,9 @@ export class FichaPacientePage implements OnInit {
     this.pacienteService.setIdVisita(id);
     this.router.navigate(['/visita']);
   }
+  addVisitaPaciente() {
+    this.router.navigate(['/add-visita']);
+  }
 
   add() {
 

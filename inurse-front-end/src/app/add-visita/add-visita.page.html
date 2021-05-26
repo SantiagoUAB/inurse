@@ -20,19 +20,24 @@
       &nbsp;
       <ion-label> {{pacientName}} </ion-label>
     </ion-item>
-
-
     <ion-item>
-      <ion-text>Información de la visita:</ion-text>
+      <ion-label position="floating">Información de la visita</ion-label>
       &nbsp;
-      <ion-label> {{this.treatment}} </ion-label>
+      <ion-textarea auto-grow="true" [(ngModel)]="treatment"></ion-textarea>
     </ion-item>
   </ion-list>
 
   <ion-item>
     <ion-text>Fecha:</ion-text>
     &nbsp;
-    <ion-label> {{this.visit?.data.getDate()}}/{{this.visit?.data.getMonth()}}/{{this.visit?.data.getFullYear()}} </ion-label>
+    <ion-label> {{this.currentDate.getDate()}}/{{this.currentDate.getMonth()}}/{{this.currentDate.getFullYear()}} </ion-label>
   </ion-item>
+
+
+  <br/>
+
+  <div padding>
+    <ion-button expand="block" shape="round" (click)="confirmVisit()" >Confirmar</ion-button>
+  </div>
 
 </ion-content>

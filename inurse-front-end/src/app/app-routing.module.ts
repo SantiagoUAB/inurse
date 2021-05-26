@@ -49,7 +49,11 @@ const routes: Routes = [
     path: 'buscador',
     loadChildren: () => import('./buscador/buscador.module').then( m => m.BuscadorPageModule),
     canActivate: [AuthGuard]
+  },  {
+    path: 'add-visita',
+    loadChildren: () => import('./add-visita/add-visita.module').then( m => m.AddVisitaPageModule)
   }
+
 
 
 

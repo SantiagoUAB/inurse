@@ -10,12 +10,11 @@ import {catchError} from 'rxjs/operators';
 import {ClassManageErrors} from '../class/class.manageErrors';
 
 @Component({
-  providers: [PantallaPrincipalPage],
-  selector: 'app-visita',
-  templateUrl: './visita.page.html',
-  styleUrls: ['./visita.page.scss'],
+  selector: 'app-add-visita',
+  templateUrl: './add-visita.page.html',
+  styleUrls: ['./add-visita.page.scss'],
 })
-export class VisitaPage implements OnInit {
+export class AddVisitaPage implements OnInit {
   patient: Patient;
   visit: Visit;
   private idVisita: number;
@@ -24,6 +23,7 @@ export class VisitaPage implements OnInit {
   username: string;
   treatment: string;
   treatmentAux: string;
+  currentDate: Date;
 
   manageErrors: ClassManageErrors;
   progress: number;
@@ -43,6 +43,8 @@ export class VisitaPage implements OnInit {
     this.idPaciente = this.patientSevice.getIdPacient();
     this.getVisitaPatientFile();
     this.getDataPatientFile();
+    this.currentDate = new Date();
+    console.log('Data actual: ' + this.currentDate);
     // this.treatmentAux = this.treatment;
   }
 
@@ -68,10 +70,10 @@ export class VisitaPage implements OnInit {
   async confirmVisit() {
     console.log('Treatment: ' + this.treatment);
     console.log('TreatmentAux: ' + this.treatmentAux);
-    if (this.treatment !== this.treatmentAux) {
+    if (true)     {
       // const postData = { treatment: this.treatment };
-      const postData = { date: this.visit['data'], treatment: this.treatment, patient: this.idPaciente };
-      console.log('enio la visita', postData);
+      const postData = { date: this.currentDate, nurse: 2 ,  treatment: this.treatment, patient: this.idPaciente };
+
       this.httpClient.post('http://158.109.74.51:55001/appointment/', postData, {
         reportProgress: true,
         observe: 'events'})
@@ -80,6 +82,7 @@ export class VisitaPage implements OnInit {
         )
         .subscribe(async (event: HttpEvent<any>) => {
           // console.log(data);
+          console.log('enio la visita', postData);
           switch (event.type){
             case HttpEventType.Sent:
               console.log('Request send');
@@ -93,14 +96,16 @@ export class VisitaPage implements OnInit {
               break;
             case HttpEventType.Response:
               console.log('New Appointment created! ', event.body);
+              await this.goToFichaPaciente();
+
               setTimeout(() => {
                 this.progress = 0;
               }, 1500);
           }
           // console.log('Visita modificada correctamente');
-          this.correctModification();
 
-          await this.goToFichaPaciente();
+
+
         }, error => {
           console.log('No se ha podido modificar la visita');
         });
@@ -113,9 +118,10 @@ export class VisitaPage implements OnInit {
 
 
   private goToFichaPaciente() {
-    this.router.navigate(['/ficha-paciente'])
+    this.router.navigate(['/pantalla-principal'])
       .then(() => {
         window.location.reload();
+        this.correctModification();
       });
   }
 
