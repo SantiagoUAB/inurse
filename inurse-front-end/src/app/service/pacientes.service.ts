@@ -72,14 +72,10 @@ export class PacientesService {
     // return this.httpClient.get(ClassGlobalConstants.API_PATIENT  + dniPaciente + '/');
    }
 
-  changeStatus(value: any) {
 
-    return this.httpClient.post(ClassGlobalConstants.API_PATIENT + this.idPatient + '/change/', {current_status: value});
-
-  }
 
   saveFilePatient(paciente: Patient) {
-    return this.httpClient.post(ClassGlobalConstants.API_PATIENT + this.idPatient + '/change/',
+    return this.httpClient.patch(ClassGlobalConstants.API_PATIENT + this.idPatient + '/',
       this.createBodyPacient(paciente),
       {reportProgress: true, observe: 'events'})
       .pipe( catchError(this.manageErrors.errorMgmt));
@@ -96,11 +92,11 @@ export class PacientesService {
       sex: paciente.getSex(),
       height: paciente.getHeight(),
       allergies: paciente.getAllergies(),
-      current_status: paciente.getCurrentStatus(),
+      current_status: paciente.getCurrentStatusText(),
       tension: paciente.getTension(),
       temperature: paciente.getTemperature(),
       heart_rate: paciente.getHeardRate(),
-      _save: 'Save'
+      // _save: 'Save'
 
     };
   }

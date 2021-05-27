@@ -53,16 +53,17 @@
     <ion-row class="ion-padding-top">
       <ion-col  >
         <ion-title class="ion-no-padding ion-text-left " >Estado actual</ion-title>
+
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col >
 
         <ion-item class=" ">
-
-          <ion-select value="3" (ionChange)="this.onChangeStatus($event)"  >
+          
+          <ion-select [value]="this.patient?.getCurrentStatusNum()? this.patient?.getCurrentStatusNum() : '0'" (ionChange)="this.onChangeStatus($event)"  >
             <ion-select-option value="0">Sin estado</ion-select-option>
-            <ion-select-option class="" value="1">En tratamiento</ion-select-option>
+            <ion-select-option value="1">En tratamiento</ion-select-option>
             <ion-select-option value="2">En cirugía</ion-select-option>
             <ion-select-option value="3" >Esperando resultados</ion-select-option>
           </ion-select >
