@@ -136,7 +136,7 @@ export class FichaPacientePage implements OnInit {
           console.log(`Progress ... ${this.progress} %`);
           break;
         case HttpEventType.Response:
-          console.log('New Appointment created! ', event.body);
+          console.log('Paciente actualizado ', event.body);
           setTimeout(() => {
             this.progress = 0;
           }, 1500);
