@@ -1,9 +1,11 @@
 import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http';
 import {throwError} from 'rxjs';
 
-export class ClassManageHttpClient{
+import {Router} from '@angular/router';
 
+export class ClassManageHttpClient  {
 
+  constructor() {  }
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -16,6 +18,8 @@ export class ClassManageHttpClient{
     console.log(errorMessage);
     return throwError(errorMessage);
   }
+
+
 
 
 }

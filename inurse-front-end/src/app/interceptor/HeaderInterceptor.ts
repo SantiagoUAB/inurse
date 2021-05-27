@@ -12,12 +12,15 @@ import {catchError, filter, switchMap, take, tap} from 'rxjs/operators';
 import {AuthenticationService} from '../service/authentication.service';
 import {Injectable} from '@angular/core';
 import {TokenStorageService} from '../service/token-storage.service';
+import {Router} from "@angular/router";
 const TOKEN_HEADER_KEY = 'Authorization';
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor{
 
-  constructor( private tokenStorageService: TokenStorageService, private authService: AuthenticationService) { }
+  constructor( private tokenStorageService: TokenStorageService,
+               private authService: AuthenticationService,
+               private  router: Router) { }
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private isRefreshing = false;
 
@@ -35,7 +38,7 @@ export class HeaderInterceptor implements HttpInterceptor{
       .pipe(catchError( err => {
         console.log('intento lanzar el interceptor para detectar el error ');
         if (err instanceof  HttpErrorResponse && err.status === 401){
-          return this.handle401Error(req, next);
+          return this.handle401ErrorReLogin(req, next);
         }else{
           return throwError(err);
         }
@@ -53,6 +56,11 @@ export class HeaderInterceptor implements HttpInterceptor{
     return authReq;
   }
 
+  private handle401ErrorReLogin(request: HttpRequest<any>, next: HttpHandler){
+      this.router.navigate(['/login']);
+
+      return next.handle(request);
+  }
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
 
     if (!this.isRefreshing){

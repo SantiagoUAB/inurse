@@ -3,6 +3,7 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 import { Observable } from 'rxjs';
 import {AuthenticationService} from "../service/authentication.service";
 import {ToastController} from "@ionic/angular";
+import {TokenStorageService} from "../service/token-storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthenticationService,
               private  router: Router,
-              public toastController: ToastController) {
+              public toastController: ToastController,
+              private tokenService: TokenStorageService) {
   }
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -29,7 +31,13 @@ export class AuthGuard implements CanActivate {
       return true;
     }
     this.authService.redirectURL = url;
-    this.toast('Primero has de logearte');
+
+    if (this.tokenService.getToken()){
+      this.toast('La sessión se ha caducado');
+    }else{
+      this.toast('Has de logearte');
+    }
+
     return this.router.parseUrl('/login');
   }
 
