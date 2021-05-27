@@ -5,11 +5,11 @@
         <ion-col size="1">
           <ion-menu-button></ion-menu-button>
         </ion-col>
-        <ion-col offSet="2" size="6">
-          <ion-title class="ion-text-center">Pantalla Principal</ion-title>
+        <ion-col  size="7" >
+          <ion-list-header class="headerPrincipal">Pantalla Principal</ion-list-header>
         </ion-col>
-        <ion-col size="3">
-          <ion-searchbar placeholder="Buscador" (ionChange)="pantallaBuscador($event.detail.value)"></ion-searchbar>
+        <ion-col size="4">
+          <ion-searchbar style="margin-top: 10px;" placeholder="" (ionChange)="pantallaBuscador($event.detail.value)"></ion-searchbar>
         </ion-col>
       </ion-row>
     </ion-grid>
