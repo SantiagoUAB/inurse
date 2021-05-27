@@ -6,6 +6,8 @@ import {first} from 'rxjs/operators';
 import {AuthenticationService} from '../service/authentication.service';
 import {TokenStorageService} from '../service/token-storage.service';
 import {PacientesService} from '../service/pacientes.service';
+import {ClassGlobalConstants} from '../class/class.globalConstants';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +25,8 @@ export class LoginPage implements OnInit {
     dni: null,
     password: null,
   };
+  private intervalRefresh: any;
+
 
   constructor(
     public toastController: ToastController,
@@ -30,7 +34,8 @@ export class LoginPage implements OnInit {
     private httpClient: HttpClient,
     private  auth: AuthenticationService,
     private tokenStorage: TokenStorageService,
-    private  pacientesService: PacientesService
+    private  pacientesService: PacientesService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -72,6 +77,7 @@ export class LoginPage implements OnInit {
       this.tokenStorage.saveToken(data.token);
       this.isLoginFailed = false;
       this.correctLogin();
+      this.refreshSleep();
       this.router.navigate(['/pantalla-principal']);
       // this.reloadPage();
     }, error => {
@@ -116,6 +122,7 @@ export class LoginPage implements OnInit {
       console.log(data);
       console.log('login correcto');
       this.correctLogin();
+      this.refreshSleep();
       this.router.navigate(['/pantalla-principal']);
     }, error => {
       this.errorUserPassword();
@@ -141,6 +148,7 @@ export class LoginPage implements OnInit {
       }
     });
   }*/
+   i: number;
   setUserDni(userDNI) {
     this.pacientesService.setUserDni(userDNI);
   }
@@ -167,4 +175,65 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
+
+  private refreshSleep() {
+
+    const time = ClassGlobalConstants.REFRESH_MIN * 1000 * 60;
+    // const time = 10 * 1000 ; // time en seg
+    console.log('refresh login cada', ClassGlobalConstants.REFRESH_MIN, 'min');
+
+    this.intervalRefresh = setInterval(() => {
+
+      this.showAlertRefreshToken().then(r => {
+        console.log(' se ha lanzado el show alert ');
+        console.log('en el then obtenemos', r);
+      });
+    }, time);
+
+
+    this.i = 0;
+    setInterval(() => {
+      this.i = this.i + 1;
+      console.log(' - ' , this.i);
+    }, 1000);
+  }
+
+  async showAlertRefreshToken() {
+    const confirm = await this.alertController.create({
+      header: 'Refrescar sessión',
+      message: '¿Quieres continuar conectado?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            // TODO implementar logout en service
+            this.clearIntervalRefresh();
+            this.router.navigate(['/login']);
+          }
+        },
+        {
+          text: 'Mantener sessión',
+          handler: () => {
+            this.auth.refreshToken().subscribe( data => {
+              console.log('token refresh' , data );
+            });
+          }
+        }
+      ]
+    });
+    await confirm.present();
+  }
+
+  private clearIntervalRefresh() {
+    if (this.intervalRefresh) {
+      console.log('clear interval');
+
+      clearInterval(this.intervalRefresh);
+      console.log('', this.intervalRefresh);
+    }
+  }
+  routerOnActivate(){
+
+  }
 }
