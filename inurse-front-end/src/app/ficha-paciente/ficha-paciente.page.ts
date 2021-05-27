@@ -22,6 +22,7 @@ export class FichaPacientePage implements OnInit {
   private idPaciente: number;
   headers: string[];
   progress: number;
+  isUpdateConstant: boolean;
 
 
 
@@ -32,6 +33,7 @@ export class FichaPacientePage implements OnInit {
     private router: Router) {
 
     this.progress = 0;
+    this.isUpdateConstant = false;
 
 
   }
@@ -104,7 +106,7 @@ export class FichaPacientePage implements OnInit {
 
     // console.log('valor de id' , idElement);
     // console.log('valor de constante cambiada', newValue);
-
+    this.isUpdateConstant = true;
     switch (idElement) {
       case 'tension':
         this.patient.setTension(newValue);

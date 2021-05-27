@@ -15,8 +15,6 @@
 <ion-content >
   <ion-progress-bar [value]="this.progress"  color="secondary"  *ngIf="this.progress > 0"></ion-progress-bar>
   <ion-grid  class="ion-padding ion-margin" >
-
-
     <ion-row>
       <ion-col  class="ion-padding-vertical" >
         <ion-title class="ion-no-padding ion-text-left">Datos Paciente</ion-title>
@@ -78,7 +76,7 @@
       <ion-col   >
         <ion-title class="ion-no-padding ion-text-left " >Constantes</ion-title>
       </ion-col>
-      <ion-col> <ion-button size="small" color="primary"  fill="outline" (click)="postFilePatient()" > <ion-icon name="save-outline"></ion-icon></ion-button></ion-col>
+      <ion-col> <ion-button size="small" [color]="this.isUpdateConstant? 'primary': 'light'"  fill="outline" (click)="postFilePatient()" > <ion-icon name="save-outline"></ion-icon></ion-button></ion-col>
     </ion-row>
     <ion-row >
         <ion-col  >
@@ -114,8 +112,8 @@
         <ion-title class="ion-no-padding ion-text-left">Historial</ion-title>
       </ion-col>
       <ion-col>
-        <ion-button size="small" color="primary"  fill="outline">
-          <ion-icon  name="add-circle-outline" class="button-add" ></ion-icon>
+        <ion-button size="small" color="primary"  fill="outline" (click)=addVisitaPaciente()>
+          <ion-icon  name="add-circle-outline" class="button-add"  ></ion-icon>
         </ion-button>
       </ion-col>
 
