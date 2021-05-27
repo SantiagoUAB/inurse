@@ -26,6 +26,7 @@ export class LoginPage implements OnInit {
     password: null,
   };
   private intervalRefresh: any;
+  private i: number;
 
 
   constructor(
@@ -114,41 +115,6 @@ export class LoginPage implements OnInit {
     );
   }
 
-  async sendPostRequest() {
-    const postData = { username: this.username, password: this.password };
-    this.httpClient.post('http://158.109.74.51:55001/auth/login/', postData, {observe: 'response' as 'body'})
-      .pipe(first())
-      .subscribe(data => {
-      console.log(data);
-      console.log('login correcto');
-      this.correctLogin();
-      this.refreshSleep();
-      this.router.navigate(['/pantalla-principal']);
-    }, error => {
-      this.errorUserPassword();
-      console.log('login incorrecto');
-    });
-
-    console.log('read headers');
-
-  }
-
-
-  /*async getDataPatientFile() {
-    this.userService.getUser(this.username).subscribe(data => {
-      console.log(data['count']);
-      if (data['count'] === 0) {
-        this.errorUserPassword();
-        return;
-      }
-      else {
-        this.user = new User(data);
-        console.log(this.user.username);
-        this.comprovationUser();
-      }
-    });
-  }*/
-   i: number;
   setUserDni(userDNI) {
     this.pacientesService.setUserDni(userDNI);
   }
@@ -189,12 +155,14 @@ export class LoginPage implements OnInit {
         console.log('en el then obtenemos', r);
       });
     }, time);
+    // this.timerPrint();
+  }
 
-
+  private timerPrint() {
     this.i = 0;
     setInterval(() => {
       this.i = this.i + 1;
-      console.log(' - ' , this.i);
+      console.log(' - ', this.i);
     }, 1000);
   }
 
