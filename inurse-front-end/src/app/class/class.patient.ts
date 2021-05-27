@@ -119,6 +119,24 @@ export  class Patient implements IPatient{
   }
 
   setCurrentStatus(value: any) {
-    this.currentStatus = value;
+
+    switch (value){
+      case '0':
+        this.currentStatus = '---';
+        break;
+      case '1':
+        this.currentStatus = 'treatment';
+        break;
+      case '2':
+        this.currentStatus = 'in surgery';
+        break;
+      case '3':
+        this.currentStatus = 'waiting for results';
+        break;
+      default:
+        this.currentStatus = '---';
+        break;
+    }
+
   }
 }
