@@ -118,7 +118,7 @@ export class FichaPacientePage implements OnInit {
         this.patient.setHeardRate(newValue);
         break;
     }
-    console.log(this.patient);
+    // console.log(this.patient);
   }
 
   postFilePatient() {

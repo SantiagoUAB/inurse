@@ -37,6 +37,7 @@ export class PantallaPrincipalPage implements OnInit {
   constructor(private plantasService: PlantasService,
               private patientSevice: PacientesService,
               private router: Router,
+              private authService: AuthenticationService
               ) {
     this.idPatient = 1; // paciente por defecto
     this.loadPlantas();
@@ -126,15 +127,15 @@ export class PantallaPrincipalPage implements OnInit {
     });
  }
 
- 
+
  pantallaBuscador(value: any){
-   
+
   this.pacienteList = []
-   if (value != ''){ 
-  
+   if (value != ''){
+
   var primeraPosicio:Number = parseInt(value.substring(0,1));
-  if(Number.isFinite(primeraPosicio)){    
-   
+  if(Number.isFinite(primeraPosicio)){
+
     this.patientSevice.getPacienteDni(value).subscribe((response: any) => {
       response.results.forEach(element => {
         this.pacienteList.push(element);
@@ -147,20 +148,20 @@ export class PantallaPrincipalPage implements OnInit {
         this.buscador = false;
      }
     })
-    
+
   } else if(!Number.isFinite(primeraPosicio)){
-    
-    
+
+
     this.patientSevice.getPacienteName(value).subscribe((response: any = []) => {
-      
-      if(response.results[1] == null) { 
+
+      if(response.results[1] == null) {
         console.log("nomes una persona")
         response.results.forEach(element => {
           this.pacienteList.push(element);
         });
 
       console.log("PACIENTE ", this.pacienteList);
-       
+
 
       } else{
         console.log("varies persona")
@@ -177,12 +178,18 @@ export class PantallaPrincipalPage implements OnInit {
         this.buscador = false;
      }
     })
-    
+
   }
 
  } else {
    this.buscador = false;
  }
-  
+
 }
+
+  refreshLogin() {
+    this.authService.refreshToken().subscribe( data => {
+      console.log('token refresh' , data );
+    });
+  }
 }

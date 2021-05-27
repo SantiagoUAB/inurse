@@ -62,4 +62,11 @@ export class LogoutPage implements OnInit {
     toast.present();
   }
 
+  navigateLogin() {
+    console.log('ir login');
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+
+    });
+  }
 }

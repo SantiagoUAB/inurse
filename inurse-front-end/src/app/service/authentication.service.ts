@@ -65,11 +65,11 @@ export class AuthenticationService {
   refreshToken(){
 
     return this.http.post<any>(ClassGlobalConstants.API_REFRESH,
-      {refreshToken: this.tokenService.getToken()})
+      {token: this.tokenService.getToken()})
       .pipe(tap((token: any) => {
+        console.log(' token refresh que llega en servicio auth ', token);
         this.tokenService.saveToken(token.token);
       }));
-
   }
 
   private getRefreshToken() {
