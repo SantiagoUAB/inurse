@@ -16,23 +16,25 @@
 
   <ion-list>
     <ion-item>
-      <ion-text>Nombre del paciente:</ion-text>
-      &nbsp;
-      <ion-label> {{pacientName}} </ion-label>
+      <ion-card-content>
+      <p style="color:#566573">Nombre del paciente:</p>
+      <p class="ion-text-wrap"> {{pacientName}} </p>
+      </ion-card-content>
     </ion-item>
 
-
-    <ion-item>
-      <ion-text>Información de la visita:</ion-text>
-      &nbsp;
-      <ion-label> {{this.treatment}} </ion-label>
+  <ion-item>
+    <ion-card-content>
+      <p style="color:#566573">Información de la visita:</p>
+      <p> {{this.treatment}} </p>
+    </ion-card-content>
     </ion-item>
   </ion-list>
 
   <ion-item>
-    <ion-text>Fecha:</ion-text>
-    &nbsp;
-    <ion-label> {{this.visit?.data.getDate()}}/{{this.visit?.data.getMonth()}}/{{this.visit?.data.getFullYear()}} </ion-label>
+    <ion-card-content>
+      <p style="color:#566573">Fecha:</p>
+      <p class="ion-text-wrap"> {{this.visit?.data.getDate()}}/{{this.visit?.data.getMonth()}}/{{this.visit?.data.getFullYear()}} </p>
+    </ion-card-content>
   </ion-item>
 
 </ion-content>
