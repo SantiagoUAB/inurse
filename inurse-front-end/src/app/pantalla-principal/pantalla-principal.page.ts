@@ -21,7 +21,7 @@ export class PantallaPrincipalPage implements OnInit {
   private aux2: string[];
   private habitacion: string;
   private lista: any[];
-  private listaPaciente: any[];
+  private listPlantaActual: any[];
   private comprobacionPacienteFijado: string;
   private nombrePacienteFijado: string;
   private apellidoPacienteFijado: string;
@@ -81,8 +81,8 @@ export class PantallaPrincipalPage implements OnInit {
       }
 
    }
-    this.listaPaciente = this.lista.sort();
-    console.log(this.listaPaciente);
+    this.listPlantaActual = this.lista.sort();
+    console.log(this.listPlantaActual);
 
 }
   ngOnInit() {

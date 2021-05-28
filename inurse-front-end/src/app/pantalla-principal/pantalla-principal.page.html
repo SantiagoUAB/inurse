@@ -22,10 +22,6 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="this.openClose()"><ion-icon name="search-outline"></ion-icon></ion-button>
-      <ion-button>
-
-      </ion-button>
-
     </ion-buttons>
 
     <ion-title  >Lista Pacientes</ion-title>
@@ -71,9 +67,9 @@
 
 
 
-  <div *ngIf="comprobacionPacienteFijado == '0'">
-    <ion-text>&nbsp; &nbsp; <b>No hay ningún paciente fijado:</b></ion-text>
-  </div>
+<!--  <div *ngIf="comprobacionPacienteFijado == '0'">
+    <ion-text>&nbsp; &nbsp; <b>No hay ningún paciente fijado</b></ion-text>
+  </div>-->
   <div *ngIf="comprobacionPacienteFijado == '1'">
 
     <ion-row class="ion-align-items-center">
@@ -86,14 +82,42 @@
 
   </div>
 
-  <ion-list>
-    <ion-item class="paciente" ion-item *ngFor="let item of listaPaciente"  >
-      <ion-label class="ion-text-wrap"  >{{item[0]}} : {{item[1]}} {{item[2]}}</ion-label>
-      <div *ngIf="comprobacionPacienteFijado == '0'">
-        <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block" size="small" color="primary"  fill="outline"><ion-icon src="assets/icon/pin.svg"></ion-icon></ion-button>
-      </div>
-    </ion-item>
-  </ion-list>
+
+<!--
+    <ion-item-sliding>
+      <ion-item href="#" >
+        <ion-label>
+          <h2>Nombre paciente</h2>
+          <p>habitacion paciente</p>
+        </ion-label>
+        <ion-note slot="end">
+          <button>fijar</button>
+        </ion-note>
+      </ion-item>
+
+    </ion-item-sliding>
+-->
+
+
+    <ion-item-sliding class="paciente "  ion-item *ngFor="let item of this.listPlantaActual">
+     <!-- <ion-item-sliding [ngClass]="{'background-color-grey': i %2 == 0}" >
+        <ion-label class="ion-text-wrap "   (click)="this.verFichaPaciente(item[3])">{{i}} -&#45;&#45; {{item[0]}} : {{item[1]}} {{item[2]}}</ion-label >
+        <div *ngIf="comprobacionPacienteFijado == '0'">
+          <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block" size="small" color="primary"  fill="outline"><ion-icon src="assets/icon/pin.svg"></ion-icon></ion-button>
+        </div>
+      </ion-item-sliding>-->
+      <ion-item    >
+        <ion-label (click)="this.verFichaPaciente(item[3])" >
+          <h2>{{this.item[1]}} {{this.item[2]}}</h2>
+          <p>Habitación: {{this.item[0]}}</p>
+        </ion-label>
+        <ion-note slot="end" *ngIf="comprobacionPacienteFijado == '0'">
+          <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block" size="small" color="primary"  fill="outline"><ion-icon src="assets/icon/pin.svg"></ion-icon></ion-button>
+        </ion-note>
+      </ion-item>
+    </ion-item-sliding>
+
+
 </div>
 <!--  <img src="./assets/icon/pin.png">-->
 
