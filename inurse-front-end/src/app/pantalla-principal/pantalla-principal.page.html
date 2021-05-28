@@ -112,7 +112,7 @@
           <p>Habitación: {{this.item[0]}}</p>
         </ion-label>
         <ion-note slot="end" *ngIf="comprobacionPacienteFijado == '0'">
-          <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block" size="small" color="primary"  fill="outline"><ion-icon src="assets/icon/pin.svg"></ion-icon></ion-button>
+          <ion-button (click) = "fijarPaciente(item[1],item[2], item[3])" expand="block" size="small" color="primary"  fill="outline"><ion-icon src="assets/icon/pin.svg"></ion-icon></ion-button>
         </ion-note>
       </ion-item>
     </ion-item-sliding>

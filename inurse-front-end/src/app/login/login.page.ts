@@ -40,6 +40,8 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    localStorage.clear();
     if ( this.tokenStorage.getToken()){
       // this.isLoggedIn = true;
 

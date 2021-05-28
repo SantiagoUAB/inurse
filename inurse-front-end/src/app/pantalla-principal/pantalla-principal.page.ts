@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from '../service/authentication.service';
 import {TokenStorageService} from '../service/token-storage.service';
 import { Patient } from '../class/class.patient';
+import {ClassGlobalConstants} from "../class/class.globalConstants";
 
 @Component({
   selector: 'app-pantalla-principal',
@@ -23,6 +24,7 @@ export class PantallaPrincipalPage implements OnInit {
   private lista: any[];
   private listPlantaActual: any[];
   private comprobacionPacienteFijado: string;
+  private idPacienteFijado: string;
   private nombrePacienteFijado: string;
   private apellidoPacienteFijado: string;
   private buscador:boolean;
@@ -87,10 +89,10 @@ export class PantallaPrincipalPage implements OnInit {
 }
   ngOnInit() {
     this.buscador = false;
-    this.nombrePacienteFijado = localStorage.getItem('nombrePacienteFijado');
+    this.nombrePacienteFijado = localStorage.getItem(ClassGlobalConstants.KEY_NOMBRE_PACIENTE_FIJADO);
     this.apellidoPacienteFijado = localStorage.getItem('apellidoPacienteFijado');
     this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
-    console.log('Valor inicial paciente fijado: ' + this.comprobacionPacienteFijado)
+    console.log('Valor inicial paciente fijado: ' + this.comprobacionPacienteFijado);
     if (this.comprobacionPacienteFijado === null || undefined) {
       this.comprobacionPacienteFijado = '0';
     }
@@ -99,24 +101,35 @@ export class PantallaPrincipalPage implements OnInit {
   public verFichaPaciente( id: any){
     console.log('voy a ver la ficha paciente con ID', id);
     this.patientSevice.setIdPacient(id);
+    this.authService.setInPantallaPrincipal();
     this.router.navigate(['/ficha-paciente/']);
  }
 
-  fijarPaciente(nombre: string, apellido: string) {
+  fijarPaciente(nombre: string, apellido: string, idPaciente: string) {
     console.log('Nombre paciente fijado: ' + nombre);
     console.log('Apellido paciente fijado: ' + apellido);
     localStorage.setItem('comprobacionPacienteFijado', '1');
     this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
     console.log('Paciente fijado: ' + this.comprobacionPacienteFijado);
-    localStorage.setItem('nombrePacienteFijado', nombre);
+    localStorage.setItem(ClassGlobalConstants.KEY_NOMBRE_PACIENTE_FIJADO, nombre);
     localStorage.setItem('apellidoPacienteFijado', apellido);
+
     this.nombrePacienteFijado = nombre;
     this.apellidoPacienteFijado = apellido;
+
+    console.log('id pacinete fijado ', idPaciente);
+    localStorage.setItem(ClassGlobalConstants.KEY_PACIENTE_ID, idPaciente);
   }
   desfijarPaciente() {
     localStorage.setItem('comprobacionPacienteFijado', '0');
     this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem('comprobacionPacienteFijado');
+    localStorage.removeItem(ClassGlobalConstants.KEY_NOMBRE_PACIENTE_FIJADO);
+    localStorage.removeItem('apellidoPacienteFijado');
+    localStorage.removeItem(ClassGlobalConstants.KEY_PACIENTE_ID);
+
+
     this.nombrePacienteFijado = undefined;
     this.apellidoPacienteFijado = undefined;
   }

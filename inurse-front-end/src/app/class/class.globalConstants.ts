@@ -8,5 +8,8 @@ export class ClassGlobalConstants{
   public static API_FLOOR = ClassGlobalConstants.API_BASE + 'floor/';
   public static API_VISITA = ClassGlobalConstants.API_BASE + 'appointment/';
   static REFRESH_MIN = 10;
+  static KEY_PACIENTE_ID = 'ID_PACIENTE_FIJADO';
+  static KEY_NOMBRE_PACIENTE_FIJADO = 'NOMBRE_PACIENTE_FIJADO';
+  static KEY_IS_PANTALLA_PRINCIPAL = 'KEY_PANTALLA_PRINCIPAL';
 
 }

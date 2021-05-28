@@ -3,19 +3,21 @@ import {PacientesService} from '../service/pacientes.service';
 import {IPatient} from '../models/interface.patient.model';
 import {Patient} from '../class/class.patient';
 
-import {fakeAsync} from '@angular/core/testing';
+
 import {HistoricalService} from '../service/historical.service';
 import {Historical} from '../class/class.historical';
 import {AuthenticationService} from '../service/authentication.service';
-import {first} from 'rxjs/operators';
+
 import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {ClassGlobalConstants} from '../class/class.globalConstants';
 
 @Component({
   selector: 'app-ficha-paciente',
   templateUrl: './ficha-paciente.page.html',
   styleUrls: ['./ficha-paciente.page.scss'],
 })
+
 export class FichaPacientePage implements OnInit {
   patient: Patient;
   historical: Historical;
@@ -34,8 +36,6 @@ export class FichaPacientePage implements OnInit {
 
     this.progress = 0;
     this.isUpdateConstant = false;
-
-
   }
 
   private loginPromise() {
@@ -55,9 +55,25 @@ export class FichaPacientePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('id paciente',  this.pacienteService.getIdPacient());
-    this.idPaciente = this.pacienteService.getIdPacient();
+    console.log('id paciente OnInit',  this.pacienteService.getIdPacient());
 
+    console.log('valor de key is pantalla principal ', this.auth.getIsPantallaPrincipal());
+    if (this.auth.getIsPantallaPrincipal() ){
+      console.log('--------------------------- Vengo de pantalla principal' );
+      this.idPaciente = this.pacienteService.getIdPacient();
+
+    }else{
+
+      if (localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID)){
+        console.log('---------------------------tengo paciente fjado', localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID));
+        this.idPaciente = Number(localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID));
+      }else{
+        console.log('--------------------------- NO TENGO paciente fjado' );
+        this.idPaciente = this.pacienteService.getIdPacient();
+      }
+
+
+    }
     this.getDataPatientFile();
   }
 
@@ -143,6 +159,11 @@ export class FichaPacientePage implements OnInit {
       }
     });
 
+  }
 
+
+  removeFlagFichaPrincipal() {
+
+    this.auth.outFichaPaciente();
   }
 }

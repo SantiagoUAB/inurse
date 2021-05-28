@@ -15,6 +15,7 @@ const URL_AUTH = 'http://127.0.0.1:8000/';
 
 
 export class AuthenticationService {
+  private isPantallaPrincipalBool: boolean;
 
 
 
@@ -126,6 +127,14 @@ export class AuthenticationService {
   }*/
 
 
+  setInPantallaPrincipal() {
+    this.isPantallaPrincipalBool = true;
+  }
+  outFichaPaciente(){
+    this.isPantallaPrincipalBool = false;
+  }
 
-
+  getIsPantallaPrincipal() {
+    return this.isPantallaPrincipalBool;
+  }
 }
