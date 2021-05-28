@@ -196,11 +196,11 @@ export class PantallaPrincipalPage implements OnInit {
   }
 
 
-  openSearch() {
-    this.isSearchOn = true;
+  openClose() {
+    this.isSearchOn = !this.isSearchOn;
   }
 
   showTitle() {
-    this.isSearchOn = false;
+    this.isSearchOn = !this.isSearchOn;
   }
 }

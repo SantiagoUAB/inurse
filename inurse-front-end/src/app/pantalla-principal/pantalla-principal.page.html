@@ -21,21 +21,28 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button *ngIf="!this.isSearchOn" (click)="this.openSearch()"><ion-icon name="search-outline"></ion-icon></ion-button>
-      <ion-searchbar  *ngIf="this.isSearchOn"
-                      (ionChange)="pantallaBuscador($event.detail.value)"
-                      showCancelButton="focus" (ionCancel)="this.showTitle()"
+      <ion-button (click)="this.openClose()"><ion-icon name="search-outline"></ion-icon></ion-button>
+      <ion-button>
 
-                      placeholder=""
-                      cancel-button-text="back">
-
-      </ion-searchbar>
+      </ion-button>
 
     </ion-buttons>
 
-    <ion-title *ngIf="!this.isSearchOn" >Lista Pacientes</ion-title>
+    <ion-title  >Lista Pacientes</ion-title>
   </ion-toolbar>
+  <ion-searchbar  *ngIf="this.isSearchOn"
+                  (ionChange)="pantallaBuscador($event.detail.value)"
+                  showCancelButton="always"
+                  (ionCancel)="this.showTitle()"
 
+
+                  placeholder="Nombre paciente"
+                  animated="true"
+
+                  cancelButtonIcon="chevron-back-outline"
+                  >
+
+  </ion-searchbar>
 </ion-header>
 
 
