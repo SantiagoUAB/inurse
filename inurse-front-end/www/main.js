@@ -20,6 +20,9 @@ ClassGlobalConstants.API_PATIENT = ClassGlobalConstants.API_BASE + 'patient/';
 ClassGlobalConstants.API_FLOOR = ClassGlobalConstants.API_BASE + 'floor/';
 ClassGlobalConstants.API_VISITA = ClassGlobalConstants.API_BASE + 'appointment/';
 ClassGlobalConstants.REFRESH_MIN = 10;
+ClassGlobalConstants.KEY_PACIENTE_ID = 'ID_PACIENTE_FIJADO';
+ClassGlobalConstants.KEY_NOMBRE_PACIENTE_FIJADO = 'NOMBRE_PACIENTE_FIJADO';
+ClassGlobalConstants.KEY_IS_PANTALLA_PRINCIPAL = 'KEY_PANTALLA_PRINCIPAL';
 
 
 /***/ }),
@@ -224,7 +227,7 @@ let AppComponent = class AppComponent {
         this.pacientesService = pacientesService;
         this.appPages = [
             { title: 'Lista pacientes', url: 'pantalla-principal', icon: 'archive' },
-            { title: 'Ficha paciente', url: 'ficha-paciente', icon: 'person' },
+            { title: 'Paciente fijado', url: 'ficha-paciente', icon: 'person' },
             { title: 'Cerrar Sesion', url: 'logout', icon: 'arrow-forward' }
         ];
     }
@@ -386,14 +389,14 @@ let PacientesService = class PacientesService {
     createBodyPacient(paciente) {
         return {
             // token : this.tokenStorageService.getToken(),
-            first_name: paciente.getFirstName(),
-            last_name: paciente.getLastName(),
-            dni: paciente.getDni(),
-            age: paciente.getAge(),
-            room: paciente.getRoom(),
-            sex: paciente.getSex(),
-            height: paciente.getHeight(),
-            allergies: paciente.getAllergies(),
+            // first_name: paciente.getFirstName(),
+            // last_name: paciente.getLastName(),
+            // dni: paciente.getDni(),
+            // age: paciente.getAge(),
+            // room: paciente.getRoom(),
+            // sex: paciente.getSex(),
+            // height: paciente.getHeight(),
+            // allergies: paciente.getAllergies(),
             current_status: paciente.getCurrentStatusText(),
             tension: paciente.getTension(),
             temperature: paciente.getTemperature(),
@@ -513,6 +516,31 @@ let AuthenticationService = AuthenticationService_1 = class AuthenticationServic
     getConfigResponsee() {
         console.log('lanzo get login urlBase');
         return this.http.get(URL_AUTH, { observe: 'response' });
+    }
+    /* loginReadHeader(user: string, pass: string ){
+       const postData = { username: user, password: pass };
+   
+       const httpOptions = {
+         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+   
+         // this is required so that Angular returns the Cookies received from the server.
+         // The server sends cookies in Set-Cookie header. Without this, Angular will ignore the Set-Cookie header
+         withCredentials: true
+   
+       };
+       return this.http.post(this.urlLogin, postData,  httpOptions)
+         .map( response => ){
+         console.log('response from backend service', response);
+       }
+     }*/
+    setInPantallaPrincipal() {
+        this.isPantallaPrincipalBool = true;
+    }
+    outFichaPaciente() {
+        this.isPantallaPrincipalBool = false;
+    }
+    getIsPantallaPrincipal() {
+        return this.isPantallaPrincipalBool;
     }
 };
 AuthenticationService.NOT_LOG = 'no-login';

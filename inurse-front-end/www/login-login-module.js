@@ -52,6 +52,7 @@ let LoginPage = class LoginPage {
         };
     }
     ngOnInit() {
+        localStorage.clear();
         if (this.tokenStorage.getToken()) {
             // this.isLoggedIn = true;
             this.tokenStorage.sinOut();

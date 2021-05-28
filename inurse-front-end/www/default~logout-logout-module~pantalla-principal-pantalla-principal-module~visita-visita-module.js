@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("button {\n  text-decoration: none;\n  padding: 3px;\n  font-weight: 400;\n  font-size: 15px;\n  color: #141313;\n  background-color: #78c3e9;\n  border-radius: 2px;\n  margin-bottom: 5px;\n  margin-left: 10px;\n}\n\n.headerPrincipal {\n  font-size: 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXHBhbnRhbGxhLXByaW5jaXBhbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDSSxxQkFBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLGVBQUE7RUFDQSxjQUFBO0VBQ0EseUJBQUE7RUFDQSxrQkFBQTtFQUNBLGtCQUFBO0VBQ0EsaUJBQUE7QUFESjs7QUFJQTtFQUNJLGVBQUE7QUFESiIsImZpbGUiOiJwYW50YWxsYS1wcmluY2lwYWwucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcblxyXG5idXR0b24ge1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gICAgcGFkZGluZzogM3B4O1xyXG4gICAgZm9udC13ZWlnaHQ6IDQwMDtcclxuICAgIGZvbnQtc2l6ZTogMTVweDtcclxuICAgIGNvbG9yOiAjMTQxMzEzO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzc4YzNlOTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDJweDtcclxuICAgIG1hcmdpbi1ib3R0b206IDVweDtcclxuICAgIG1hcmdpbi1sZWZ0OiAxMHB4O1xyXG59XHJcblxyXG4uaGVhZGVyUHJpbmNpcGFse1xyXG4gICAgZm9udC1zaXplOiAyMHB4O1xyXG59XHJcblxyXG4iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("button {\n  text-decoration: none;\n  padding: 3px;\n  font-weight: 400;\n  font-size: 15px;\n  color: #141313;\n  background-color: #78c3e9;\n  border-radius: 2px;\n  margin-bottom: 5px;\n  margin-left: 10px;\n}\n\n.headerPrincipal {\n  font-size: 20px;\n}\n\n.background-color-grey {\n  background-color: #EEEEEE;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXHBhbnRhbGxhLXByaW5jaXBhbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDSSxxQkFBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLGVBQUE7RUFDQSxjQUFBO0VBQ0EseUJBQUE7RUFDQSxrQkFBQTtFQUNBLGtCQUFBO0VBQ0EsaUJBQUE7QUFESjs7QUFJQTtFQUNJLGVBQUE7QUFESjs7QUFJQTtFQUNFLHlCQUFBO0FBREYiLCJmaWxlIjoicGFudGFsbGEtcHJpbmNpcGFsLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG5cclxuYnV0dG9uIHtcclxuICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxuICAgIHBhZGRpbmc6IDNweDtcclxuICAgIGZvbnQtd2VpZ2h0OiA0MDA7XHJcbiAgICBmb250LXNpemU6IDE1cHg7XHJcbiAgICBjb2xvcjogIzE0MTMxMztcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICM3OGMzZTk7XHJcbiAgICBib3JkZXItcmFkaXVzOiAycHg7XHJcbiAgICBtYXJnaW4tYm90dG9tOiA1cHg7XHJcbiAgICBtYXJnaW4tbGVmdDogMTBweDtcclxufVxyXG5cclxuLmhlYWRlclByaW5jaXBhbHtcclxuICAgIGZvbnQtc2l6ZTogMjBweDtcclxufVxyXG5cclxuLmJhY2tncm91bmQtY29sb3ItZ3JleXtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjRUVFRUVFO1xyXG4gIC8vYmFja2dyb3VuZC1jb2xvcjogcmVkO1xyXG59XHJcblxyXG4iXX0= */");
 
 /***/ }),
 
@@ -87,7 +87,7 @@ class Floor {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n<!--  <ion-toolbar>\r\n    <ion-grid class=\"ion-no-padding ion-no-margin\">\r\n      <ion-row >\r\n        <ion-col >\r\n          <ion-menu-button></ion-menu-button>\r\n        </ion-col>\r\n        <ion-col   >\r\n          <ion-list-header class=\"headerPrincipal\">Pantalla Principal</ion-list-header>\r\n        </ion-col>\r\n        <ion-col >\r\n          <ion-searchbar style=\"margin-top: 10px;\" placeholder=\"\" (ionChange)=\"pantallaBuscador($event.detail.value)\"></ion-searchbar>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </ion-toolbar>-->\r\n\r\n\r\n  <ion-toolbar >\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"this.openClose()\"><ion-icon name=\"search-outline\"></ion-icon></ion-button>\r\n      <ion-button>\r\n\r\n      </ion-button>\r\n\r\n    </ion-buttons>\r\n\r\n    <ion-title  >Lista Pacientes</ion-title>\r\n  </ion-toolbar>\r\n  <ion-searchbar  *ngIf=\"this.isSearchOn\"\r\n                  (ionChange)=\"pantallaBuscador($event.detail.value)\"\r\n                  showCancelButton=\"always\"\r\n                  (ionCancel)=\"this.showTitle()\"\r\n\r\n\r\n                  placeholder=\"Nombre paciente\"\r\n                  animated=\"true\"\r\n\r\n                  cancelButtonIcon=\"chevron-back-outline\"\r\n                  >\r\n\r\n  </ion-searchbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n<!--  <ion-button (click)=\"this.refreshLogin()\"> Refresh</ion-button>-->\r\n\r\n  <div *ngIf=\"!buscador\">\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col size=\"11\">\r\n        <ion-segment scrollable   >\r\n          <ion-segment-button *ngFor=\"let planta of arrayPlanta\" (click)=\"cambioPlanta(planta['floor_num'])\">\r\n\r\n            PLANTA {{planta['floor_num']}}\r\n\r\n          </ion-segment-button>\r\n\r\n        </ion-segment>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  <div *ngIf=\"comprobacionPacienteFijado == '0'\">\r\n    <ion-text>&nbsp; &nbsp; <b>No hay ningún paciente fijado:</b></ion-text>\r\n  </div>\r\n  <div *ngIf=\"comprobacionPacienteFijado == '1'\">\r\n\r\n    <ion-row class=\"ion-align-items-center\">\r\n      <ion-text class=\"ion-padding-end\">&nbsp; &nbsp; <b>Paciente fijado: {{nombrePacienteFijado}} {{apellidoPacienteFijado}}</b></ion-text>\r\n      <ion-button (click) = \"desfijarPaciente()\" expand=\"block\" color=\"danger\" size=\"small\"   fill=\"outline\"><ion-icon name=\"close-circle-sharp\"></ion-icon></ion-button>\r\n    </ion-row>\r\n  </div>\r\n\r\n  <div *ngIf=\"comprobacionPacienteFijado == '1'\">\r\n\r\n  </div>\r\n\r\n  <ion-list>\r\n    <ion-item class=\"paciente\" ion-item *ngFor=\"let item of listaPaciente\"  >\r\n      <ion-label class=\"ion-text-wrap\"  >{{item[0]}} : {{item[1]}} {{item[2]}}</ion-label>\r\n      <div *ngIf=\"comprobacionPacienteFijado == '0'\">\r\n        <ion-button (click) = \"fijarPaciente(item[1],item[2])\" expand=\"block\" size=\"small\" color=\"primary\"  fill=\"outline\"><ion-icon src=\"assets/icon/pin.svg\"></ion-icon></ion-button>\r\n      </div>\r\n    </ion-item>\r\n  </ion-list>\r\n</div>\r\n<!--  <img src=\"./assets/icon/pin.png\">-->\r\n\r\n<div *ngIf=\"buscador\">\r\n\r\n\r\n  <app-buscador [pacienteList]=\"pacienteList\"></app-buscador>\r\n\r\n</div>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n<!--  <ion-toolbar>\r\n    <ion-grid class=\"ion-no-padding ion-no-margin\">\r\n      <ion-row >\r\n        <ion-col >\r\n          <ion-menu-button></ion-menu-button>\r\n        </ion-col>\r\n        <ion-col   >\r\n          <ion-list-header class=\"headerPrincipal\">Pantalla Principal</ion-list-header>\r\n        </ion-col>\r\n        <ion-col >\r\n          <ion-searchbar style=\"margin-top: 10px;\" placeholder=\"\" (ionChange)=\"pantallaBuscador($event.detail.value)\"></ion-searchbar>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </ion-toolbar>-->\r\n\r\n\r\n  <ion-toolbar >\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"this.openClose()\"><ion-icon name=\"search-outline\"></ion-icon></ion-button>\r\n    </ion-buttons>\r\n\r\n    <ion-title  >Lista Pacientes</ion-title>\r\n  </ion-toolbar>\r\n  <ion-searchbar  *ngIf=\"this.isSearchOn\"\r\n                  (ionChange)=\"pantallaBuscador($event.detail.value)\"\r\n                  showCancelButton=\"always\"\r\n                  (ionCancel)=\"this.showTitle()\"\r\n\r\n\r\n                  placeholder=\"Nombre paciente\"\r\n                  animated=\"true\"\r\n\r\n                  cancelButtonIcon=\"chevron-back-outline\"\r\n                  >\r\n\r\n  </ion-searchbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n<!--  <ion-button (click)=\"this.refreshLogin()\"> Refresh</ion-button>-->\r\n\r\n  <div *ngIf=\"!buscador\">\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col size=\"11\">\r\n        <ion-segment scrollable   >\r\n          <ion-segment-button *ngFor=\"let planta of arrayPlanta\" (click)=\"cambioPlanta(planta['floor_num'])\">\r\n\r\n            PLANTA {{planta['floor_num']}}\r\n\r\n          </ion-segment-button>\r\n\r\n        </ion-segment>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--  <div *ngIf=\"comprobacionPacienteFijado == '0'\">\r\n    <ion-text>&nbsp; &nbsp; <b>No hay ningún paciente fijado</b></ion-text>\r\n  </div>-->\r\n  <div *ngIf=\"comprobacionPacienteFijado == '1'\">\r\n\r\n    <ion-row class=\"ion-align-items-center\">\r\n      <ion-text class=\"ion-padding-end\">&nbsp; &nbsp; <b>Paciente fijado: {{nombrePacienteFijado}} {{apellidoPacienteFijado}}</b></ion-text>\r\n      <ion-button (click) = \"desfijarPaciente()\" expand=\"block\" color=\"danger\" size=\"small\"   fill=\"outline\"><ion-icon name=\"close-circle-sharp\"></ion-icon></ion-button>\r\n    </ion-row>\r\n  </div>\r\n\r\n  <div *ngIf=\"comprobacionPacienteFijado == '1'\">\r\n\r\n  </div>\r\n\r\n\r\n<!--\r\n    <ion-item-sliding>\r\n      <ion-item href=\"#\" >\r\n        <ion-label>\r\n          <h2>Nombre paciente</h2>\r\n          <p>habitacion paciente</p>\r\n        </ion-label>\r\n        <ion-note slot=\"end\">\r\n          <button>fijar</button>\r\n        </ion-note>\r\n      </ion-item>\r\n\r\n    </ion-item-sliding>\r\n-->\r\n\r\n\r\n    <ion-item-sliding class=\"paciente \"  ion-item *ngFor=\"let item of this.listPlantaActual\">\r\n     <!-- <ion-item-sliding [ngClass]=\"{'background-color-grey': i %2 == 0}\" >\r\n        <ion-label class=\"ion-text-wrap \"   (click)=\"this.verFichaPaciente(item[3])\">{{i}} -&#45;&#45; {{item[0]}} : {{item[1]}} {{item[2]}}</ion-label >\r\n        <div *ngIf=\"comprobacionPacienteFijado == '0'\">\r\n          <ion-button (click) = \"fijarPaciente(item[1],item[2])\" expand=\"block\" size=\"small\" color=\"primary\"  fill=\"outline\"><ion-icon src=\"assets/icon/pin.svg\"></ion-icon></ion-button>\r\n        </div>\r\n      </ion-item-sliding>-->\r\n      <ion-item    >\r\n        <ion-label (click)=\"this.verFichaPaciente(item[3])\" >\r\n          <h2>{{this.item[1]}} {{this.item[2]}}</h2>\r\n          <p>Habitación: {{this.item[0]}}</p>\r\n        </ion-label>\r\n        <ion-note slot=\"end\" *ngIf=\"comprobacionPacienteFijado == '0'\">\r\n          <ion-button (click) = \"fijarPaciente(item[1],item[2], item[3])\" expand=\"block\" size=\"small\" color=\"primary\"  fill=\"outline\"><ion-icon src=\"assets/icon/pin.svg\"></ion-icon></ion-button>\r\n        </ion-note>\r\n      </ion-item>\r\n    </ion-item-sliding>\r\n\r\n\r\n</div>\r\n<!--  <img src=\"./assets/icon/pin.png\">-->\r\n\r\n<div *ngIf=\"buscador\">\r\n\r\n\r\n  <app-buscador [pacienteList]=\"pacienteList\"></app-buscador>\r\n\r\n</div>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -110,6 +110,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_pacientes_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../service/pacientes.service */ "ZbvY");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var _service_authentication_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../service/authentication.service */ "bZGi");
+/* harmony import */ var _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../class/class.globalConstants */ "/rmJ");
+
 
 
 
@@ -159,12 +161,12 @@ let PantallaPrincipalPage = class PantallaPrincipalPage {
                 this.lista.push(this.aux2);
             }
         }
-        this.listaPaciente = this.lista.sort();
-        console.log(this.listaPaciente);
+        this.listPlantaActual = this.lista.sort();
+        console.log(this.listPlantaActual);
     }
     ngOnInit() {
         this.buscador = false;
-        this.nombrePacienteFijado = localStorage.getItem('nombrePacienteFijado');
+        this.nombrePacienteFijado = localStorage.getItem(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_9__["ClassGlobalConstants"].KEY_NOMBRE_PACIENTE_FIJADO);
         this.apellidoPacienteFijado = localStorage.getItem('apellidoPacienteFijado');
         this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
         console.log('Valor inicial paciente fijado: ' + this.comprobacionPacienteFijado);
@@ -175,23 +177,30 @@ let PantallaPrincipalPage = class PantallaPrincipalPage {
     verFichaPaciente(id) {
         console.log('voy a ver la ficha paciente con ID', id);
         this.patientSevice.setIdPacient(id);
+        this.authService.setInPantallaPrincipal();
         this.router.navigate(['/ficha-paciente/']);
     }
-    fijarPaciente(nombre, apellido) {
+    fijarPaciente(nombre, apellido, idPaciente) {
         console.log('Nombre paciente fijado: ' + nombre);
         console.log('Apellido paciente fijado: ' + apellido);
         localStorage.setItem('comprobacionPacienteFijado', '1');
         this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
         console.log('Paciente fijado: ' + this.comprobacionPacienteFijado);
-        localStorage.setItem('nombrePacienteFijado', nombre);
+        localStorage.setItem(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_9__["ClassGlobalConstants"].KEY_NOMBRE_PACIENTE_FIJADO, nombre);
         localStorage.setItem('apellidoPacienteFijado', apellido);
         this.nombrePacienteFijado = nombre;
         this.apellidoPacienteFijado = apellido;
+        console.log('id pacinete fijado ', idPaciente);
+        localStorage.setItem(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_9__["ClassGlobalConstants"].KEY_PACIENTE_ID, idPaciente);
     }
     desfijarPaciente() {
         localStorage.setItem('comprobacionPacienteFijado', '0');
         this.comprobacionPacienteFijado = localStorage.getItem('comprobacionPacienteFijado');
-        localStorage.clear();
+        // localStorage.clear();
+        localStorage.removeItem('comprobacionPacienteFijado');
+        localStorage.removeItem(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_9__["ClassGlobalConstants"].KEY_NOMBRE_PACIENTE_FIJADO);
+        localStorage.removeItem('apellidoPacienteFijado');
+        localStorage.removeItem(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_9__["ClassGlobalConstants"].KEY_PACIENTE_ID);
         this.nombrePacienteFijado = undefined;
         this.apellidoPacienteFijado = undefined;
     }
