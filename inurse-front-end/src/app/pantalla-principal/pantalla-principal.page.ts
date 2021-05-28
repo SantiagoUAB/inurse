@@ -25,9 +25,10 @@ export class PantallaPrincipalPage implements OnInit {
   private comprobacionPacienteFijado: string;
   private nombrePacienteFijado: string;
   private apellidoPacienteFijado: string;
-  private buscador:boolean
+  private buscador:boolean;
   private pacienteBuscador: Patient;
-  private pacienteList:any = []
+  private pacienteList:any = [];
+  isSearchOn: boolean;
 
 
   @Input()
@@ -42,6 +43,7 @@ export class PantallaPrincipalPage implements OnInit {
     this.idPatient = 1; // paciente por defecto
     this.loadPlantas();
     this.loadPacientes();
+    this.isSearchOn = false;
 
 
     console.log(this.resultado);
@@ -194,4 +196,11 @@ export class PantallaPrincipalPage implements OnInit {
   }
 
 
+  openSearch() {
+    this.isSearchOn = true;
+  }
+
+  showTitle() {
+    this.isSearchOn = false;
+  }
 }

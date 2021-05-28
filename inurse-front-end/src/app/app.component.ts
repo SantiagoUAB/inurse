@@ -10,7 +10,7 @@ import { PacientesService } from './service/pacientes.service';
 export class AppComponent implements OnInit {
   userDni: string;
   public appPages = [
-    { title: 'Pantalla pincipal', url: 'pantalla-principal', icon: 'archive' },
+    { title: 'Lista pacientes', url: 'pantalla-principal', icon: 'archive' },
     { title: 'Ficha paciente', url: 'ficha-paciente', icon: 'person' },
     { title: 'Cerrar Sesion', url: 'logout', icon: 'arrow-forward' }
   ];

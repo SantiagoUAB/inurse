@@ -1,19 +1,41 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="1">
+<!--  <ion-toolbar>
+    <ion-grid class="ion-no-padding ion-no-margin">
+      <ion-row >
+        <ion-col >
           <ion-menu-button></ion-menu-button>
         </ion-col>
-        <ion-col  size="7" >
+        <ion-col   >
           <ion-list-header class="headerPrincipal">Pantalla Principal</ion-list-header>
         </ion-col>
-        <ion-col size="4">
+        <ion-col >
           <ion-searchbar style="margin-top: 10px;" placeholder="" (ionChange)="pantallaBuscador($event.detail.value)"></ion-searchbar>
         </ion-col>
       </ion-row>
     </ion-grid>
+  </ion-toolbar>-->
+
+
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!this.isSearchOn" (click)="this.openSearch()"><ion-icon name="search-outline"></ion-icon></ion-button>
+      <ion-searchbar  *ngIf="this.isSearchOn"
+                      (ionChange)="pantallaBuscador($event.detail.value)"
+                      showCancelButton="focus" (ionCancel)="this.showTitle()"
+
+                      placeholder=""
+                      cancel-button-text="back">
+
+      </ion-searchbar>
+
+    </ion-buttons>
+
+    <ion-title *ngIf="!this.isSearchOn" >Lista Pacientes</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 
@@ -58,14 +80,16 @@
   </div>
 
   <ion-list>
-    <ion-item class="paciente" ion-item *ngFor="let item of listaPaciente" (click)=verFichaPaciente(item[3]) >
+    <ion-item class="paciente" ion-item *ngFor="let item of listaPaciente"  >
       <ion-label class="ion-text-wrap"  >{{item[0]}} : {{item[1]}} {{item[2]}}</ion-label>
       <div *ngIf="comprobacionPacienteFijado == '0'">
-        <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block" size="small" color="primary"  fill="outline"><ion-icon name="pin-sharp"></ion-icon></ion-button>
+        <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block" size="small" color="primary"  fill="outline"><ion-icon src="assets/icon/pin.svg"></ion-icon></ion-button>
       </div>
     </ion-item>
   </ion-list>
 </div>
+<!--  <img src="./assets/icon/pin.png">-->
+
 <div *ngIf="buscador">
 
 
