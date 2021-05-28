@@ -15,8 +15,8 @@ export interface IPatient{
   // clase Room //crear clase?
   history: string[];
 
-  tension: string;
-  temperature: string;
-  heardRate: string;
+  tensionActual: string;
+  temperatureActual: string;
+  heardRateActual: string;
 }
 

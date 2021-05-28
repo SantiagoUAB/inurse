@@ -82,8 +82,17 @@
     <ion-row >
         <ion-col  >
           <ion-item>
-            <ion-label position="stacked" >Tensión (mmHg)</ion-label>
-            <ion-input type="number" [placeholder]="this.patient?.tension " (ionChange)="onChangeConstants($event.target.id, $event.target.value)" id="tension"></ion-input>
+            <ion-label position="stacked"  >Tensión (mmHg)</ion-label>
+            <ion-input type="number"
+                       [placeholder]="this.patient?.tensionActual"
+                       (ionChange)="onChangeConstants($event.target.id, $event.target.value)"
+                       id="tension"
+
+                       required="true"
+                       clear-input="true"
+
+            ></ion-input>
+
           </ion-item>
         </ion-col>
     </ion-row>
@@ -92,7 +101,14 @@
       <ion-col  >
         <ion-item>
           <ion-label position="stacked">Temperatura (°C)</ion-label>
-          <ion-input type="number" [placeholder]="this.patient?.temperature " (ionChange)="onChangeConstants($event.target.id, $event.target.value)" id="temperature"></ion-input>
+          <ion-input type="number"
+                     [placeholder]="this.patient?.temperatureActual "
+                     (ionChange)="onChangeConstants($event.target.id, $event.target.value)"
+                     id="temperature"
+                     clear-input="true"
+
+
+          ></ion-input>
         </ion-item>
       </ion-col>
 
@@ -103,7 +119,14 @@
         <ion-col >
           <ion-item>
             <ion-label position="stacked">Frecuencia Cardiaca (lat/min)</ion-label>
-            <ion-input type="number" [placeholder]="this.patient?.heardRate" (ionChange)="onChangeConstants($event.target.id, $event.target.value)" id="heardRate"></ion-input>
+            <ion-input type="number"
+                       [placeholder]="this.patient?.heardRateActual"
+                       (ionChange)="onChangeConstants($event.target.id, $event.target.value)"
+                       id="heardRate"
+                       clear-input="true"
+            >
+
+            </ion-input>
           </ion-item>
         </ion-col>
 

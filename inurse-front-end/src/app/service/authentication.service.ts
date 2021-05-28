@@ -15,7 +15,6 @@ const URL_AUTH = 'http://127.0.0.1:8000/';
 
 
 export class AuthenticationService {
-  private isPantallaPrincipalBool: boolean;
 
 
 
@@ -24,10 +23,13 @@ export class AuthenticationService {
     // this.sessionID = AuthenticationService.NOT_LOG;
     localStorage.setItem(AuthenticationService.SESSION_ID, AuthenticationService.NOT_LOG);
 
+    this.isLastPatient = false;
   }
 
   public static NOT_LOG = 'no-login';
   public static SESSION_ID = 'sessionid';
+  private isPantallaPrincipalBool: boolean;
+  private isLastPatient: boolean;
   isLoggedIn = false;
   redirectURL: string;
 
@@ -137,4 +139,17 @@ export class AuthenticationService {
   getIsPantallaPrincipal() {
     return this.isPantallaPrincipalBool;
   }
+
+  setLastPatient(){
+    this.isLastPatient = true;
+  }
+
+  getIsLastPatient(){
+    return this.isLastPatient;
+  }
+  outLastPatient(){
+    this.isLastPatient = false;
+  }
+
+
 }

@@ -11,6 +11,8 @@ import {AuthenticationService} from '../service/authentication.service';
 import {HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ClassGlobalConstants} from '../class/class.globalConstants';
+import {AlertController} from '@ionic/angular';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -32,7 +34,9 @@ export class FichaPacientePage implements OnInit {
     private pacienteService: PacientesService,
     private  historicalService: HistoricalService,
     private  auth: AuthenticationService,
-    private router: Router) {
+    private router: Router,
+    private alertController: AlertController,
+    private location: Location) {
 
     this.progress = 0;
     this.isUpdateConstant = false;
@@ -62,14 +66,30 @@ export class FichaPacientePage implements OnInit {
       console.log('--------------------------- Vengo de pantalla principal' );
       this.idPaciente = this.pacienteService.getIdPacient();
 
+    } else if (this.auth.getIsLastPatient()){
+
+      if (this.pacienteService.getIdPacient()){
+        this.idPaciente = this.pacienteService.getIdPacient();
+      }else{
+        this.showNoPacienteFijado().then(r => {
+          console.log(' se ha lanzado el show alert ');
+          console.log('en el then obtenemos', r);
+        });
+      }
     }else{
 
       if (localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID)){
         console.log('---------------------------tengo paciente fjado', localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID));
         this.idPaciente = Number(localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID));
       }else{
-        console.log('--------------------------- NO TENGO paciente fjado' );
+        console.log('--------------------------- NO TENGO paciente fjado y show' );
         this.idPaciente = this.pacienteService.getIdPacient();
+        this.showNoPacienteFijado().then(r => {
+          console.log(' se ha lanzado el show alert ');
+          console.log('en el then obtenemos', r);
+        });
+
+
       }
 
 
@@ -122,16 +142,20 @@ export class FichaPacientePage implements OnInit {
 
     // console.log('valor de id' , idElement);
     // console.log('valor de constante cambiada', newValue);
+
     this.isUpdateConstant = true;
+
+
     switch (idElement) {
       case 'tension':
-        this.patient.setTension(newValue);
+
+        this.patient.setTensionNew(newValue);
         break;
       case 'temperature':
-        this.patient.setTemperature(newValue);
+        this.patient.setTemperatureNew(newValue);
         break;
       case 'heardRate':
-        this.patient.setHeardRate(newValue);
+        this.patient.setHeardRateNew(newValue);
         break;
     }
     // console.log(this.patient);
@@ -166,4 +190,23 @@ export class FichaPacientePage implements OnInit {
 
     this.auth.outFichaPaciente();
   }
+
+  async showNoPacienteFijado() {
+    const confirm = await this.alertController.create({
+      header: 'Aviso',
+      message: 'Has de fijar un paciente',
+      buttons: [
+        {
+          text: 'Volver',
+          handler: () => {
+            this.location.back();
+          }
+        }
+      ]
+    });
+    await confirm.present();
+
+  }
+
+
 }

@@ -7,12 +7,15 @@ export  class Patient implements IPatient{
   public static STATUS_WAITING = 'waiting for results';
   public static STATUS_IN_SURGERY = 'in surgery';
 
-  heardRate: string;
+  heardRateActual: string;
+  heardRateNew: string;
   height: number;
   history: string[];
   firstName: string;
-  temperature: string;
-  tension: string;
+  temperatureActual: string;
+  temperatureNew: string;
+  tensionActual: string;
+  tensionNew: string;
   weight: number;
   currentStatus: string;
   age: number;
@@ -29,27 +32,47 @@ export  class Patient implements IPatient{
 
 
   setTension(value: string){
-    this.tension = value;
+
+    this.tensionActual = value;
+  }
+
+  setTensionNew(value: string){
+
+    if ( this.tensionActual === value){
+
+      console.log('same values tension');
+    }
+    this.tensionNew = value;
   }
 
   setTemperature(value: string){
-    this.temperature = value;
+
+    if ( this.temperatureActual === value){
+
+      console.log('same values temperature');
+    }
+    this.temperatureActual = value;
   }
 
   setHeardRate(value: string){
-    this.heardRate = value;
+
+    if ( this.heardRateActual === value){
+
+      console.log('same values heardRate');
+    }
+    this.heardRateActual = value;
   }
 
   getTension(){
-    return this.tension;
+    return this.tensionActual;
   }
 
   getTemperature(){
-    return this.temperature;
+    return this.temperatureActual;
   }
 
   getHeardRate(){
-    return this.heardRate;
+    return this.heardRateActual;
   }
 
   getFirstName(): any{
@@ -63,14 +86,14 @@ export  class Patient implements IPatient{
     this.age = data.age;
     this.allergies = data.allergies;
     this.currentStatus = data.current_status;
-    this.heardRate = data.heart_rate;
+    this.heardRateActual = data.heart_rate;
     this.dni = data.dni;
     this.height = data.height;
     this.id = data.id;
     this.lastName = data.last_name;
     this.sex = data.sex;
-    this.temperature = data.temperature;
-    this.tension = data.tension;
+    this.temperatureActual = data.temperature;
+    this.tensionActual = data.tension;
     this.weight = data.weight;
     this.roomId = data.room.id;
 
@@ -158,5 +181,26 @@ export  class Patient implements IPatient{
         this.currentStatus = Patient.STATUS_NONE;
         break;
     }
+  }
+
+  getTensionNew() {
+    return this.tensionNew;
+  }
+
+  getTemperatureNew() {
+    return  this.temperatureNew;
+  }
+
+  getHeardRateNew() {
+    return this.heardRateNew;
+  }
+
+  setTemperatureNew(newValue: string) {
+    this.tensionNew = newValue;
+
+  }
+
+  setHeardRateNew(newValue: string) {
+    this.heardRateNew = newValue;
   }
 }

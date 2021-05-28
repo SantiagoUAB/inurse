@@ -11,5 +11,6 @@ export class ClassGlobalConstants{
   static KEY_PACIENTE_ID = 'ID_PACIENTE_FIJADO';
   static KEY_NOMBRE_PACIENTE_FIJADO = 'NOMBRE_PACIENTE_FIJADO';
   static KEY_IS_PANTALLA_PRINCIPAL = 'KEY_PANTALLA_PRINCIPAL';
+  static MENU_LAST_PATIENT = 'Último paciente visitado';
 
 }

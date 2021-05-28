@@ -9,9 +9,9 @@
           <ion-text><strong>{{pacientesService.getUserDni()}}</strong></ion-text>
           <br /> <br /> <br />
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected" (click)="this.isLastPatient(p.title)">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+              <ion-label >{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

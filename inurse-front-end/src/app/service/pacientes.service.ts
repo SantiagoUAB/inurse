@@ -93,9 +93,9 @@ export class PacientesService {
       // height: paciente.getHeight(),
       // allergies: paciente.getAllergies(),
       current_status: paciente.getCurrentStatusText(),
-      tension: paciente.getTension(),
-      temperature: paciente.getTemperature(),
-      heart_rate: paciente.getHeardRate(),
+      tension: paciente.getTensionNew(),
+      temperature: paciente.getTemperatureNew(),
+      heart_rate: paciente.getHeardRateNew(),
       // _save: 'Save'
 
     };
