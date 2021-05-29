@@ -143,15 +143,13 @@ export class FichaPacientePage implements OnInit {
   verVisitaPaciente( id: any){
     console.log('ir a la visita con ID', id);
     this.pacienteService.setIdVisita(id);
-    this.router.navigate(['/visita']);
+    this.router.navigate(['/visita/']);
   }
   addVisitaPaciente() {
     this.router.navigate(['/add-visita']);
   }
 
-  add() {
 
-  }
 
   onChangeStatus($event: any) {
     console.log('valor evento', $event.target.value);
@@ -165,6 +163,7 @@ export class FichaPacientePage implements OnInit {
 
      console.log('valor de id' , idElement, newValue.length);
      // console.log('valor de constante cambiada', newValue);
+
 
      this.isUpdateConstant = true;
 

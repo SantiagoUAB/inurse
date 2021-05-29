@@ -113,12 +113,12 @@ let LogoutPage = class LogoutPage {
             console.log('logout correcto');
             this.auth.isLoggedIn = false;
             this.comprovationUser();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login/']);
             this.tokenStorage.sinOut();
         }, error => {
             this.errorUserPassword();
             console.log('logout incorrecto');
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login/']);
             error(error);
         });
     }
@@ -142,7 +142,7 @@ let LogoutPage = class LogoutPage {
     }
     navigateLogin() {
         console.log('ir login');
-        this.router.navigate(['/login']).then(() => {
+        this.router.navigate(['/login/']).then(() => {
             window.location.reload();
         });
     }

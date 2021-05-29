@@ -178,7 +178,7 @@ let PantallaPrincipalPage = class PantallaPrincipalPage {
         console.log('voy a ver la ficha paciente con ID', id);
         this.patientSevice.setIdPacient(id);
         this.authService.setLastPage(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_9__["ClassGlobalConstants"].MENU_PANTALLA_PRINCIPAL);
-        this.router.navigate(['/show-patient']);
+        this.router.navigate(['/show-patient/']);
     }
     fijarPaciente(nombre, apellido, idPaciente) {
         console.log('Nombre paciente fijado: ' + nombre);

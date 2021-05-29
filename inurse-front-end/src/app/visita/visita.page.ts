@@ -113,7 +113,7 @@ export class VisitaPage implements OnInit {
 
 
   private goToFichaPaciente() {
-    this.router.navigate(['/ficha-paciente'])
+    this.router.navigate(['/ficha-paciente/'])
       .then(() => {
         window.location.reload();
       });

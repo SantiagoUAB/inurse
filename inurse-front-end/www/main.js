@@ -28,6 +28,7 @@ ClassGlobalConstants.MENU_FIX_PATIENT = 'Paciente fijado';
 ClassGlobalConstants.MENU_PANTALLA_PRINCIPAL = 'Lista pacientes';
 ClassGlobalConstants.MENU_OUT_PACIENTE = 'out';
 ClassGlobalConstants.DELAY_PROGRESS_BAR = 1500;
+ClassGlobalConstants.MENU_LOG_OUT = 'Cerrar Sesion';
 
 
 /***/ }),
@@ -39,7 +40,7 @@ ClassGlobalConstants.DELAY_PROGRESS_BAR = 1500;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Santi\Documents\inurse\inurse-front-end\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\SRP\Git\gitUAB\LISgit\inurse-front-end\inurse-front-end\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -140,7 +141,7 @@ let HeaderInterceptor = class HeaderInterceptor {
         return authReq;
     }
     handle401ErrorReLogin(request, next) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login/']);
         return next.handle(request);
     }
     handle401Error(request, next) {
@@ -224,6 +225,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_pacientes_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./service/pacientes.service */ "ZbvY");
 /* harmony import */ var _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./class/class.globalConstants */ "/rmJ");
 /* harmony import */ var _service_authentication_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./service/authentication.service */ "bZGi");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _service_token_storage_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./service/token-storage.service */ "mwsN");
+
+
 
 
 
@@ -232,14 +237,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor(pacientesService, auth) {
+    constructor(pacientesService, auth, toastController, tokenStorage) {
         this.pacientesService = pacientesService;
         this.auth = auth;
+        this.toastController = toastController;
+        this.tokenStorage = tokenStorage;
         this.appPages = [
             { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_PANTALLA_PRINCIPAL, url: 'pantalla-principal', icon: 'archive' },
             { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_FIX_PATIENT, url: 'fix-patient', icon: 'person' },
             { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_LAST_PATIENT, url: 'last-patient', icon: 'arrow-back' },
-            { title: 'Cerrar Sesion', url: 'logout', icon: 'arrow-forward' }
+            { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_LOG_OUT, url: 'logout', icon: 'arrow-forward' }
         ];
     }
     ngOnInit() {
@@ -254,11 +261,38 @@ let AppComponent = class AppComponent {
             console.log('option menu', optionMenu);
             this.auth.setLastPage(optionMenu);
         }
+        else if (_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_LOG_OUT === optionMenu) {
+            this.logOut();
+        }
+    }
+    logOut() {
+        this.auth.logOut().subscribe(data => {
+            console.log(data);
+            console.log('logout correcto');
+            this.auth.isLoggedIn = false;
+            this.toast('Has cerrado sesión');
+            // this.router.navigate(['/login/']);
+            this.tokenStorage.sinOut();
+        }, error => {
+            // this.toast('Error al desconocoido');
+            error(error);
+        });
+    }
+    toast(msg) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const toast = yield this.toastController.create({
+                message: msg,
+                duration: 2000
+            });
+            toast.present();
+        });
     }
 };
 AppComponent.ctorParameters = () => [
     { type: _service_pacientes_service__WEBPACK_IMPORTED_MODULE_4__["PacientesService"] },
-    { type: _service_authentication_service__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"] }
+    { type: _service_authentication_service__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"] },
+    { type: _service_token_storage_service__WEBPACK_IMPORTED_MODULE_8__["TokenStorageService"] }
 ];
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -476,8 +510,8 @@ var AuthenticationService_1;
 // const URL_AUTH = 'http://158.109.74.51:55001/auth/login/';
 const URL_AUTH = 'http://127.0.0.1:8000/';
 let AuthenticationService = AuthenticationService_1 = class AuthenticationService {
-    constructor(http, tokenService) {
-        this.http = http;
+    constructor(httpClient, tokenService) {
+        this.httpClient = httpClient;
         this.tokenService = tokenService;
         this.isLoggedIn = false;
         this.headers = new Headers({ 'Content-Type': 'application/json',
@@ -501,13 +535,13 @@ let AuthenticationService = AuthenticationService_1 = class AuthenticationServic
     login(user, pass) {
         const postData = { dni: user, password: pass };
         // console.log('post login', postData);
-        return this.http.post(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_4__["ClassGlobalConstants"].API_LOGIN, postData)
+        return this.httpClient.post(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_4__["ClassGlobalConstants"].API_LOGIN, postData)
             .pipe(
         // si es correcto el login, guardo que estoy logeado
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(() => this.isLoggedIn = true));
     }
     refreshToken() {
-        return this.http.post(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_4__["ClassGlobalConstants"].API_REFRESH, { token: this.tokenService.getToken() })
+        return this.httpClient.post(_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_4__["ClassGlobalConstants"].API_REFRESH, { token: this.tokenService.getToken() })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((token) => {
             console.log(' old token  ', this.tokenService.getToken());
             console.log(' refresh token ', token);
@@ -521,7 +555,7 @@ let AuthenticationService = AuthenticationService_1 = class AuthenticationServic
         const postData = { dni: user, password: pass };
         /*    const headers = new Headers({'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'});*/
-        return this.http.post(URL_AUTH + 'auth/login/', postData
+        return this.httpClient.post(URL_AUTH + 'auth/login/', postData
         // , httpOptions
         )
             .toPromise()
@@ -539,7 +573,7 @@ let AuthenticationService = AuthenticationService_1 = class AuthenticationServic
     }
     getConfigResponsee() {
         console.log('lanzo get login urlBase');
-        return this.http.get(URL_AUTH, { observe: 'response' });
+        return this.httpClient.get(URL_AUTH, { observe: 'response' });
     }
     /* loginReadHeader(user: string, pass: string ){
        const postData = { username: user, password: pass };
@@ -593,6 +627,10 @@ let AuthenticationService = AuthenticationService_1 = class AuthenticationServic
     }
     getLastPage() {
         return this.lastPage;
+    }
+    logOut() {
+        const postData = { content: '' };
+        return this.httpClient.post('http://158.109.74.51:55001/auth/logout/', postData);
     }
 };
 AuthenticationService.NOT_LOG = 'no-login';

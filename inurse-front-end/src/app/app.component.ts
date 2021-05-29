@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     { title: ClassGlobalConstants.MENU_PANTALLA_PRINCIPAL, url: 'pantalla-principal', icon: 'archive' },
     { title: ClassGlobalConstants.MENU_FIX_PATIENT, url: 'fix-patient', icon: 'person' },
     { title: ClassGlobalConstants.MENU_LAST_PATIENT, url: 'last-patient', icon: 'arrow-back' },
-    { title: ClassGlobalConstants.MENU_LOG_OUT, url: 'logout', icon: 'arrow-forward' }
+    { title: ClassGlobalConstants.MENU_LOG_OUT, url: 'login', icon: 'arrow-forward' }
   ];
   constructor(private  pacientesService: PacientesService,
               private auth: AuthenticationService,
@@ -50,10 +50,10 @@ export class AppComponent implements OnInit {
 
       this.auth.isLoggedIn = false;
       this.toast('Has cerrado sesión');
-      // this.router.navigate(['/login']);
+      // this.router.navigate(['/login/']);
       this.tokenStorage.sinOut();
     }, error => {
-      // this.toast('Error al desconocoido');
+      this.toast('Error al desconocoido');
       error(error);
     });
   }

@@ -57,7 +57,7 @@ export class HeaderInterceptor implements HttpInterceptor{
   }
 
   private handle401ErrorReLogin(request: HttpRequest<any>, next: HttpHandler){
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login/']);
 
       return next.handle(request);
   }

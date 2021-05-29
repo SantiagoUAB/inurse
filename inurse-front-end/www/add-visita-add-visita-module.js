@@ -27,6 +27,55 @@ class Visit {
 
 /***/ }),
 
+/***/ "AGPV":
+/*!***********************************************!*\
+  !*** ./src/app/service/historical.service.ts ***!
+  \***********************************************/
+/*! exports provided: HistoricalService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HistoricalService", function() { return HistoricalService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _class_class_historical__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../class/class.historical */ "eSZ1");
+
+
+
+
+let HistoricalService = class HistoricalService {
+    constructor(httpClient) {
+        this.httpClient = httpClient;
+        this.urlHistorical = 'http://158.109.74.51:55001/appointment/';
+    }
+    getHistoricalAPI(idPaciente) {
+        return this.httpClient.get(this.urlHistorical + '?patient=' + idPaciente);
+    }
+    setHistorical(historical) {
+        this.historical = new _class_class_historical__WEBPACK_IMPORTED_MODULE_3__["Historical"](historical);
+    }
+    getHistorical() {
+        return this.historical;
+    }
+    addVisit(visita) {
+        this.historical.addVisit(visita);
+    }
+};
+HistoricalService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+HistoricalService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], HistoricalService);
+
+
+
+/***/ }),
+
 /***/ "QEr1":
 /*!****************************************!*\
   !*** ./src/app/class/class.patient.ts ***!
@@ -280,6 +329,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
 /* harmony import */ var _class_classManageHttpClient__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../class/classManageHttpClient */ "1jAD");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _service_historical_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../service/historical.service */ "AGPV");
+
+
 
 
 
@@ -293,11 +346,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddVisitaPage = class AddVisitaPage {
-    constructor(patientSevice, router, httpClient, toastController) {
+    constructor(patientSevice, router, httpClient, toastController, location, historicalService) {
         this.patientSevice = patientSevice;
         this.router = router;
         this.httpClient = httpClient;
         this.toastController = toastController;
+        this.location = location;
+        this.historicalService = historicalService;
         this.manageErrors = new _class_classManageHttpClient__WEBPACK_IMPORTED_MODULE_11__["ClassManageHttpClient"]();
         this.progress = 0;
     }
@@ -355,6 +410,7 @@ let AddVisitaPage = class AddVisitaPage {
                             break;
                         case _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpEventType"].Response:
                             console.log('New Appointment created! ', event.body);
+                            this.historicalService.addVisit(event.body);
                             yield this.goToFichaPaciente();
                             setTimeout(() => {
                                 this.progress = 0;
@@ -369,11 +425,12 @@ let AddVisitaPage = class AddVisitaPage {
         });
     }
     goToFichaPaciente() {
-        this.router.navigate(['/pantalla-principal'])
-            .then(() => {
+        /*this.router.navigate(['/pantalla-principal/'])
+          .then(() => {
             window.location.reload();
             this.correctModification();
-        });
+          });*/
+        this.location.back();
     }
     correctModification() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -417,7 +474,9 @@ AddVisitaPage.ctorParameters = () => [
     { type: _service_pacientes_service__WEBPACK_IMPORTED_MODULE_4__["PacientesService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["ToastController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["ToastController"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_12__["Location"] },
+    { type: _service_historical_service__WEBPACK_IMPORTED_MODULE_13__["HistoricalService"] }
 ];
 AddVisitaPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -427,6 +486,46 @@ AddVisitaPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     })
 ], AddVisitaPage);
 
+
+
+/***/ }),
+
+/***/ "eSZ1":
+/*!*******************************************!*\
+  !*** ./src/app/class/class.historical.ts ***!
+  \*******************************************/
+/*! exports provided: Historical */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Historical", function() { return Historical; });
+/* harmony import */ var _class_visit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./class.visit */ "2Dhv");
+
+class Historical {
+    constructor(data) {
+        this.visits = [];
+        // console.log('hola soy el constructor historial');
+        // console.log(data);
+        /*    for (let i = 0; i < data.results.length; i++){
+              // console.log(data['results'][i]['nurse']);
+              // console.log(data['results'][i]['created_at']);
+              // console.log(data['results'][i]['description']);
+        
+              this.visits.push( new Visit( data.results[i]));
+        
+            }*/
+        for (const visit of data.results) {
+            if (visit) {
+                // console.log(visit);
+                this.visits.push(new _class_visit__WEBPACK_IMPORTED_MODULE_0__["Visit"](visit));
+            }
+        }
+    }
+    addVisit(visit) {
+        this.visits.push(new _class_visit__WEBPACK_IMPORTED_MODULE_0__["Visit"](visit));
+    }
+}
 
 
 /***/ }),

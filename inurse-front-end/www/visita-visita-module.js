@@ -142,7 +142,7 @@ let VisitaPage = class VisitaPage {
         });
     }
     goToFichaPaciente() {
-        this.router.navigate(['/ficha-paciente'])
+        this.router.navigate(['/ficha-paciente/'])
             .then(() => {
             window.location.reload();
         });

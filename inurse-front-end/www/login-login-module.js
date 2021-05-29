@@ -92,7 +92,7 @@ let LoginPage = class LoginPage {
             this.isLoginFailed = false;
             this.correctLogin();
             this.refreshSleep();
-            this.router.navigate(['/pantalla-principal']);
+            this.router.navigate(['/pantalla-principal/']);
             // this.reloadPage();
         }, error => {
             if (this.isLoginFailed === true) {
@@ -116,7 +116,7 @@ let LoginPage = class LoginPage {
             this.correctLogin();
             this.toast('he obtenido del servidor ' + data.body);
             this.toast('he obtenido del servidor ' + this.auth.getSessionID());
-            this.router.navigate(['/pantalla-principal']);
+            this.router.navigate(['/pantalla-principal/']);
         });
     }
     setUserDni(userDNI) {
@@ -180,7 +180,7 @@ let LoginPage = class LoginPage {
                         handler: () => {
                             // TODO implementar logout en service
                             this.clearIntervalRefresh();
-                            this.router.navigate(['/login']);
+                            this.router.navigate(['/login/']);
                         }
                     },
                     {

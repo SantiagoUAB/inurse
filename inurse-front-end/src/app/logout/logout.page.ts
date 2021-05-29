@@ -36,13 +36,13 @@ export class LogoutPage implements OnInit {
 
       this.auth.isLoggedIn = false;
       this.comprovationUser();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login/']);
       this.tokenStorage.sinOut();
     }, error => {
       this.errorUserPassword();
 
       console.log('logout incorrecto');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login/']);
       error(error);
     });
   }
@@ -64,7 +64,7 @@ export class LogoutPage implements OnInit {
 
   navigateLogin() {
     console.log('ir login');
-    this.router.navigate(['/login']).then(() => {
+    this.router.navigate(['/login/']).then(() => {
       window.location.reload();
 
     });
