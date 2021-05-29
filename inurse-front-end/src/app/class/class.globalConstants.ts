@@ -16,5 +16,6 @@ export class ClassGlobalConstants{
   static MENU_PANTALLA_PRINCIPAL = 'Lista pacientes';
   static MENU_OUT_PACIENTE = 'out';
   static DELAY_PROGRESS_BAR = 1500;
+  static MENU_LOG_OUT = 'Cerrar Sesion';
 
 }

@@ -8,6 +8,8 @@ import {ToastController} from '@ionic/angular';
 import {PantallaPrincipalPage} from '../pantalla-principal/pantalla-principal.page';
 import {catchError} from 'rxjs/operators';
 import {ClassManageHttpClient} from '../class/classManageHttpClient';
+import {Location} from "@angular/common";
+import {HistoricalService} from "../service/historical.service";
 
 @Component({
   selector: 'app-add-visita',
@@ -31,7 +33,9 @@ export class AddVisitaPage implements OnInit {
   constructor(private patientSevice: PacientesService,
               private router: Router,
               private httpClient: HttpClient,
-              public toastController: ToastController
+              public toastController: ToastController,
+              private location: Location,
+              private  historicalService: HistoricalService
 
   ) {
     this.manageErrors = new ClassManageHttpClient();
@@ -96,6 +100,7 @@ export class AddVisitaPage implements OnInit {
               break;
             case HttpEventType.Response:
               console.log('New Appointment created! ', event.body);
+              this.historicalService.addVisit(event.body);
               await this.goToFichaPaciente();
 
               setTimeout(() => {
@@ -118,11 +123,13 @@ export class AddVisitaPage implements OnInit {
 
 
   private goToFichaPaciente() {
-    this.router.navigate(['/pantalla-principal'])
+    /*this.router.navigate(['/pantalla-principal/'])
       .then(() => {
         window.location.reload();
         this.correctModification();
-      });
+      });*/
+    this.location.back();
+
   }
 
   async correctModification() {

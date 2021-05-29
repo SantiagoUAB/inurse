@@ -147,7 +147,7 @@
         <ion-row>
 
 
-              <ion-item-sliding *ngFor="let visit of this.historical?.visits" (click)=verVisitaPaciente(visit.id) >
+              <ion-item-sliding *ngFor="let visit of this.historicalService.getHistorical()?.visits" (click)=verVisitaPaciente(visit.id) >
 <!--                <ion-label> {{visit.createdTimestamp}} </ion-label>-->
 <!--                <ion-label> {{visit.nurse}} </ion-label>-->
                 <ion-item>

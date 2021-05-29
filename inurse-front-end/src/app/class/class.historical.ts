@@ -28,6 +28,8 @@ export class Historical implements IHistorical{
 
   }
 
-
+  addVisit(visit: any){
+    this.visits.push(new Visit(visit));
+  }
 
 }

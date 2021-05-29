@@ -22,7 +22,7 @@ import { Location } from '@angular/common'
 
 export class FichaPacientePage implements OnInit {
   patient: Patient;
-  historical: Historical;
+  // historical: Historical;
   private idPaciente: number;
   headers: string[];
   progress: number;
@@ -32,7 +32,7 @@ export class FichaPacientePage implements OnInit {
 
   constructor(
     private pacienteService: PacientesService,
-    private  historicalService: HistoricalService,
+    public historicalService: HistoricalService,
     public auth: AuthenticationService,
     private router: Router,
     private alertController: AlertController,
@@ -132,11 +132,11 @@ export class FichaPacientePage implements OnInit {
   }
 
   private getDataPatientHistorical(idPatient: number) {
-    this.historicalService.getHistorical(idPatient).subscribe(data => {
+    this.historicalService.getHistoricalAPI(idPatient).subscribe(data => {
       console.log('Historial paciente ', idPatient);
       console.log(data);
-      this.historical = new Historical( data);
-
+      // this.historical = new Historical( data);
+      this.historicalService.setHistorical(data);
     });
   }
 

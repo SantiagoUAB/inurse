@@ -20,7 +20,7 @@ export class AuthenticationService {
 
 
 
-  constructor(private http: HttpClient, private tokenService: TokenStorageService) {
+  constructor(private httpClient: HttpClient, private tokenService: TokenStorageService) {
 
     // this.sessionID = AuthenticationService.NOT_LOG;
     localStorage.setItem(AuthenticationService.SESSION_ID, AuthenticationService.NOT_LOG);
@@ -56,7 +56,7 @@ export class AuthenticationService {
     const postData = { dni: user, password: pass };
 
     // console.log('post login', postData);
-    return this.http.post<any>(ClassGlobalConstants.API_LOGIN , postData
+    return this.httpClient.post<any>(ClassGlobalConstants.API_LOGIN , postData
       ,
       // {observe : 'response' as 'body'})
       // httpOptions
@@ -69,7 +69,7 @@ export class AuthenticationService {
 
   refreshToken(){
 
-    return this.http.post<any>(ClassGlobalConstants.API_REFRESH,
+    return this.httpClient.post<any>(ClassGlobalConstants.API_REFRESH,
       {token: this.tokenService.getToken()})
       .pipe(tap((token: any) => {
         console.log(' old token  ', this.tokenService.getToken());
@@ -87,7 +87,7 @@ export class AuthenticationService {
 /*    const headers = new Headers({'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'});*/
 
-    return this.http.post( URL_AUTH + 'auth/login/', postData
+    return this.httpClient.post( URL_AUTH + 'auth/login/', postData
       // , httpOptions
     )
       .toPromise()
@@ -110,7 +110,7 @@ export class AuthenticationService {
   getConfigResponsee(): Observable<HttpResponse<any>>{
     console.log('lanzo get login urlBase');
 
-    return this.http.get<any>(URL_AUTH, {observe: 'response'});
+    return this.httpClient.get<any>(URL_AUTH, {observe: 'response'});
   }
 
  /* loginReadHeader(user: string, pass: string ){
@@ -171,5 +171,10 @@ export class AuthenticationService {
 
   getLastPage(): string{
     return this.lastPage;
+  }
+
+  logOut() {
+    const postData = {content: ''};
+    return  this.httpClient.post('http://158.109.74.51:55001/auth/logout/', postData);
   }
 }
