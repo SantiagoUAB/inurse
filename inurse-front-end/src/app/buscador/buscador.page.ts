@@ -16,15 +16,15 @@ export class BuscadorPage implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-   
+
   }
 
-  
+
 
   verFichaPaciente( id: any){
     console.log('id paciente wey', id);
     this.patientSevice.setIdPacient(id);
-    this.router.navigate(['/ficha-paciente/']);
+    this.router.navigate(['/show-patient/']);
  }
 
 }

@@ -100,12 +100,6 @@
 
 
     <ion-item-sliding class="paciente "  ion-item *ngFor="let item of this.listPlantaActual">
-     <!-- <ion-item-sliding [ngClass]="{'background-color-grey': i %2 == 0}" >
-        <ion-label class="ion-text-wrap "   (click)="this.verFichaPaciente(item[3])">{{i}} -&#45;&#45; {{item[0]}} : {{item[1]}} {{item[2]}}</ion-label >
-        <div *ngIf="comprobacionPacienteFijado == '0'">
-          <ion-button (click) = "fijarPaciente(item[1],item[2])" expand="block" size="small" color="primary"  fill="outline"><ion-icon src="assets/icon/pin.svg"></ion-icon></ion-button>
-        </div>
-      </ion-item-sliding>-->
       <ion-item    >
         <ion-label (click)="this.verFichaPaciente(item[3])" >
           <h2>{{this.item[1]}} {{this.item[2]}}</h2>

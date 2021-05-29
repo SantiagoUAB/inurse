@@ -145,21 +145,23 @@
     <ion-row>
       <ion-col>
         <ion-row>
-          <ion-col >
-            <ion-infinite-scroll  >
-              <ion-item *ngFor="let visit of this.historical?.visits" (click)=verVisitaPaciente(visit.id) >
+
+
+              <ion-item-sliding *ngFor="let visit of this.historical?.visits" (click)=verVisitaPaciente(visit.id) >
 <!--                <ion-label> {{visit.createdTimestamp}} </ion-label>-->
 <!--                <ion-label> {{visit.nurse}} </ion-label>-->
-                <ion-label> {{visit.data.getDate() }}/{{visit.data.getMonth()}}/{{visit.data.getFullYear()}} </ion-label>
-                <ion-label class="ion-text-wrap"> {{visit.treatment}} </ion-label>
+                <ion-item>
+                  <ion-label >
+                    <h2 class="ion-padding-bottom"> {{visit.data.getDate() }}/{{visit.data.getMonth()}}/{{visit.data.getFullYear()}} </h2>
+                    <p class="ion-text-wrap"> {{visit.treatment}} </p>
+                  </ion-label>
+                </ion-item>
+
+              </ion-item-sliding>
 
 
 
-              </ion-item>
 
-            </ion-infinite-scroll>
-
-          </ion-col>
         </ion-row>
       </ion-col>
     </ion-row>

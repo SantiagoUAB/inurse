@@ -75,10 +75,15 @@ export class FichaPacientePage implements OnInit {
         break;
       case ClassGlobalConstants.MENU_LAST_PATIENT:
         console.log('--------------------------- Vengo de LAST PATIENT' , this.auth.getLastPage());
-        // this.setLastPatient();
+        this.setLastPatient();
         break;
       default:
         console.log('--------------------------- no vengo del menu', this.auth.getLastPage() );
+        if (this.pacienteService.getIdPacient()){
+          this.idPaciente = this.pacienteService.getIdPacient();
+        }else{
+          this.showAlert('Error al cargar el paciente');
+        }
         break;
     }
 
@@ -200,10 +205,10 @@ export class FichaPacientePage implements OnInit {
     });
   }
 
-  async showNoPacienteFijado() {
+  async showAlert(message: string) {
     const confirm = await this.alertController.create({
       header: 'Aviso',
-      message: 'Has de fijar un paciente',
+      message,
       buttons: [
         {
           text: 'Volver',
@@ -230,7 +235,7 @@ export class FichaPacientePage implements OnInit {
     }else{
       console.log('--------------------------- NO TENGO paciente fjado y show aviso de volver' );
       // this.idPaciente = this.pacienteService.getIdPacient();
-      this.showNoPacienteFijado().then(r => {
+      this.showAlert('No hay paciente fijado').then(r => {
         console.log(' se ha lanzado el show alert ');
         console.log('en el then obtenemos', r);
       });
@@ -243,7 +248,7 @@ export class FichaPacientePage implements OnInit {
     if (this.pacienteService.getIdPacient()){
       this.idPaciente = this.pacienteService.getIdPacient();
     }else{
-      this.showNoPacienteFijado().then(r => {
+      this.showAlert('Visita algun paciente').then(r => {
         console.log(' se ha lanzado el show alert ');
         console.log('en el then obtenemos', r);
       });

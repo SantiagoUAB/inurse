@@ -1,1 +1,17 @@
-<app-ficha-paciente></app-ficha-paciente>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button (click)="this.auth.setLastPage(this.menuOut)"></ion-menu-button>
+      <ion-back-button (click)="this.auth.setLastPage(this.menuOut)"
+                       text='back'
+                       icon="chevron-back-outline"
+      >
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Último paciente</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen="true">
+  <app-ficha-paciente></app-ficha-paciente>
+
+</ion-content>
