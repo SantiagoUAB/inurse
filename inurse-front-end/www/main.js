@@ -23,6 +23,11 @@ ClassGlobalConstants.REFRESH_MIN = 10;
 ClassGlobalConstants.KEY_PACIENTE_ID = 'ID_PACIENTE_FIJADO';
 ClassGlobalConstants.KEY_NOMBRE_PACIENTE_FIJADO = 'NOMBRE_PACIENTE_FIJADO';
 ClassGlobalConstants.KEY_IS_PANTALLA_PRINCIPAL = 'KEY_PANTALLA_PRINCIPAL';
+ClassGlobalConstants.MENU_LAST_PATIENT = 'Último paciente visitado';
+ClassGlobalConstants.MENU_FIX_PATIENT = 'Paciente fijado';
+ClassGlobalConstants.MENU_PANTALLA_PRINCIPAL = 'Lista pacientes';
+ClassGlobalConstants.MENU_OUT_PACIENTE = 'out';
+ClassGlobalConstants.DELAY_PROGRESS_BAR = 1500;
 
 
 /***/ }),
@@ -34,7 +39,7 @@ ClassGlobalConstants.KEY_IS_PANTALLA_PRINCIPAL = 'KEY_PANTALLA_PRINCIPAL';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\SRP\Git\gitUAB\LISgit\inurse-front-end\inurse-front-end\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\Santi\Documents\inurse\inurse-front-end\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -217,25 +222,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component.scss */ "ynWL");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _service_pacientes_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./service/pacientes.service */ "ZbvY");
+/* harmony import */ var _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./class/class.globalConstants */ "/rmJ");
+/* harmony import */ var _service_authentication_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./service/authentication.service */ "bZGi");
+
+
 
 
 
 
 
 let AppComponent = class AppComponent {
-    constructor(pacientesService) {
+    constructor(pacientesService, auth) {
         this.pacientesService = pacientesService;
+        this.auth = auth;
         this.appPages = [
-            { title: 'Lista pacientes', url: 'pantalla-principal', icon: 'archive' },
-            { title: 'Paciente fijado', url: 'ficha-paciente', icon: 'person' },
+            { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_PANTALLA_PRINCIPAL, url: 'pantalla-principal', icon: 'archive' },
+            { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_FIX_PATIENT, url: 'fix-patient', icon: 'person' },
+            { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_LAST_PATIENT, url: 'last-patient', icon: 'arrow-back' },
             { title: 'Cerrar Sesion', url: 'logout', icon: 'arrow-forward' }
         ];
     }
     ngOnInit() {
     }
+    isLastPatient(optionMenu) {
+        if (_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_LAST_PATIENT === optionMenu) {
+            console.log('opcion de menu', optionMenu);
+            // this.auth.inLastPatient();
+            this.auth.setLastPage(optionMenu);
+        }
+        else if (_class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_FIX_PATIENT === optionMenu) {
+            console.log('option menu', optionMenu);
+            this.auth.setLastPage(optionMenu);
+        }
+    }
 };
 AppComponent.ctorParameters = () => [
-    { type: _service_pacientes_service__WEBPACK_IMPORTED_MODULE_4__["PacientesService"] }
+    { type: _service_pacientes_service__WEBPACK_IMPORTED_MODULE_4__["PacientesService"] },
+    { type: _service_authentication_service__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"] }
 ];
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -259,7 +282,7 @@ AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-split-pane contentId=\"main-content\">\r\n    <ion-menu contentId=\"main-content\" type=\"overlay\">\r\n      <ion-content>\r\n        <ion-list id=\"inbox-list\">\r\n          <ion-list-header>iNurse</ion-list-header>\r\n          <ion-note></ion-note>\r\n          <ion-text>Bienvenido, </ion-text>\r\n          <ion-text><strong>{{pacientesService.getUserDni()}}</strong></ion-text>\r\n          <br /> <br /> <br />\r\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages; let i = index\">\r\n            <ion-item routerDirection=\"root\" [routerLink]=\"[p.url]\" lines=\"none\" detail=\"false\" routerLinkActive=\"selected\">\r\n              <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon>\r\n              <ion-label>{{ p.title }}</ion-label>\r\n            </ion-item>\r\n          </ion-menu-toggle>\r\n        </ion-list>\r\n\r\n\r\n      </ion-content>\r\n    </ion-menu>\r\n    <ion-router-outlet id=\"main-content\" ></ion-router-outlet>\r\n  </ion-split-pane>\r\n</ion-app>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-split-pane contentId=\"main-content\">\r\n    <ion-menu contentId=\"main-content\" type=\"overlay\">\r\n      <ion-content>\r\n        <ion-list id=\"inbox-list\">\r\n          <ion-list-header>iNurse</ion-list-header>\r\n          <ion-note></ion-note>\r\n          <ion-text>Bienvenido, </ion-text>\r\n          <ion-text><strong>{{pacientesService.getUserDni()}}</strong></ion-text>\r\n          <br /> <br /> <br />\r\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages; let i = index\">\r\n            <ion-item routerDirection=\"root\" [routerLink]=\"[p.url]\" lines=\"none\" detail=\"false\" routerLinkActive=\"selected\" (click)=\"this.isLastPatient(p.title)\">\r\n              <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon>\r\n              <ion-label >{{ p.title }}</ion-label>\r\n            </ion-item>\r\n          </ion-menu-toggle>\r\n        </ion-list>\r\n\r\n\r\n      </ion-content>\r\n    </ion-menu>\r\n    <ion-router-outlet id=\"main-content\" ></ion-router-outlet>\r\n  </ion-split-pane>\r\n</ion-app>\r\n");
 
 /***/ }),
 
@@ -398,9 +421,9 @@ let PacientesService = class PacientesService {
             // height: paciente.getHeight(),
             // allergies: paciente.getAllergies(),
             current_status: paciente.getCurrentStatusText(),
-            tension: paciente.getTension(),
-            temperature: paciente.getTemperature(),
-            heart_rate: paciente.getHeardRate(),
+            tension: paciente.getTensionNew(),
+            temperature: paciente.getTemperatureNew(),
+            heart_rate: paciente.getHeardRateNew(),
         };
     }
     setUserDni(dni) {
@@ -461,6 +484,7 @@ let AuthenticationService = AuthenticationService_1 = class AuthenticationServic
             'Access-Control-Allow-Origin': '*' });
         // this.sessionID = AuthenticationService.NOT_LOG;
         localStorage.setItem(AuthenticationService_1.SESSION_ID, AuthenticationService_1.NOT_LOG);
+        this.isLastPatient = false;
     }
     isLogIn() {
         return this.tokenService.isLogIn();
@@ -533,14 +557,42 @@ let AuthenticationService = AuthenticationService_1 = class AuthenticationServic
          console.log('response from backend service', response);
        }
      }*/
-    setInPantallaPrincipal() {
+    /*  setInPantallaPrincipal() {
         this.isPantallaPrincipalBool = true;
-    }
-    outFichaPaciente() {
+      }
+      outFichaPaciente(){
         this.isPantallaPrincipalBool = false;
-    }
-    getIsPantallaPrincipal() {
+      }
+    
+      getIsPantallaPrincipal() {
         return this.isPantallaPrincipalBool;
+      }*/
+    /*  inLastPatient(){
+        this.isLastPatient = true;
+      }
+    
+      outLastPatient(){
+        this.isLastPatient = false;
+      }
+    
+      getIsLastPatient(){
+        return this.isLastPatient;
+      }*/
+    /*  outFixPatient() {
+        this.isFixPatient = false;
+      }
+      inFixPatient(){
+        this.isFixPatient = true;
+      }
+    
+      getFixPatient(){
+        return this.isFixPatient;
+      }*/
+    setLastPage(optionMenu) {
+        this.lastPage = optionMenu;
+    }
+    getLastPage() {
+        return this.lastPage;
     }
 };
 AuthenticationService.NOT_LOG = 'no-login';
@@ -969,7 +1021,7 @@ const routes = [
     },
     {
         path: 'ficha-paciente',
-        loadChildren: () => Promise.all(/*! import() | ficha-paciente-ficha-paciente-module */[__webpack_require__.e("common"), __webpack_require__.e("ficha-paciente-ficha-paciente-module")]).then(__webpack_require__.bind(null, /*! ./ficha-paciente/ficha-paciente.module */ "zgqh")).then(m => m.FichaPacientePageModule),
+        loadChildren: () => __webpack_require__.e(/*! import() | ficha-paciente-ficha-paciente-module */ "default~ficha-paciente-ficha-paciente-module~fix-patient-fix-patient-module~last-patient-last-patien~1032b9be").then(__webpack_require__.bind(null, /*! ./ficha-paciente/ficha-paciente.module */ "zgqh")).then(m => m.FichaPacientePageModule),
         canActivate: [_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
     },
     {
@@ -988,7 +1040,7 @@ const routes = [
     },
     {
         path: 'visita',
-        loadChildren: () => Promise.all(/*! import() | visita-visita-module */[__webpack_require__.e("default~logout-logout-module~pantalla-principal-pantalla-principal-module~visita-visita-module"), __webpack_require__.e("common"), __webpack_require__.e("visita-visita-module")]).then(__webpack_require__.bind(null, /*! ./visita/visita.module */ "x6ly")).then(m => m.VisitaPageModule),
+        loadChildren: () => Promise.all(/*! import() | visita-visita-module */[__webpack_require__.e("default~logout-logout-module~pantalla-principal-pantalla-principal-module~visita-visita-module"), __webpack_require__.e("visita-visita-module")]).then(__webpack_require__.bind(null, /*! ./visita/visita.module */ "x6ly")).then(m => m.VisitaPageModule),
         canActivate: [_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
     },
     {
@@ -998,7 +1050,22 @@ const routes = [
     },
     {
         path: 'add-visita',
-        loadChildren: () => Promise.all(/*! import() | add-visita-add-visita-module */[__webpack_require__.e("common"), __webpack_require__.e("add-visita-add-visita-module")]).then(__webpack_require__.bind(null, /*! ./add-visita/add-visita.module */ "YDLX")).then(m => m.AddVisitaPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() | add-visita-add-visita-module */ "add-visita-add-visita-module").then(__webpack_require__.bind(null, /*! ./add-visita/add-visita.module */ "YDLX")).then(m => m.AddVisitaPageModule),
+    },
+    {
+        path: 'last-patient',
+        loadChildren: () => Promise.all(/*! import() | last-patient-last-patient-module */[__webpack_require__.e("default~ficha-paciente-ficha-paciente-module~fix-patient-fix-patient-module~last-patient-last-patien~1032b9be"), __webpack_require__.e("last-patient-last-patient-module")]).then(__webpack_require__.bind(null, /*! ./last-patient/last-patient.module */ "tKuV")).then(m => m.LastPatientPageModule),
+        canActivate: [_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
+    },
+    {
+        path: 'fix-patient',
+        loadChildren: () => Promise.all(/*! import() | fix-patient-fix-patient-module */[__webpack_require__.e("default~ficha-paciente-ficha-paciente-module~fix-patient-fix-patient-module~last-patient-last-patien~1032b9be"), __webpack_require__.e("fix-patient-fix-patient-module")]).then(__webpack_require__.bind(null, /*! ./fix-patient/fix-patient.module */ "vJVg")).then(m => m.FixPatientPageModule),
+        canActivate: [_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
+    },
+    {
+        path: 'show-patient',
+        loadChildren: () => Promise.all(/*! import() | show-patient-show-patient-module */[__webpack_require__.e("default~ficha-paciente-ficha-paciente-module~fix-patient-fix-patient-module~last-patient-last-patien~1032b9be"), __webpack_require__.e("show-patient-show-patient-module")]).then(__webpack_require__.bind(null, /*! ./show-patient/show-patient.module */ "Wa6e")).then(m => m.ShowPatientPageModule),
+        canActivate: [_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
     }
 ];
 let AppRoutingModule = class AppRoutingModule {

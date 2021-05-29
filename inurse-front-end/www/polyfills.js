@@ -181,8 +181,8 @@ module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\SRP\Git\gitUAB\LISgit\inurse-front-end\inurse-front-end\src\polyfills.ts */"hN/g");
-module.exports = __webpack_require__(/*! C:\SRP\Git\gitUAB\LISgit\inurse-front-end\inurse-front-end\node_modules\@angular-devkit\build-angular\src\webpack\jit-polyfills.js */"rZy+");
+__webpack_require__(/*! C:\Users\Santi\Documents\inurse\inurse-front-end\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! C:\Users\Santi\Documents\inurse\inurse-front-end\node_modules\@angular-devkit\build-angular\src\webpack\jit-polyfills.js */"rZy+");
 
 
 /***/ }),

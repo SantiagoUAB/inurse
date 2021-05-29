@@ -1,32 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"],{
 
-/***/ "2Dhv":
-/*!**************************************!*\
-  !*** ./src/app/class/class.visit.ts ***!
-  \**************************************/
-/*! exports provided: Visit */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Visit", function() { return Visit; });
-class Visit {
-    constructor(data) {
-        // console.log('soy el constructor Visita');
-        // console.log(data);
-        // this.createdTimestamp =  data['created_at'];
-        this.data = new Date(data.date);
-        this.id = data.id;
-        this.patient = data.patient;
-        this.treatment = data.treatment;
-        // this.nurse =  data['nurse'];
-        // this.description =  data['description'];
-    }
-}
-
-
-/***/ }),
-
 /***/ "5Je2":
 /*!*******************************************!*\
   !*** ./src/app/buscador/buscador.page.ts ***!
@@ -59,7 +32,7 @@ let BuscadorPage = class BuscadorPage {
     verFichaPaciente(id) {
         console.log('id paciente wey', id);
         this.patientSevice.setIdPacient(id);
-        this.router.navigate(['/ficha-paciente/']);
+        this.router.navigate(['/show-patient/']);
     }
 };
 BuscadorPage.ctorParameters = () => [
@@ -228,131 +201,6 @@ const createButtonActiveGesture = (el, isButton) => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("\r\n\r\n\r\n\r\n<ion-list>\r\n \r\n  <ion-item *ngFor=\"let paciente of pacienteList\" (click)=verFichaPaciente(paciente.id)> \r\n<ion-label>\r\n       <ul>\r\n         <li style=\"list-style: none;\">&nbsp; &nbsp; <b>Nombre:</b> {{paciente.first_name}}<br></li>\r\n         <li style=\"list-style: none;\">&nbsp; &nbsp; <b>Apellido: </b>{{paciente.last_name}}</li>\r\n         <li style=\"list-style: none;\">&nbsp; &nbsp; <b>Planta:</b> {{paciente.room.floor.floor_num}}</li>\r\n       </ul>\r\n      \r\n     </ion-label>\r\n  </ion-item>\r\n</ion-list>\r\n");
-
-/***/ }),
-
-/***/ "QEr1":
-/*!****************************************!*\
-  !*** ./src/app/class/class.patient.ts ***!
-  \****************************************/
-/*! exports provided: Patient */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Patient", function() { return Patient; });
-class Patient {
-    constructor(data) {
-        console.log('hola soy el constructor paciente');
-        // console.log(data);
-        this.firstName = data.first_name;
-        this.age = data.age;
-        this.allergies = data.allergies;
-        this.currentStatus = data.current_status;
-        this.heardRate = data.heart_rate;
-        this.dni = data.dni;
-        this.height = data.height;
-        this.id = data.id;
-        this.lastName = data.last_name;
-        this.sex = data.sex;
-        this.temperature = data.temperature;
-        this.tension = data.tension;
-        this.weight = data.weight;
-        this.roomId = data.room.id;
-        this.mapCurrentStatus = new Map();
-        this.mapCurrentStatus.set(Patient.STATUS_NONE, '0');
-        this.mapCurrentStatus.set(Patient.STATUS_TREATMENT, '1');
-        this.mapCurrentStatus.set(Patient.STATUS_IN_SURGERY, '2');
-        this.mapCurrentStatus.set(Patient.STATUS_WAITING, '3');
-        console.log(this.mapCurrentStatus);
-        if (this.sex == 'Man') {
-            this.isMale = true;
-        }
-        else {
-            this.isMale = false;
-        }
-    }
-    setTension(value) {
-        this.tension = value;
-    }
-    setTemperature(value) {
-        this.temperature = value;
-    }
-    setHeardRate(value) {
-        this.heardRate = value;
-    }
-    getTension() {
-        return this.tension;
-    }
-    getTemperature() {
-        return this.temperature;
-    }
-    getHeardRate() {
-        return this.heardRate;
-    }
-    getFirstName() {
-        return this.firstName;
-    }
-    initMap() {
-        this.mapCurrentStatus = new Map();
-        this.mapCurrentStatus.set(Patient.STATUS_NONE, '0');
-        this.mapCurrentStatus.set(Patient.STATUS_TREATMENT, '1');
-        this.mapCurrentStatus.set(Patient.STATUS_IN_SURGERY, '2');
-        this.mapCurrentStatus.set(Patient.STATUS_WAITING, '3');
-    }
-    getLastName() {
-        return this.lastName;
-    }
-    getAge() {
-        return this.age;
-    }
-    getDni() {
-        return this.dni;
-    }
-    getRoom() {
-        // TODO mirar donde se carga el valor
-        return this.roomId;
-    }
-    getSex() {
-        return this.sex;
-    }
-    getHeight() {
-        return this.height;
-    }
-    getAllergies() {
-        return this.allergies;
-    }
-    getCurrentStatusText() {
-        return this.currentStatus;
-    }
-    getCurrentStatusNum() {
-        return this.mapCurrentStatus.get(this.currentStatus);
-    }
-    setCurrentStatus(value) {
-        switch (value) {
-            case '0':
-                this.currentStatus = Patient.STATUS_NONE;
-                break;
-            case '1':
-                this.currentStatus = Patient.STATUS_TREATMENT;
-                break;
-            case '2':
-                this.currentStatus = Patient.STATUS_IN_SURGERY;
-                break;
-            case '3':
-                this.currentStatus = Patient.STATUS_WAITING;
-                break;
-            default:
-                this.currentStatus = Patient.STATUS_NONE;
-                break;
-        }
-    }
-}
-Patient.STATUS_NONE = '---';
-Patient.STATUS_TREATMENT = 'treatment';
-Patient.STATUS_WAITING = 'waiting for results';
-Patient.STATUS_IN_SURGERY = 'in surgery';
-
 
 /***/ }),
 
