@@ -15,6 +15,8 @@ const URL_AUTH = 'http://127.0.0.1:8000/';
 
 
 export class AuthenticationService {
+  private isFixPatient: boolean;
+  private lastPage: string;
 
 
 
@@ -129,7 +131,7 @@ export class AuthenticationService {
   }*/
 
 
-  setInPantallaPrincipal() {
+/*  setInPantallaPrincipal() {
     this.isPantallaPrincipalBool = true;
   }
   outFichaPaciente(){
@@ -138,18 +140,36 @@ export class AuthenticationService {
 
   getIsPantallaPrincipal() {
     return this.isPantallaPrincipalBool;
-  }
+  }*/
 
-  setLastPatient(){
+/*  inLastPatient(){
     this.isLastPatient = true;
   }
 
-  getIsLastPatient(){
-    return this.isLastPatient;
-  }
   outLastPatient(){
     this.isLastPatient = false;
   }
 
+  getIsLastPatient(){
+    return this.isLastPatient;
+  }*/
 
+/*  outFixPatient() {
+    this.isFixPatient = false;
+  }
+  inFixPatient(){
+    this.isFixPatient = true;
+  }
+
+  getFixPatient(){
+    return this.isFixPatient;
+  }*/
+
+  setLastPage(optionMenu: string) {
+    this.lastPage = optionMenu;
+  }
+
+  getLastPage(): string{
+    return this.lastPage;
+  }
 }

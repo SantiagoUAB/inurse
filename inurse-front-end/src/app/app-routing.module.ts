@@ -49,10 +49,28 @@ const routes: Routes = [
     path: 'buscador',
     loadChildren: () => import('./buscador/buscador.module').then( m => m.BuscadorPageModule),
     canActivate: [AuthGuard]
-  },  {
+  },
+  {
     path: 'add-visita',
-    loadChildren: () => import('./add-visita/add-visita.module').then( m => m.AddVisitaPageModule)
+    loadChildren: () => import('./add-visita/add-visita.module').then( m => m.AddVisitaPageModule),
+
+  },
+  {
+    path: 'last-patient',
+    loadChildren: () => import('./last-patient/last-patient.module').then( m => m.LastPatientPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'fix-patient',
+    loadChildren: () => import('./fix-patient/fix-patient.module').then( m => m.FixPatientPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'show-patient',
+    loadChildren: () => import('./show-patient/show-patient.module').then( m => m.ShowPatientPageModule),
+    canActivate: [AuthGuard]
   }
+
 
 
 

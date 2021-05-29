@@ -12,5 +12,9 @@ export class ClassGlobalConstants{
   static KEY_NOMBRE_PACIENTE_FIJADO = 'NOMBRE_PACIENTE_FIJADO';
   static KEY_IS_PANTALLA_PRINCIPAL = 'KEY_PANTALLA_PRINCIPAL';
   static MENU_LAST_PATIENT = 'Último paciente visitado';
+  static MENU_FIX_PATIENT = 'Paciente fijado';
+  static MENU_PANTALLA_PRINCIPAL = 'Lista pacientes';
+  static MENU_OUT_PACIENTE = 'out';
+  static DELAY_PROGRESS_BAR = 1500;
 
 }

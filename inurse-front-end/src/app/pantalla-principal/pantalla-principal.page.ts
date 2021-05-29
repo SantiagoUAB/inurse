@@ -101,8 +101,8 @@ export class PantallaPrincipalPage implements OnInit {
   public verFichaPaciente( id: any){
     console.log('voy a ver la ficha paciente con ID', id);
     this.patientSevice.setIdPacient(id);
-    this.authService.setInPantallaPrincipal();
-    this.router.navigate(['/ficha-paciente/']);
+    this.authService.setLastPage(ClassGlobalConstants.MENU_PANTALLA_PRINCIPAL);
+    this.router.navigate(['/show-patient']);
  }
 
   fijarPaciente(nombre: string, apellido: string, idPaciente: string) {

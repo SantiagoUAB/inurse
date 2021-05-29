@@ -33,7 +33,7 @@ export class FichaPacientePage implements OnInit {
   constructor(
     private pacienteService: PacientesService,
     private  historicalService: HistoricalService,
-    private  auth: AuthenticationService,
+    public auth: AuthenticationService,
     private router: Router,
     private alertController: AlertController,
     private location: Location) {
@@ -61,24 +61,44 @@ export class FichaPacientePage implements OnInit {
   ngOnInit() {
     console.log('id paciente OnInit',  this.pacienteService.getIdPacient());
 
-    console.log('valor de key is pantalla principal ', this.auth.getIsPantallaPrincipal());
+    console.log('valor de key is pantalla principal ', this.auth.getLastPage());
+
+    switch (this.auth.getLastPage()){
+
+      case ClassGlobalConstants.MENU_PANTALLA_PRINCIPAL:
+        console.log('--------------------------- Vengo de pantalla principal' , this.auth.getLastPage());
+        this.setPatient();
+        break;
+      case ClassGlobalConstants.MENU_FIX_PATIENT:
+        console.log('--------------------------- Vengo de FIX PATIENT' , this.auth.getLastPage());
+        this.setFixPatient();
+        break;
+      case ClassGlobalConstants.MENU_LAST_PATIENT:
+        console.log('--------------------------- Vengo de LAST PATIENT' , this.auth.getLastPage());
+        // this.setLastPatient();
+        break;
+      default:
+        console.log('--------------------------- no vengo del menu', this.auth.getLastPage() );
+        break;
+    }
+
+    this.getDataPatientFile();
+/*
     if (this.auth.getIsPantallaPrincipal() ){
-      console.log('--------------------------- Vengo de pantalla principal' );
-      this.idPaciente = this.pacienteService.getIdPacient();
 
     } else if (this.auth.getIsLastPatient()){
 
-      if (this.pacienteService.getIdPacient()){
+/!*      if (this.pacienteService.getIdPacient()){
         this.idPaciente = this.pacienteService.getIdPacient();
       }else{
         this.showNoPacienteFijado().then(r => {
           console.log(' se ha lanzado el show alert ');
           console.log('en el then obtenemos', r);
         });
-      }
+      }*!/
     }else{
 
-      if (localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID)){
+/!*      if (localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID)){
         console.log('---------------------------tengo paciente fjado', localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID));
         this.idPaciente = Number(localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID));
       }else{
@@ -88,13 +108,11 @@ export class FichaPacientePage implements OnInit {
           console.log(' se ha lanzado el show alert ');
           console.log('en el then obtenemos', r);
         });
+      }*!/
 
 
-      }
+    }*/
 
-
-    }
-    this.getDataPatientFile();
   }
 
 
@@ -140,15 +158,13 @@ export class FichaPacientePage implements OnInit {
 
   onChangeConstants(idElement: string, newValue: string) {
 
-    // console.log('valor de id' , idElement);
-    // console.log('valor de constante cambiada', newValue);
+     console.log('valor de id' , idElement, newValue.length);
+     // console.log('valor de constante cambiada', newValue);
 
-    this.isUpdateConstant = true;
+     this.isUpdateConstant = true;
 
-
-    switch (idElement) {
+     switch (idElement) {
       case 'tension':
-
         this.patient.setTensionNew(newValue);
         break;
       case 'temperature':
@@ -179,16 +195,9 @@ export class FichaPacientePage implements OnInit {
           console.log('Paciente actualizado ', event.body);
           setTimeout(() => {
             this.progress = 0;
-          }, 1500);
+          }, ClassGlobalConstants.DELAY_PROGRESS_BAR);
       }
     });
-
-  }
-
-
-  removeFlagFichaPrincipal() {
-
-    this.auth.outFichaPaciente();
   }
 
   async showNoPacienteFijado() {
@@ -209,4 +218,36 @@ export class FichaPacientePage implements OnInit {
   }
 
 
+  private setPatient() {
+    this.idPaciente = this.pacienteService.getIdPacient();
+  }
+
+  private setFixPatient() {
+
+    if (localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID)){
+      console.log('---------------------------tengo paciente fjado', localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID));
+      this.idPaciente = Number(localStorage.getItem(ClassGlobalConstants.KEY_PACIENTE_ID));
+    }else{
+      console.log('--------------------------- NO TENGO paciente fjado y show aviso de volver' );
+      // this.idPaciente = this.pacienteService.getIdPacient();
+      this.showNoPacienteFijado().then(r => {
+        console.log(' se ha lanzado el show alert ');
+        console.log('en el then obtenemos', r);
+      });
+    }
+
+  }
+
+  private setLastPatient() {
+
+    if (this.pacienteService.getIdPacient()){
+      this.idPaciente = this.pacienteService.getIdPacient();
+    }else{
+      this.showNoPacienteFijado().then(r => {
+        console.log(' se ha lanzado el show alert ');
+        console.log('en el then obtenemos', r);
+      });
+    }
+
+  }
 }
