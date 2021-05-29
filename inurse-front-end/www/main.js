@@ -246,7 +246,7 @@ let AppComponent = class AppComponent {
             { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_PANTALLA_PRINCIPAL, url: 'pantalla-principal', icon: 'archive' },
             { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_FIX_PATIENT, url: 'fix-patient', icon: 'person' },
             { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_LAST_PATIENT, url: 'last-patient', icon: 'arrow-back' },
-            { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_LOG_OUT, url: 'logout', icon: 'arrow-forward' }
+            { title: _class_class_globalConstants__WEBPACK_IMPORTED_MODULE_5__["ClassGlobalConstants"].MENU_LOG_OUT, url: 'login', icon: 'arrow-forward' }
         ];
     }
     ngOnInit() {
@@ -274,7 +274,7 @@ let AppComponent = class AppComponent {
             // this.router.navigate(['/login/']);
             this.tokenStorage.sinOut();
         }, error => {
-            // this.toast('Error al desconocoido');
+            this.toast('Error al desconocoido');
             error(error);
         });
     }
